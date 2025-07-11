@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <div class="border p-4 rounded">
                                 <div class="text-center mb-4">
-                                    <h3 class="">Log Masuk</h3>
+                                    <h3 class="">LOGIN</h3>
                                 </div>
                                 @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -39,13 +39,13 @@
                                     <form method="POST" action="{{ route('login') }}" class="row g-4">
                                         {{ csrf_field() }}
                                         <div class="col-12">
-                                            <label for="staff_id" class="form-label">No. Pekerja</label>
+                                            <label for="staff_id" class="form-label">Email</label>
                                             <input type="number" class="form-control" id="staff_id" name="staff_id"
                                                 value="{{ old('staff_id') }}" required autocomplete="staff_id"
                                                 autofocus>
                                         </div>
                                         <div class="col-12">
-                                            <label for="password" class="form-label">Kata Laluan</label>
+                                            <label for="password" class="form-label">Password</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" class="form-control border-end-0" id="password"
                                                     name="password" required autocomplete="current-password">
@@ -57,17 +57,16 @@
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="flexSwitchCheckChecked">Ingat
-                                                    saya</label>
+                                                <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 text-end">
-                                            <a href="{{ route('password.request') }}">Lupa kata laluan?</a>
+                                            <a href="{{ route('password.request') }}">Forgot Password?</a>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
                                                 <button type="submit" class="btn btn-primary"><i
-                                                        class="bx bxs-lock-open"></i> Log Masuk</button>
+                                                        class="bx bxs-lock-open"></i> Login</button>
                                             </div>
                                         </div>
                                     </form>

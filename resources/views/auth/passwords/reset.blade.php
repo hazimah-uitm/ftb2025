@@ -21,9 +21,9 @@
                             <div class="border p-4 rounded">
                                 <div class="text-center mb-4">
                                     @if(request()->query('type') == 'reset')
-                                    <h3 class="">Reset Kata Laluan</h3>
+                                    <h3 class="">Reset Password</h3>
                                     @else
-                                    <h3 class="">Set Kata Laluan</h3>
+                                    <h3 class="">Set Password</h3>
                                     @endif
                                 </div>
 
@@ -49,7 +49,7 @@
                                         <input type="hidden" name="token" value="{{ $token }}">
 
                                         <div class="col-12">
-                                            <label for="email" class="form-label">Alamat Emel</label>
+                                            <label for="email" class="form-label">Email</label>
                                             <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
                                                 name="email" value="{{ old('email') }}">
                                             @if ($errors->has('email'))
@@ -62,7 +62,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="password" class="form-label">Kata Laluan</label>
+                                            <label for="password" class="form-label">Password</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" class="form-control border-end-0" id="password"
                                                     name="password" required autocomplete="current-password">
@@ -72,7 +72,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="password-confirm" class="form-label">Sahkan Kata Laluan</label>
+                                            <label for="password-confirm" class="form-label">Confirm Password</label>
                                             <div class="input-group" id="show_hide_password_confirm">
                                                 <input id="password-confirm" type="password" class="form-control border-end-0" name="password_confirmation" required autocomplete="new-password">
                                                 <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
@@ -82,7 +82,7 @@
                                         <div class="col-12">
                                             <div class="d-grid">
                                                 <button type="submit" class="btn btn-primary"><i class='bx bx-reset'></i>
-                                                    {{ __('Hantar') }}
+                                                    {{ __('Submit') }}
                                                 </button>
                                             </div>
                                         </div>

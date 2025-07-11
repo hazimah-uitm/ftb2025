@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3>{{ __('Lupa Kata Laluan') }}</h3>
+                                        <h3>{{ __('Forgot Password') }}</h3>
                                     </div>
                                     @if (session('status'))
                                         <div class="alert alert-success" role="alert">
@@ -32,7 +32,7 @@
                                             {{ csrf_field() }}
 
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Alamat Emel</label>
+                                                <label for="email" class="form-label">Email Address</label>
                                                 <input type="text"
                                                     class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                     id="email" name="email" value="{{ old('email') }}">
@@ -49,7 +49,7 @@
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary"><i
                                                             class='bx bx-mail-send'></i>
-                                                        {{ __('Hantar') }}
+                                                        {{ __('Submit') }}
                                                     </button>
                                                 </div>
                                             </div>
