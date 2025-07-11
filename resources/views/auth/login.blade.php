@@ -39,9 +39,9 @@
                                     <form method="POST" action="{{ route('login') }}" class="row g-4">
                                         {{ csrf_field() }}
                                         <div class="col-12">
-                                            <label for="staff_id" class="form-label">Email</label>
-                                            <input type="number" class="form-control" id="staff_id" name="staff_id"
-                                                value="{{ old('staff_id') }}" required autocomplete="staff_id"
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email"
                                                 autofocus>
                                         </div>
                                         <div class="col-12">
@@ -53,15 +53,15 @@
                                                         class='bx bx-hide'></i></a>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 text-end">
-                                            <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                        <div class="col-md-7 text-end">
+                                            <a class="text-info" href="{{ route('password.request') }}">Reset Password</a><br><a href="{{ route('register') }}">Register Account</a>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">

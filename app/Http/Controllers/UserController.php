@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campus;
+use App\Models\EmailVerificationToken;
 use App\Models\Position;
 use App\Models\User;
+use App\Notifications\EmailVerificationNotification;
 use App\Notifications\ResetPasswordNotification;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Role;
@@ -66,7 +69,7 @@ class UserController extends Controller
             'roles'    => 'required|array|exists:roles,name',
             'phone_no' => 'required',
             'publish_status' => 'required|in:1,0',
-        ],[
+        ], [
             'name.required'     => 'Sila isi nama pengguna',
             'ic_no.required' => 'Sila isi id pengguna',
             'ic_no.unique' => 'id telah wujud',
@@ -77,24 +80,24 @@ class UserController extends Controller
             'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
         ]);
-    
+
         $user = new User();
         $user->fill($request->except('roles'));
         $user->password = null; // Password will be set later via email link
         $user->email_verified_at = null; // Email verification pending
         $user->save();
-    
+
         // Assign roles to the user
         $user->assignRole($request->input('roles'));
-    
+
         // Send password reset link to the new user with the isNewAccount flag set to true
         $token = Password::broker()->createToken($user);
         $user->notify(new ResetPasswordNotification($token, true));
-    
+
         return redirect()->route('user')
             ->with('success', 'Maklumat berjaya disimpan');
     }
-    
+
 
 
 
@@ -142,7 +145,7 @@ class UserController extends Controller
             'roles'      => 'required|array|exists:roles,name',
             'phone_no' => 'required|string',
             'publish_status' => 'required|in:1,0',
-        ],[
+        ], [
             'name.required'     => 'Sila isi nama pengguna',
             'ic_no.required' => 'Sila isi id pengguna',
             'ic_no.unique' => 'id telah wujud',
@@ -167,6 +170,72 @@ class UserController extends Controller
 
         return redirect()->route('user')
             ->with('success', 'Maklumat berjaya dikemaskini');
+    }
+
+    public function showPublicRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    public function storePublicRegister(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required',
+            'ic_no' => 'required|unique:users,ic_no',
+            'email'    => 'required|email|unique:users,email',
+            'position' => 'required',
+            'phone_no' => 'required|string',
+            'password' => 'required|min:8|confirmed',
+        ], [
+            'name.required'     => 'Sila isi nama pengguna',
+            'ic_no.required' => 'Sila isi no. pekerja pengguna',
+            'ic_no.unique' => 'No. pekerja telah wujud',
+            'email.required'    => 'Sila isi emel pengguna',
+            'email.unique'    => 'Emel telah wujud',
+            'position.required' => 'Sila isi jawatan pengguna',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->ic_no = $request->ic_no;
+        $user->phone_no = $request->phone_no;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->position = $request->position;
+        $user->publish_status = 1;
+        $user->email_verified_at = null;
+        $user->save();
+
+        $user->assignRole('Pengguna');
+
+        $token = Str::random(40);
+
+        EmailVerificationToken::updateOrCreate(
+            ['user_id' => $user->id],
+            ['token' => $token]
+        );
+
+        $user->notify(new EmailVerificationNotification($user, $token));
+
+        return view('auth.register-confirm');
+    }
+
+    public function verifyEmail($token)
+    {
+        $record = EmailVerificationToken::where('token', $token)->first();
+
+        if (!$record) {
+            return redirect('/login')->withErrors(['msg' => 'Token tidak sah atau telah luput.']);
+        }
+
+        $user = User::find($record->user_id);
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+
+        // Padam token selepas sah
+        $record->delete();
+
+        return redirect('/login')->with('success', 'Emel anda telah disahkan. Sila log masuk.');
     }
 
     public function destroy($id)

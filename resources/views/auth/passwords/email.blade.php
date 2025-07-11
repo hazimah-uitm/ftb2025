@@ -45,13 +45,14 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-12">
-                                                <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary"><i
-                                                            class='bx bx-mail-send'></i>
-                                                        {{ __('Submit') }}
-                                                    </button>
-                                                </div>
+                                            <div class="col-12 d-grid mt-3">
+                                                <button type="submit" class="btn btn-primary"><i
+                                                        class='bx bx-mail-send'></i>
+                                                    {{ __('Submit') }}
+                                                </button>
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <a href="{{ route('login') }}">Back to Login</a>
                                             </div>
                                         </form>
                                     </div>

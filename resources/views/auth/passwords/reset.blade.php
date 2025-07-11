@@ -1,92 +1,98 @@
 @extends('layouts.app')
 
 @section('content')
-<!--wrapper-->
-<div class="wrapper">
-    <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
-        <div class="container-fluid">
-            <div class="text-center">
-                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-4">
-                    <img src="{{ asset('public/assets/images/putih.png') }}" class="logo-icon-login" alt="logo icon">
-                    <div class="ms-3">
-                        <h4 class="logo-text-login mb-0">FTB2025</h4>
-                        <h6 class="logo-subtitle-login mb-0">Festival Tari Borneo 2025</h6>
+    <!--wrapper-->
+    <div class="wrapper">
+        <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-4">
+                        <img src="{{ asset('public/assets/images/putih.png') }}" class="logo-icon-login" alt="logo icon">
+                        <div class="ms-3">
+                            <h4 class="logo-text-login mb-0">FTB2025</h4>
+                            <h6 class="logo-subtitle-login mb-0">Festival Tari Borneo 2025</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-                <div class="col mx-auto">
-                    <div class="card shadow-none">
-                        <div class="card-body">
-                            <div class="border p-4 rounded">
-                                <div class="text-center mb-4">
-                                    @if(request()->query('type') == 'reset')
-                                    <h3 class="">Reset Password</h3>
-                                    @else
-                                    <h3 class="">Set Password</h3>
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                    <div class="col mx-auto">
+                        <div class="card shadow-none">
+                            <div class="card-body">
+                                <div class="border p-4 rounded">
+                                    <div class="text-center mb-4">
+                                        @if (request()->query('type') == 'reset')
+                                            <h3 class="">Reset Password</h3>
+                                        @else
+                                            <h3 class="">Set Password</h3>
+                                        @endif
+                                    </div>
+
+
+                                    @if (session('status'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('status') }}
+                                        </div>
                                     @endif
-                                </div>
-
-
-                                @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                                @endif
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul class="mb-0">
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-                                <div class="form-body">
-                                    <form method="POST" action="{{ route('password.update') }}" class="row g-4">
-                                        {{ csrf_field() }}
-
-                                        <input type="hidden" name="token" value="{{ $token }}">
-
-                                        <div class="col-12">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
-                                                name="email" value="{{ old('email') }}">
-                                            @if ($errors->has('email'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('email') as $error)
-                                                {{ $error }}
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul class="mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
                                                 @endforeach
-                                            </div>
-                                            @endif
+                                            </ul>
                                         </div>
+                                    @endif
+                                    <div class="form-body">
+                                        <form method="POST" action="{{ route('password.update') }}" class="row g-4">
+                                            {{ csrf_field() }}
 
-                                        <div class="col-12">
-                                            <label for="password" class="form-label">Password</label>
-                                            <div class="input-group" id="show_hide_password">
-                                                <input type="password" class="form-control border-end-0" id="password"
-                                                    name="password" required autocomplete="current-password">
-                                                <a href="javascript:;" class="input-group-text bg-transparent"><i
-                                                        class='bx bx-hide'></i></a>
+                                            <input type="hidden" name="token" value="{{ $token }}">
+
+                                            <div class="col-12">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email"
+                                                    class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                                    id="email" name="email" value="{{ old('email') }}">
+                                                @if ($errors->has('email'))
+                                                    <div class="invalid-feedback">
+                                                        @foreach ($errors->get('email') as $error)
+                                                            {{ $error }}
+                                                        @endforeach
+                                                    </div>
+                                                @endif
                                             </div>
-                                        </div>
 
-                                        <div class="col-12">
-                                            <label for="password-confirm" class="form-label">Confirm Password</label>
-                                            <div class="input-group" id="show_hide_password_confirm">
-                                                <input id="password-confirm" type="password" class="form-control border-end-0" name="password_confirmation" required autocomplete="new-password">
-                                                <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                            <div class="col-12">
+                                                <label for="password" class="form-label">Password</label>
+                                                <div class="input-group" id="show_hide_password">
+                                                    <input type="password" class="form-control border-end-0" id="password"
+                                                        name="password" required autocomplete="current-password">
+                                                    <a href="javascript:;" class="input-group-text bg-transparent"><i
+                                                            class='bx bx-hide'></i></a>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-12">
-                                            <div class="d-grid">
+                                            <div class="col-12">
+                                                <label for="password-confirm" class="form-label">Confirm Password</label>
+                                                <div class="input-group" id="show_hide_password_confirm">
+                                                    <input id="password-confirm" type="password"
+                                                        class="form-control border-end-0" name="password_confirmation"
+                                                        required autocomplete="new-password">
+                                                    <a href="javascript:;" class="input-group-text bg-transparent"><i
+                                                            class='bx bx-hide'></i></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 d-grid mt-3">
                                                 <button type="submit" class="btn btn-primary"><i class='bx bx-reset'></i>
                                                     {{ __('Submit') }}
                                                 </button>
                                             </div>
-                                        </div>
-                                    </form>
+                                            <div class="col-12 text-center">
+                                                <a href="{{ route('login') }}">Back to Login</a>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -95,6 +101,5 @@
             </div>
         </div>
     </div>
-</div>
-<!--end wrapper-->
+    <!--end wrapper-->
 @endsection
