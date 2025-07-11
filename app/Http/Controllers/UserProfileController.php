@@ -38,26 +38,24 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'name'       => 'required',
-            'staff_id'   => 'required|unique:users,staff_id,' . $id,
+            'ic_no'   => 'required|unique:users,ic_no,' . $id,
             'email'      => 'required|email|unique:users,email,' . $id,
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'position_id' => 'required|exists:positions,id',
-            'campus_id'  => 'required|exists:campuses,id',
-            'office_phone_no' => 'nullable|string',
+            'position' => 'required',
+            'phone_no' => 'nullable|string',
         ], [
             'name.required'     => 'Sila isi nama pengguna',
-            'staff_id.required' => 'Sila isi no. pekerja pengguna',
-            'staff_id.unique' => 'No. pekerja telah wujud',
+            'ic_no.required' => 'Sila isi no. pekerja pengguna',
+            'ic_no.unique' => 'No. pekerja telah wujud',
             'email.required'    => 'Sila isi emel pengguna',
             'email.unique'    => 'Emel telah wujud',
-            'position_id.required' => 'Sila isi jawatan pengguna',
-            'campus_id.required' => 'Sila isi kampus pengguna',
+            'position.required' => 'Sila isi jawatan pengguna',
         ]);
 
         $user = User::findOrFail($id);
 
         // Update the user's basic information
-        $user->fill($request->only('name', 'staff_id', 'email', 'position_id', 'office_phone_no', 'campus_id'));
+        $user->fill($request->only('name', 'ic_no', 'email', 'position', 'phone_no'));
 
         // Handle profile image update or removal
         if ($request->hasFile('profile_image')) {

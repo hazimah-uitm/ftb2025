@@ -20,11 +20,10 @@ class SuperAdminSeeder extends Seeder
         $superadmin = User::create([
             'email' => 'hazimahpte@gmail.com',
             'name' => 'Super Admin',
-            'staff_id' => '100001',
+            'ic_no' => '100001',
             'password' => Hash::make('superadmin123'),
-            'position_id' => 1,
-            'campus_id' => 2,
-            'office_phone_no' => '082000000',
+            'position' => 'Pegawai IT',
+            'phone_no' => '082000000',
             'publish_status' => true,
             'email_verified_at' => now(), 
         ]);

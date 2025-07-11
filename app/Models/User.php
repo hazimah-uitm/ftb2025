@@ -24,12 +24,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 
-        'staff_id', 
+        'ic_no', 
         'email', 
         'password',
-        'position_id',
-        'campus_id',
-        'office_phone_no',
+        'position',
+        'profile_image',
+        'phone_no',
         'publish_status'
     ];
 
@@ -54,15 +54,5 @@ class User extends Authenticatable
     public function getPublishStatusAttribute()
     {
         return $this->attributes['publish_status'] ? 'Aktif' : 'Tidak Aktif';
-    }
-
-    public function campus()
-    {
-        return $this->belongsTo(Campus::class);
-    }
-
-    public function position()
-    {
-        return $this->belongsTo(Position::class);
     }
 }

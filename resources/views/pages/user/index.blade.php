@@ -53,9 +53,10 @@
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                        <th>No. Staf</th>
-                        <th>Kampus</th>
-                        <th>Peranan</th>
+                        <th>IC No. / Passport / KTP</th>
+                        <th>Position</th>
+                        <th>Phone No.</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th>Tindakan</th>
                     </tr>
@@ -66,8 +67,9 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ ucfirst($user->name) }}</td>
-                        <td>{{ $user->staff_id }}</td>
-                        <td>{{ $user->campus->name }}</td>
+                        <td>{{ $user->ic_no }}</td>
+                        <td>{{ $user->position }}</td>
+                        <td>{{ $user->phone_no }}</td>
                         <td>
                             @if ($user->roles->count() === 1)
                             {{ ucwords(str_replace('-', ' ', $user->roles->first()->name)) }}

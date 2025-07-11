@@ -41,15 +41,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $campusList = Campus::where('publish_status', 1)->get();
-        $positionList = Position::where('publish_status', 1)->get();
         $roles = Role::where('publish_status', 1)->get();
 
         return view('pages.user.create', [
             'save_route' => route('user.store'),
             'str_mode' => 'Tambah',
-            'campusList' => $campusList,
-            'positionList' => $positionList,
             'roles' => $roles,
         ]);
     }
@@ -64,22 +60,21 @@ class UserController extends Controller
     {
         $request->validate([
             'name'     => 'required',
-            'staff_id' => 'required|unique:users,staff_id',
+            'ic_no' => 'required|unique:users,ic_no',
             'email'    => 'required|email|unique:users,email',
-            'position_id' => 'required',
+            'position' => 'required|string',
             'roles'    => 'required|array|exists:roles,name',
-            'campus_id' => 'required|exists:campuses,id',
-            'office_phone_no' => 'nullable|string',
+            'phone_no' => 'required',
             'publish_status' => 'required|in:1,0',
         ],[
             'name.required'     => 'Sila isi nama pengguna',
-            'staff_id.required' => 'Sila isi no. pekerja pengguna',
-            'staff_id.unique' => 'No. pekerja telah wujud',
+            'ic_no.required' => 'Sila isi id pengguna',
+            'ic_no.unique' => 'id telah wujud',
             'email.required'    => 'Sila isi emel pengguna',
             'email.unique'    => 'Emel telah wujud',
-            'position_id.required' => 'Sila isi jawatan pengguna',
+            'position.required' => 'Sila isi jawatan pengguna',
             'roles.required'    => 'Sila isi peranan pengguna',
-            'campus_id.required' => 'Sila isi kampus pengguna',
+            'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
         ]);
     
@@ -128,16 +123,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::where('publish_status', 1)->get();
-        $campusList = Campus::where('publish_status', 1)->get();
-        $positionList = Position::where('publish_status', 1)->get();
 
         return view('pages.user.edit', [
             'save_route' => route('user.update', $id),
             'str_mode' => 'Kemas Kini',
             'roles' => $roles,
             'user' => $user,
-            'campusList' => $campusList,
-            'positionList' => $positionList,
         ]);
     }
 
@@ -145,22 +136,21 @@ class UserController extends Controller
     {
         $request->validate([
             'name'       => 'required',
-            'staff_id'   => 'required|unique:users,staff_id,' . $id,
+            'ic_no'   => 'required|unique:users,ic_no,' . $id,
             'email'      => 'required|email|unique:users,email,' . $id,
-            'position_id' => 'required|exists:positions,id',
+            'position' => 'required',
             'roles'      => 'required|array|exists:roles,name',
-            'campus_id'  => 'required|exists:campuses,id',
-            'office_phone_number' => 'nullable|string',
+            'phone_no' => 'required|string',
             'publish_status' => 'required|in:1,0',
         ],[
             'name.required'     => 'Sila isi nama pengguna',
-            'staff_id.required' => 'Sila isi no. pekerja pengguna',
-            'staff_id.unique' => 'No. pekerja telah wujud',
+            'ic_no.required' => 'Sila isi id pengguna',
+            'ic_no.unique' => 'id telah wujud',
             'email.required'    => 'Sila isi emel pengguna',
             'email.unique'    => 'Emel telah wujud',
-            'position_id.required' => 'Sila isi jawatan pengguna',
+            'position.required' => 'Sila isi jawatan pengguna',
             'roles.required'    => 'Sila isi peranan pengguna',
-            'campus_id.required' => 'Sila isi kampus pengguna',
+            'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
         ]);
 
@@ -217,7 +207,6 @@ class UserController extends Controller
 
         if ($search) {
             $userList = User::where('name', 'LIKE', "%$search%")
-                ->orWhere('position_id', 'LIKE', "%$search%")
                 ->latest()
                 ->paginate(10);
         } else {

@@ -26,7 +26,7 @@
             {{ csrf_field() }}
 
             <div class="mb-3">
-                <label for="name" class="form-label">Nama Penuh</label>
+                <label for="name" class="form-label">Full Name</label>
                 <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
                     name="name" value="{{ old('name') }}">
                 @if ($errors->has('name'))
@@ -39,12 +39,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="staff_id" class="form-label">No. Pekerja</label>
-                <input type="number" class="form-control {{ $errors->has('staff_id') ? 'is-invalid' : '' }}" id="staff_id"
-                    name="staff_id" value="{{ old('staff_id') }}">
-                @if ($errors->has('staff_id'))
+                <label for="ic_no" class="form-label">IC. No / Passport / KTP</label>
+                 <input type="text" class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
+                    name="ic_no" value="{{ old('ic_no') }}">
+                @if ($errors->has('ic_no'))
                 <div class="invalid-feedback">
-                    @foreach ($errors->get('staff_id') as $error)
+                    @foreach ($errors->get('ic_no') as $error)
                     {{ $error }}
                     @endforeach
                 </div>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Alamat Emel</label>
+                <label for="email" class="form-label">Email Address</label>
                 <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
                     name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
@@ -65,12 +65,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="office_phone_no" class="form-label">No. Telefon Pejabat</label>
-                <input type="number" class="form-control {{ $errors->has('office_phone_no') ? 'is-invalid' : '' }}"
-                    id="office_phone_no" name="office_phone_no" value="{{ old('office_phone_no') }}">
-                @if ($errors->has('office_phone_no'))
+                <label for="phone_no" class="form-label">Phone Number</label>
+                <input type="number" class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
+                    id="phone_no" name="phone_no" value="{{ old('phone_no') }}">
+                @if ($errors->has('phone_no'))
                 <div class="invalid-feedback">
-                    @foreach ($errors->get('office_phone_no') as $error)
+                    @foreach ($errors->get('phone_no') as $error)
                     {{ $error }}
                     @endforeach
                 </div>
@@ -78,20 +78,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="position_id" class="form-label">Jawatan</label>
-                <select class="form-select {{ $errors->has('position_id') ? 'is-invalid' : '' }}" id="position_id"
-                    name="position_id">
-                    <option value="" disabled selected>Pilih Jawatan</option>
-                    @foreach ($positionList as $position)
-                    <option value="{{ $position->id }}"
-                        {{ old('position_id') == $position->id ? 'selected' : '' }}>
-                        {{ $position->title }} ({{ $position->grade }})
-                    </option>
-                    @endforeach
-                </select>
-                @if ($errors->has('position_id'))
+                <label for="position_id" class="form-label">Position</label>
+                <input type="text" class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" id="position"
+                    name="position" value="{{ old('position') }}">
+                @if ($errors->has('position'))
                 <div class="invalid-feedback">
-                    @foreach ($errors->get('position_id') as $error)
+                    @foreach ($errors->get('position') as $error)
                     {{ $error }}
                     @endforeach
                 </div>
@@ -99,27 +91,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="campus_id" class="form-label">Kampus</label>
-                <select class="form-select {{ $errors->has('campus_id') ? 'is-invalid' : '' }}" id="campus_id"
-                    name="campus_id">
-                    <option value="" disabled selected>Pilih Kampus</option>
-                    @foreach ($campusList as $campus)
-                    <option value="{{ $campus->id }}" {{ old('campus_id') == $campus->id ? 'selected' : '' }}>
-                        {{ $campus->name }}
-                    </option>
-                    @endforeach
-                </select>
-                @if ($errors->has('campus'))
-                <div class="invalid-feedback">
-                    @foreach ($errors->get('campus') as $error)
-                    {{ $error }}
-                    @endforeach
-                </div>
-                @endif
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Peranan Pengguna</label>
+                <label class="form-label">User Role</label>
                 <div>
                     @foreach ($roles as $role)
                     <div class="form-check">
@@ -171,7 +143,7 @@
 <!-- End Page Wrapper -->
 
 <script>
-    document.getElementById('office_phone_no').addEventListener('input', function(e) {
+    document.getElementById('phone_no').addEventListener('input', function(e) {
         e.target.value = e.target.value.replace(/-/g, '');
     });
 </script>
