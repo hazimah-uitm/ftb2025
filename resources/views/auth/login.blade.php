@@ -75,8 +75,8 @@
                                             <div class="col-12 text-center">
                                                 <div class="d-grid">
                                                 <a href="{{ route('register') }}"
-                                                    class="btn btn-outline-warning">
-                                                    <i class='bx bxs-user-plus'></i> Daftar Akaun Baru
+                                                    class="btn btn-warning">
+                                                    <i class='bx bxs-user-plus'></i> Daftar
                                                 </a>
                                                 </div>
                                             </div>
