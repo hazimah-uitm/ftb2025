@@ -31,42 +31,32 @@
             <div class="card-body">
                 <table class="table table-borderless">
                     <tr>
-                        <th>Nama Penuh</th>
-                        <td>{{ ucfirst($user->name) }}</td>
+                        <th width="30%">Nama Penuh</th>
+                        <td>{{ $user->name }}</td>
                     </tr>
                     <tr>
-                        <th>ID Pekerja</th>
-                        <td>{{ $user->staff_id }}</td>
+                        <th>Institusi</th>
+                        <td>{{ $user->institution_name }}</td>
                     </tr>
                     <tr>
-                        <th>Jawatan</th>
-                        <td>{{ $user->position->title }} ({{ $user->position->grade }})</td>
+                        <th>Jenis IPTA</th>
+                        <td>{{ $user->jenis_ipta }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombor Pengenalan</th>
+                        <td>{{ $user->ic_no }}</td>
                     </tr>
                     <tr>
                         <th>Alamat Emel</th>
                         <td>{{ $user->email }}</td>
                     </tr>
                     <tr>
-                        <th>No. Telefon Pejabat</th>
-                        <td>{{ $user->office_phone_no }}</td>
+                        <th>Jawatan</th>
+                        <td>{{ $user->position }}</td>
                     </tr>
                     <tr>
-                        <th>Kampus</th>
-                        <td>{{ $user->campus->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Peranan</th>
-                        <td>
-                            @if ($user->roles->count() === 1)
-                            {{ ucwords(str_replace('-', ' ', $user->roles->first()->name)) }}
-                            @else
-                            <ul>
-                                @foreach ($user->roles as $role)
-                                <li>{{ ucwords(str_replace('-', ' ', $role->name)) }}</li>
-                                @endforeach
-                            </ul>
-                            @endif
-                        </td>
+                        <th>Nombor Telefon</th>
+                        <td>{{ $user->phone_no }}</td>
                     </tr>
                     <tr>
                         <th>Status</th>

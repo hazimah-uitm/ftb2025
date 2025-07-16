@@ -52,6 +52,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Institusi</th>
                         <th>Nama</th>
                         <th>IC No. / Passport / KTP</th>
                         <th>Position</th>
@@ -66,6 +67,7 @@
                     @foreach ($userList as $user)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $user->institution_name }}</td>
                         <td>{{ ucfirst($user->name) }}</td>
                         <td>{{ $user->ic_no }}</td>
                         <td>{{ $user->position }}</td>

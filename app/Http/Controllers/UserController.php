@@ -208,6 +208,8 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->ic_no = $request->ic_no;
+        $user->institution_name = $request->institution_name;
+        $user->jenis_ipta = $request->jenis_ipta;
         $user->phone_no = $request->phone_no;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
