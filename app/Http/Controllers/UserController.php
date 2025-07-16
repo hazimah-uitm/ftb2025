@@ -62,6 +62,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'institution_name' => 'required',
+            'jenis_ipta' => 'required',
             'name'     => 'required',
             'ic_no' => 'required|unique:users,ic_no',
             'email'    => 'required|email|unique:users,email',
@@ -79,6 +81,8 @@ class UserController extends Controller
             'roles.required'    => 'Sila isi peranan pengguna',
             'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
+            'institution_name.required' => 'Sila isi nama institusi',
+            'jenis_ipta.required' => 'Sila pilih jenis ipta',
         ]);
 
         $user = new User();
@@ -97,8 +101,6 @@ class UserController extends Controller
         return redirect()->route('user')
             ->with('success', 'Maklumat berjaya disimpan');
     }
-
-
 
 
     /**
@@ -138,6 +140,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'institution_name' => 'required',
+            'jenis_ipta' => 'required',
             'name'       => 'required',
             'ic_no'   => 'required|unique:users,ic_no,' . $id,
             'email'      => 'required|email|unique:users,email,' . $id,
@@ -155,6 +159,8 @@ class UserController extends Controller
             'roles.required'    => 'Sila isi peranan pengguna',
             'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
+            'institution_name.required' => 'Sila isi nama institusi',
+            'jenis_ipta.required' => 'Sila pilih jenis ipta',
         ]);
 
         $user = User::findOrFail($id);
@@ -180,6 +186,8 @@ class UserController extends Controller
     public function storePublicRegister(Request $request)
     {
         $request->validate([
+            'institution_name' => 'required',
+            'jenis_ipta' => 'required',
             'name'     => 'required',
             'ic_no' => 'required|unique:users,ic_no',
             'email'    => 'required|email|unique:users,email',
@@ -193,6 +201,8 @@ class UserController extends Controller
             'email.required'    => 'Sila isi emel pengguna',
             'email.unique'    => 'Emel telah wujud',
             'position.required' => 'Sila isi jawatan pengguna',
+            'institution_name.required' => 'Sila isi nama institusi',
+            'jenis_ipta.required' => 'Sila pilih jenis ipta',
         ]);
 
         $user = new User();

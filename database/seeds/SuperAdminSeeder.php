@@ -18,6 +18,8 @@ class SuperAdminSeeder extends Seeder
         $superadminRole = Role::firstOrCreate(['name' => 'superadmin']);
 
         $superadmin = User::create([
+            'institution_name' => 'Universiti Malaysia Sarawak',
+            'jenis_ipta'       => 'IPTA',
             'email' => 'hazimahpte@gmail.com',
             'name' => 'Super Admin',
             'ic_no' => '100001',
@@ -25,7 +27,7 @@ class SuperAdminSeeder extends Seeder
             'position' => 'Pegawai IT',
             'phone_no' => '082000000',
             'publish_status' => true,
-            'email_verified_at' => now(), 
+            'email_verified_at' => now(),
         ]);
 
         $superadmin->assignRole($superadminRole);

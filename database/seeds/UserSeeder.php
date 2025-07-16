@@ -15,6 +15,8 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
+                'institution_name' => 'Universiti Teknologi MARA',
+                'jenis_ipta'       => 'IPTA',
                 'name' => 'Hazimah',
                 'ic_no' => '961213136028',
                 'email' => 'hazimahpethie@gmail.com',
@@ -22,7 +24,7 @@ class UserSeeder extends Seeder
                 'position' => "Pegawai IT",
                 'phone_no' => '082111111',
                 'publish_status' => true,
-                'email_verified_at' => now(), 
+                'email_verified_at' => now(),
             ],
         ]);
     }
