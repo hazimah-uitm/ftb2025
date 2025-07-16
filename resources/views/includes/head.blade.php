@@ -2,7 +2,7 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <!--favicon-->
- <link rel="icon" href="{{ asset('public/assets/images/logo-icon.png') }}" type="image/png" />
+ <link rel="icon" href="{{ asset('public/assets/images/logo-ftb.png') }}" type="image/png" />
  <!--plugins-->
  <link href="{{ asset('public/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
  <!-- loader-->
