@@ -28,6 +28,7 @@ class Registration extends Model
         'sinopsis_creative',
         'fax_no',
         'doc_link',
+        'status',
     ];
 
     public function user()

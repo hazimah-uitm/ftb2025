@@ -90,6 +90,10 @@
                         @endif
                     </td>
                 </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ $registration->status }}</td>
+                </tr>
             </table>
         </div>
     </div>
@@ -181,7 +185,8 @@
                             <th>Payment Proof</th>
                             <td>
                                 @if ($payment->payment_file)
-                                    <a href="{{ asset('public/storage/' . $payment->payment_file) }}" target="_blank"><i class='bx bxs-file-pdf' style="font-size: 1.2rem; color: #007bff;"></i></a>
+                                    <a href="{{ asset('public/storage/' . $payment->payment_file) }}" target="_blank"><i
+                                            class='bx bxs-file-pdf' style="font-size: 1.2rem; color: #007bff;"></i></a>
                                 @else
                                     -
                                 @endif

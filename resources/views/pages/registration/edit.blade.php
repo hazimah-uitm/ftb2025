@@ -168,6 +168,19 @@
                     @endif
                 </div>
 
+                <div class="col-12">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="submitted & waiting for approval"
+                            {{ $registration->status == 'submitted & waiting for approval' ? 'selected' : '' }}>Submitted &
+                            Waiting for Approval</option>
+                        <option value="approved" {{ $registration->status == 'approved' ? 'selected' : '' }}>Approved
+                        </option>
+                        <option value="rejected" {{ $registration->status == 'rejected' ? 'selected' : '' }}>Rejected
+                        </option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">{{ $str_mode }}</button>
             </form>
         </div>

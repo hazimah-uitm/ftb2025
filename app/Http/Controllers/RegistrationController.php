@@ -73,6 +73,7 @@ class RegistrationController extends Controller
         $registration = new Registration();
         $registration->user_id = Auth::id();
         $registration->fill($request->except(['members', 'escort_officers', 'payment']));
+        $registration->status = 'Submitted & waiting for approval';
         $registration->save();
 
         // Save Members
