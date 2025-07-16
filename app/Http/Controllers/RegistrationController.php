@@ -1,0 +1,168 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Registration;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class RegistrationController extends Controller
+{
+    public function index(Request $request)
+    {
+        $perPage = $request->input('perPage', 10);
+
+        $registrationList = Registration::latest()->paginate($perPage);
+
+        return view('pages.registration.index', [
+            'registrationList' => $registrationList,
+            'perPage' => $perPage,
+        ]);
+    }
+
+    public function create()
+    {
+        $user = Auth::user();
+
+        return view('pages.registration.create', [
+            'save_route' => route('registration.store'),
+            'str_mode' => 'Daftar',
+            'user_id' => $user->id,
+            'institution_name' => $user->institution_name,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'group_name' => 'required|string|max:255',
+            'traditional_dance_name' => 'required|string|max:255',
+            'creative_dance_name' => 'required|string|max:255',
+            'koreografer_name' => 'required|string|max:255',
+            'assistant_koreografer_name' => 'nullable|string|max:255',
+            'address' => 'required|string',
+            'sinopsis_traditional' => 'required|string',
+            'sinopsis_creative' => 'required|string',
+            'fax_no' => 'nullable|string|max:50',
+            'doc_link' => 'nullable|string|max:255',
+        ], [
+            'group_name.required' => 'Sila isi nama kumpulan',
+            'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
+            'creative_dance_name.required' => 'Sila isi nama tarian kreatif',
+            'koreografer_name.required' => 'Sila isi nama koreografer',
+            'address.required' => 'Sila isi alamat',
+            'sinopsis_traditional.required' => 'Sila isi sinopsis tradisional',
+            'sinopsis_creative.required' => 'Sila isi sinopsis kreatif',
+        ]);
+
+        $registration = new Registration();
+        $registration->user_id = Auth::id();
+        $registration->fill($request->except('user_id'));
+        $registration->save();
+
+        return redirect()->route('registration')->with('success', 'Maklumat berjaya disimpan');
+    }
+
+    public function show($id)
+    {
+        $registration = Registration::findOrFail($id);
+
+        return view('pages.registration.view', [
+            'registration' => $registration,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $registration = Registration::findOrFail($id);
+
+        return view('pages.registration.edit', [
+            'save_route' => route('registration.update', $id),
+            'str_mode' => 'Kemas Kini',
+            'registration' => $registration,
+            'user_id' => $registration->user_id,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'group_name' => 'required|string|max:255',
+            'traditional_dance_name' => 'required|string|max:255',
+            'creative_dance_name' => 'required|string|max:255',
+            'koreografer_name' => 'required|string|max:255',
+            'assistant_koreografer_name' => 'nullable|string|max:255',
+            'address' => 'required|string',
+            'sinopsis_traditional' => 'required|string',
+            'sinopsis_creative' => 'required|string',
+            'fax_no' => 'nullable|string|max:50',
+            'doc_link' => 'nullable|string|max:255',
+        ], [
+            'group_name.required' => 'Sila isi nama kumpulan',
+            'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
+            'creative_dance_name.required' => 'Sila isi nama tarian kreatif',
+            'koreografer_name.required' => 'Sila isi nama koreografer',
+            'address.required' => 'Sila isi alamat',
+            'sinopsis_traditional.required' => 'Sila isi sinopsis tradisional',
+            'sinopsis_creative.required' => 'Sila isi sinopsis kreatif',
+        ]);
+
+        $registration = Registration::findOrFail($id);
+        $registration->fill($request->except('user_id'));
+        $registration->save();
+
+        return redirect()->route('registration')->with('success', 'Maklumat berjaya dikemaskini');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $query = Registration::query();
+
+        if ($search) {
+            $query->where('group_name', 'LIKE', "%$search%");
+        }
+
+        $registrationList = $query->with('user')->latest()->paginate(10);
+
+        return view('pages.registration.index', [
+            'registrationList' => $registrationList,
+        ]);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $registration = Registration::findOrFail($id);
+
+        $registration->delete();
+
+        return redirect()->route('registration')->with('success', 'Maklumat berjaya dihapuskan');
+    }
+
+    public function trashList()
+    {
+        $trashList = Registration::onlyTrashed()->latest()->paginate(10);
+
+        return view('pages.registration.trash', [
+            'trashList' => $trashList,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        Registration::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->route('registration')->with('success', 'Maklumat berjaya dikembalikan');
+    }
+
+
+    public function forceDelete($id)
+    {
+        $registration = Registration::withTrashed()->findOrFail($id);
+
+        $registration->forceDelete();
+
+        return redirect()->route('registration.trash')->with('success', 'Maklumat berjaya dihapuskan sepenuhnya');
+    }
+}

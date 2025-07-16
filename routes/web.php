@@ -71,6 +71,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/restore', 'UserController@restore')->name('user.restore');
     Route::delete('/user/{id}/force-delete', 'UserController@forceDelete')->name('user.forceDelete');
 
+    // Registration Management
+    Route::get('registration', 'RegistrationController@index')->name('registration');
+    Route::get('registration/create', 'RegistrationController@create')->name('registration.create');
+    Route::post('registration/store', 'RegistrationController@store')->name('registration.store');
+    Route::get('registration/{id}/edit', 'RegistrationController@edit')->name('registration.edit');
+    Route::post('registration/{id}', 'RegistrationController@update')->name('registration.update');
+    Route::get('registration/view/{id}', 'RegistrationController@show')->name('registration.show');
+    Route::get('/registration/search', 'RegistrationController@search')->name('registration.search');
+    Route::delete('registration/{id}', 'RegistrationController@destroy')->name('registration.destroy');
+    Route::get('/registration/trash', 'RegistrationController@trashList')->name('registration.trash');
+    Route::get('/registration/{id}/restore', 'RegistrationController@restore')->name('registration.restore');
+    Route::delete('/registration/{id}/force-delete', 'RegistrationController@forceDelete')->name('registration.forceDelete');
+
     // User Role Management
     Route::get('user-role', 'UserRoleController@index')->name('user-role');
     Route::get('user-role/create', 'UserRoleController@create')->name('user-role.create');
