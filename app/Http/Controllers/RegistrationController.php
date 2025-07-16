@@ -26,9 +26,11 @@ class RegistrationController extends Controller
 
         return view('pages.registration.create', [
             'save_route' => route('registration.store'),
-            'str_mode' => 'Daftar',
+            'str_mode' => 'Register',
             'user_id' => $user->id,
             'institution_name' => $user->institution_name,
+            'email' => $user->email,
+            'phone_no' => $user->phone_no,
         ]);
     }
 
@@ -45,6 +47,19 @@ class RegistrationController extends Controller
             'sinopsis_creative' => 'required|string',
             'fax_no' => 'nullable|string|max:50',
             'doc_link' => 'nullable|string|max:255',
+            'members' => 'required|array|min:1',
+            'members.*.name' => 'required|string|max:255',
+            'members.*.ic_no' => 'required|string|max:255',
+            'members.*.peranan' => 'required|string|max:255',
+            'members.*.jantina' => 'required|string',
+            'members.*.saiz_baju' => 'required|string',
+
+            'escort_officers' => 'nullable|array',
+            'escort_officers.*.name' => 'required|string|max:255',
+
+            'payment.payment_type' => 'required|string|max:255',
+            'payment.date' => 'required|date',
+            'payment.payment_file' => 'nullable|file|max:2048',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
@@ -57,8 +72,29 @@ class RegistrationController extends Controller
 
         $registration = new Registration();
         $registration->user_id = Auth::id();
-        $registration->fill($request->except('user_id'));
+        $registration->fill($request->except(['members', 'escort_officers', 'payment']));
         $registration->save();
+
+        // Save Members
+        foreach ($request->members as $memberData) {
+            $registration->members()->create($memberData);
+        }
+
+        // Save Escort Officers
+        if ($request->has('escort_officers')) {
+            foreach ($request->escort_officers as $officerData) {
+                $registration->escortOfficers()->create($officerData);
+            }
+        }
+
+        // Save Payment
+        if ($request->has('payment')) {
+            $paymentData = $request->payment;
+            if ($request->hasFile('payment.payment_file')) {
+                $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+            }
+            $registration->payments()->create($paymentData);
+        }
 
         return redirect()->route('registration')->with('success', 'Maklumat berjaya disimpan');
     }

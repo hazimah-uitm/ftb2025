@@ -29,9 +29,24 @@ class Registration extends Model
         'fax_no',
         'doc_link',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(GroupMember::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function escortOfficers()
+    {
+        return $this->hasMany(EscortOfficer::class);
     }
 }

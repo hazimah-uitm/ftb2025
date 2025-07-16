@@ -3,40 +3,41 @@
 @section('content')
     <!-- Breadcrumb -->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Pengurusan Pendaftaran</div>
+        <div class="breadcrumb-title pe-3">Participation Management</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Senarai Pendaftaran</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $str_mode }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Participation List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Participation Form</li>
                 </ol>
             </nav>
         </div>
     </div>
     <!-- End Breadcrumb -->
 
-    <h6 class="mb-0 text-uppercase">{{ $str_mode }}</h6>
+    <h6 class="mb-0 text-uppercase">Participation Form</h6>
     <hr />
 
     <div class="card">
         <div class="card-body">
 
-            <form method="POST" action="{{ $save_route }}">
+            <form method="POST" action="{{ $save_route }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 {{-- Institution Name from User --}}
 
                 <div class="row g-3 mb-3">
 
+                    <h6>Group Details</h6>
                     <div class="col-12">
-                        <label class="form-label">Nama Institusi</label>
+                        <label class="form-label">Institution Name</label>
                         <input type="text" class="form-control"
                             value="{{ $institution_name ?? ($registration->user->institution_name ?? '-') }}" readonly>
                     </div>
 
                     <div class="col-12">
-                        <label for="group_name" class="form-label">Nama Kumpulan</label>
+                        <label for="group_name" class="form-label">Group Name</label>
                         <input type="text" class="form-control {{ $errors->has('group_name') ? 'is-invalid' : '' }}"
                             id="group_name" name="group_name"
                             value="{{ old('group_name', $registration->group_name ?? '') }}">
@@ -50,7 +51,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="traditional_dance_name" class="form-label">Nama Tarian Tradisional</label>
+                        <label for="traditional_dance_name" class="form-label">Ethnic Borneo Traditional Dance Name</label>
                         <input type="text"
                             class="form-control {{ $errors->has('traditional_dance_name') ? 'is-invalid' : '' }}"
                             id="traditional_dance_name" name="traditional_dance_name"
@@ -65,7 +66,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="creative_dance_name" class="form-label">Nama Tarian Kreatif</label>
+                        <label for="creative_dance_name" class="form-label">Ethnic Borneo Creative Dance Name</label>
                         <input type="text"
                             class="form-control {{ $errors->has('creative_dance_name') ? 'is-invalid' : '' }}"
                             id="creative_dance_name" name="creative_dance_name"
@@ -79,8 +80,27 @@
                         @endif
                     </div>
 
+                    @for ($i = 0; $i < 2; $i++)
+                        <div class="col-6">
+                            <label for="escort_officers_{{ $i }}_name" class="form-label">Escort Officer Name
+                                {{ $i + 1 }}</label>
+                            <input type="text"
+                                class="form-control {{ $errors->has('escort_officers.' . $i . '.name') ? 'is-invalid' : '' }}"
+                                id="escort_officers_{{ $i }}_name"
+                                name="escort_officers[{{ $i }}][name]"
+                                value="{{ old('escort_officers.' . $i . '.name', $registration->escortOfficers[$i]->name ?? '') }}">
+                            @if ($errors->has('escort_officers.' . $i . '.name'))
+                                <div class="invalid-feedback">
+                                    @foreach ($errors->get('escort_officers.' . $i . '.name') as $error)
+                                        {{ $error }}
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    @endfor
+
                     <div class="col-6">
-                        <label for="koreografer_name" class="form-label">Nama Koreografer</label>
+                        <label for="koreografer_name" class="form-label">Choreographer Name</label>
                         <input type="text"
                             class="form-control {{ $errors->has('koreografer_name') ? 'is-invalid' : '' }}"
                             id="koreografer_name" name="koreografer_name"
@@ -95,7 +115,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="assistant_koreografer_name" class="form-label">Nama Penolong Koreografer</label>
+                        <label for="assistant_koreografer_name" class="form-label">Choreographer Name (If any)</label>
                         <input type="text"
                             class="form-control {{ $errors->has('assistant_koreografer_name') ? 'is-invalid' : '' }}"
                             id="assistant_koreografer_name" name="assistant_koreografer_name"
@@ -110,7 +130,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="address" class="form-label">Alamat</label>
+                        <label for="address" class="form-label">Address</label>
                         <textarea class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" id="address" name="address">{{ old('address', $registration->address ?? '') }}</textarea>
                         @if ($errors->has('address'))
                             <div class="invalid-feedback">
@@ -121,34 +141,14 @@
                         @endif
                     </div>
 
-                    <div class="col-12">
-                        <label for="sinopsis_traditional" class="form-label">Sinopsis Tarian Tradisional</label>
-                        <textarea class="form-control {{ $errors->has('sinopsis_traditional') ? 'is-invalid' : '' }}" id="sinopsis_traditional"
-                            name="sinopsis_traditional">{{ old('sinopsis_traditional', $registration->sinopsis_traditional ?? '') }}</textarea>
-                        @if ($errors->has('sinopsis_traditional'))
-                            <div class="invalid-feedback">
-                                @foreach ($errors->get('sinopsis_traditional') as $error)
-                                    {{ $error }}
-                                @endforeach
-                            </div>
-                        @endif
+                    <div class="col-4">
+                        <label class="form-label">Telephone No.</label>
+                        <input type="text" class="form-control"
+                            value="{{ $phone_no ?? ($registration->user->phone_no ?? '-') }}" readonly>
                     </div>
 
-                    <div class="col-12">
-                        <label for="sinopsis_creative" class="form-label">Sinopsis Tarian Kreatif</label>
-                        <textarea class="form-control {{ $errors->has('sinopsis_creative') ? 'is-invalid' : '' }}" id="sinopsis_creative"
-                            name="sinopsis_creative">{{ old('sinopsis_creative', $registration->sinopsis_creative ?? '') }}</textarea>
-                        @if ($errors->has('sinopsis_creative'))
-                            <div class="invalid-feedback">
-                                @foreach ($errors->get('sinopsis_creative') as $error)
-                                    {{ $error }}
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="col-6">
-                        <label for="fax_no" class="form-label">No. Faks</label>
+                    <div class="col-4">
+                        <label for="fax_no" class="form-label">Fax No.</label>
                         <input type="text" class="form-control {{ $errors->has('fax_no') ? 'is-invalid' : '' }}"
                             id="fax_no" name="fax_no" value="{{ old('fax_no', $registration->fax_no ?? '') }}">
                         @if ($errors->has('fax_no'))
@@ -160,9 +160,15 @@
                         @endif
                     </div>
 
-                    <div class="col-6">
-                        <label for="doc_link" class="form-label">Pautan Dokumen (Beri akses kepada
-                            ftb2025@gmail.com)</label>
+                    <div class="col-4">
+                        <label class="form-label">Email Address</label>
+                        <input type="text" class="form-control"
+                            value="{{ $email ?? ($registration->user->email ?? '-') }}" readonly>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="doc_link" class="form-label">Shared Folder (Allow access for
+                            <strong>ftb2025@gmail.com</strong>)</label>
                         <span data-bs-toggle="tooltip" data-bs-placement="right"
                             title="Sila letak pautan url shared folder"><input type="url"
                                 class="form-control {{ $errors->has('doc_link') ? 'is-invalid' : '' }}" name="doc_link"
@@ -175,6 +181,187 @@
                             </div>
                         @endif
                     </div>
+
+                    <div class="col-12">
+                        <label for="sinopsis_traditional" class="form-label">Synopsis of Ethnic Borneo Traditional
+                            Dance</label>
+                        <textarea class="form-control {{ $errors->has('sinopsis_traditional') ? 'is-invalid' : '' }}"
+                            id="sinopsis_traditional" name="sinopsis_traditional">{{ old('sinopsis_traditional', $registration->sinopsis_traditional ?? '') }}</textarea>
+                        @if ($errors->has('sinopsis_traditional'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('sinopsis_traditional') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="col-12">
+                        <label for="sinopsis_creative" class="form-label">Synopsis of Ethnic Borneo Creative Dance</label>
+                        <textarea class="form-control {{ $errors->has('sinopsis_creative') ? 'is-invalid' : '' }}" id="sinopsis_creative"
+                            name="sinopsis_creative">{{ old('sinopsis_creative', $registration->sinopsis_creative ?? '') }}</textarea>
+                        @if ($errors->has('sinopsis_creative'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('sinopsis_creative') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- GROUP MEMBER --}}
+                    <hr class="my-4">
+                    <h6>Group Members (Max 25)</h6>
+
+                    <div id="members-container">
+                        <div class="card mb-3 member-item">
+                            <div class="card-header d-flex justify-content-between align-items-center py-2">
+                                <span class="fw-semibold">Member <span class="member-number">1</span></span>
+                                <!-- This Remove button is hidden for the first member -->
+                                <button type="button" class="btn btn-danger btn-sm remove-member d-none">
+                                    <i class="bx bx-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" name="members[0][name]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">IC / Passport / KTP</label>
+                                        <input type="text" name="members[0][ic_no]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Student ID</label>
+                                        <input type="text" name="members[0][student_id]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Role</label>
+                                        <select name="members[0][peranan]" class="form-select">
+                                            <option value="">Select</option>
+                                            <option value="Penari">Penari</option>
+                                            <option value="Krew">Krew</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Gender</label>
+                                        <select name="members[0][jantina]" class="form-select">
+                                            <option value="">Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Shirt Size</label>
+                                        <input type="text" name="members[0][saiz_baju]" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-2">
+                        <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
+                            <i class="bx bx-plus"></i> Add Member
+                        </button>
+                    </div>
+
+                    <!-- Template for new members -->
+                    <template id="member-template">
+                        <div class="card mb-3 member-item">
+                            <div class="card-header d-flex justify-content-between align-items-center py-2">
+                                <span class="fw-semibold">Member <span class="member-number">__NO__</span></span>
+                                <button type="button" class="btn btn-danger btn-sm remove-member">
+                                    <i class="bx bx-trash"></i> Remove
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" name="members[__INDEX__][name]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">IC / Passport / KTP</label>
+                                        <input type="text" name="members[__INDEX__][ic_no]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Student ID</label>
+                                        <input type="text" name="members[__INDEX__][student_id]" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Role</label>
+                                        <select name="members[__INDEX__][peranan]" class="form-select">
+                                            <option value="">Select</option>
+                                            <option value="Penari">Penari</option>
+                                            <option value="Krew">Krew</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Gender</label>
+                                        <select name="members[__INDEX__][jantina]" class="form-select">
+                                            <option value="">Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Shirt Size</label>
+                                        <input type="text" name="members[__INDEX__][saiz_baju]" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <hr class="my-4">
+                    <h6>Payment Details</h6>
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Payment Method</label>
+                            <input type="text"
+                                class="form-control {{ $errors->has('payment.payment_type') ? 'is-invalid' : '' }}"
+                                name="payment[payment_type]"
+                                value="{{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') }}">
+                            @if ($errors->has('payment.payment_type'))
+                                <div class="invalid-feedback">
+                                    @foreach ($errors->get('payment.payment_type') as $error)
+                                        {{ $error }}
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Payment Date</label>
+                            <input type="date"
+                                class="form-control {{ $errors->has('payment.date') ? 'is-invalid' : '' }}"
+                                name="payment[date]"
+                                value="{{ old('payment.date', $registration->payments[0]->date ?? '') }}">
+                            @if ($errors->has('payment.date'))
+                                <div class="invalid-feedback">
+                                    @foreach ($errors->get('payment.date') as $error)
+                                        {{ $error }}
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Upload Payment Slip (PDF / Image)</label>
+                            <input type="file" name="payment[payment_file]" class="form-control">
+                            @if (!empty($registration->payments[0]->payment_file))
+                                <small>Current File: <a
+                                        href="{{ asset('storage/' . $registration->payments[0]->payment_file) }}"
+                                        target="_blank">View</a></small>
+                            @endif
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <button type="submit" class="btn btn-primary">{{ $str_mode }}</button>
@@ -183,4 +370,53 @@
         </div>
     </div>
     <!-- End Page Wrapper -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('members-container');
+            const templateHtml = document.getElementById('member-template').innerHTML;
+            const addBtn = document.getElementById('add-member-btn');
+
+            let count = 1; // already have 1 member
+
+            addBtn.addEventListener('click', function() {
+                if (count >= 25) {
+                    alert('Maximum 25 members allowed.');
+                    return;
+                }
+
+                const index = count;
+                const newHtml = templateHtml
+                    .replace(/__INDEX__/g, index)
+                    .replace(/__NO__/g, index + 1);
+
+                const div = document.createElement('div');
+                div.innerHTML = newHtml;
+                container.appendChild(div);
+
+                count++;
+                updateNumbers();
+            });
+
+            container.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-member')) {
+                    const allItems = container.querySelectorAll('.member-item');
+                    if (allItems.length === 1) {
+                        alert('At least one member is required.');
+                        return;
+                    }
+                    e.target.closest('.member-item').remove();
+                    count--;
+                    updateNumbers();
+                }
+            });
+
+            function updateNumbers() {
+                const numbers = container.querySelectorAll('.member-number');
+                numbers.forEach((el, idx) => {
+                    el.textContent = idx + 1;
+                });
+            }
+        });
+    </script>
+
 @endsection

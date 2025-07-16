@@ -3,93 +3,194 @@
 @section('content')
     <!-- Breadcrumb -->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Pengurusan Pendaftaran</div>
+        <div class="breadcrumb-title pe-3">Participation Management</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Senarai Pendaftaran</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Maklumat {{ $registration->user->institution_name }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Participation List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $registration->user->institution_name }}</li>
                 </ol>
             </nav>
         </div>
-        @role('Superadmin')
+        {{-- @role('Superadmin')
             <div class="ms-auto">
                 <a href="{{ route('registration.edit', $registration->id) }}">
-                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Kemaskini Maklumat</button>
+                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Update Record</button>
                 </a>
             </div>
-        @endrole
+        @endrole --}}
     </div>
     <!-- End Breadcrumb -->
 
-    <h6 class="mb-0 text-uppercase">Maklumat {{ $registration->user->institution_name }}</h6>
+    <h6 class="mb-0 text-uppercase">{{ $registration->user->institution_name }}</h6>
     <hr />
 
-    <!-- Campus Information Table -->
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
+    <!-- Registration Information -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table table-borderless">
+                <tr>
+                    <th style="width: 30%">Institution Name</th>
+                    <td>{{ $registration->user->institution_name ?? '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Group Name</th>
+                    <td>{{ $registration->group_name }}</td>
+                </tr>
+                <tr>
+                    <th>Ethnic Borneo Traditional Dance Name</th>
+                    <td>{{ $registration->traditional_dance_name }}</td>
+                </tr>
+                <tr>
+                    <th>Ethnic Borneo Creative Dance Name</th>
+                    <td>{{ $registration->creative_dance_name }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{!! nl2br(e($registration->address)) !!}</td>
+                </tr>
+                <tr>
+                    <th>Phone No.</th>
+                    <td>{{ $registration->user->phone_no ?? '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Fax No.</th>
+                    <td>{{ $registration->fax_no ?? '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Email Address</th>
+                    <td>{{ $registration->user->email ?? '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Choreographer Name</th>
+                    <td>{{ $registration->koreografer_name }}</td>
+                </tr>
+                <tr>
+                    <th>Assistant Choreographer Name</th>
+                    <td>{{ $registration->assistant_koreografer_name ?? '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Synopsis of Ethnic Borneo Traditional Dance</th>
+                    <td>{!! nl2br(e($registration->sinopsis_traditional)) !!}</td>
+                </tr>
+                <tr>
+                    <th>Synopsis of Ethnic Borneo Creative Dance</th>
+                    <td>{!! nl2br(e($registration->sinopsis_creative)) !!}</td>
+                </tr>
+                <tr>
+                    <th>Shared Folder Link</th>
+                    <td>
+                        @if (!empty($registration->doc_link))
+                            <a href="{{ $registration->doc_link }}" target="_blank">
+                                <i class='bx bxs-folder-open' style="font-size: 1.2rem; color: #007bff;"></i>
+                            </a>
+                        @else
+                            -
+                        @endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Escort Officers -->
+    @if ($registration->escortOfficers && $registration->escortOfficers->count())
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">Escort Officer</h6>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($registration->escortOfficers as $index => $officer)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $officer->name }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
+
+    <!-- Group Members -->
+    @if ($registration->members && $registration->members->count())
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">Group Members</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>IC / Passport / KTP</th>
+                                <th>ID Pelajar</th>
+                                <th>Peranan</th>
+                                <th>Jantina</th>
+                                <th>Saiz Baju</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($registration->members as $index => $member)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $member->name }}</td>
+                                    <td>{{ $member->ic_no }}</td>
+                                    <td>{{ $member->student_id ?? '-' }}</td>
+                                    <td>{{ $member->peranan }}</td>
+                                    <td>{{ $member->jantina }}</td>
+                                    <td>{{ $member->saiz_baju }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Payment Details -->
+    @if ($registration->payments && $registration->payments->count())
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">Commitment Fee Payment Confirmation</h6>
+            </div>
+            <div class="card-body">
+                @foreach ($registration->payments as $payment)
                     <table class="table table-borderless">
                         <tr>
-                            <th style="width: 30%">Nama Institusi</th>
-                            <td>{{ $registration->user->institution_name ?? '-' }}</td>
+                            <th style="width: 30%">Payment Method</th>
+                            <td>{{ $payment->payment_type }}</td>
                         </tr>
                         <tr>
-                            <th>Nama Kumpulan</th>
-                            <td>{{ $registration->group_name }}</td>
+                            <th>Payment Date</th>
+                            <td>{{ $payment->date }}</td>
                         </tr>
                         <tr>
-                            <th>Nama Tarian Tradisional</th>
-                            <td>{{ $registration->traditional_dance_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nama Tarian Kreatif</th>
-                            <td>{{ $registration->creative_dance_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nama Koreografer</th>
-                            <td>{{ $registration->koreografer_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nama Pembantu Koreografer</th>
-                            <td>{{ $registration->assistant_koreografer_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Alamat</th>
-                            <td>{!! nl2br(e($registration->address)) !!}</td>
-                        </tr>
-                        <tr>
-                            <th>Sinopsis Tarian Tradisional</th>
-                            <td>{!! nl2br(e($registration->sinopsis_traditional)) !!}</td>
-                        </tr>
-                        <tr>
-                            <th>Sinopsis Tarian Kreatif</th>
-                            <td>{!! nl2br(e($registration->sinopsis_creative)) !!}</td>
-                        </tr>
-                        <tr>
-                            <th>No. Faks</th>
-                            <td>{{ $registration->fax_no }}</td>
-                        </tr>
-                        <tr>
-                            <th>Pautan Dokumen</th>
+                            <th>Payment Proof</th>
                             <td>
-                                @if (!empty($registration->doc_link))
-                                    <a href="{{ $registration->doc_link }}" target="_blank" data-bs-toggle="tooltip"
-                                        data-bs-placement="bottom" title="Buka pautan shared folder">
-                                        <i class='bx bxs-folder-open' style="font-size: 1.2rem; color: #007bff;"></i>
-                                    </a>
+                                @if ($payment->payment_file)
+                                    <a href="{{ asset('public/storage/' . $payment->payment_file) }}" target="_blank"><i class='bx bxs-file-pdf' style="font-size: 1.2rem; color: #007bff;"></i></a>
                                 @else
                                     -
                                 @endif
                             </td>
                         </tr>
                     </table>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
-    <!-- End Campus Information Table -->
-    <!-- End Page Wrapper -->
+    @endif
+
 @endsection

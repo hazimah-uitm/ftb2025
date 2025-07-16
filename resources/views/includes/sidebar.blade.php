@@ -17,10 +17,10 @@
             <div class="menu-title">Dashboard</div>
         </a>
     </li>
-    <li class="{{ Request::routeIs('registration') ? 'mm-active' : '' }}">
+    <li class="{{ Request::routeIs('registration*') ? 'mm-active' : '' }}">
         <a href="{{ route('registration') }}">
-            <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
-            <div class="menu-title">Pendaftaran</div>
+            <div class="parent-icon"><i class='bx bx-file'></i></div>
+            <div class="menu-title">Participation</div>
         </a>
     </li>
 

@@ -2,26 +2,26 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Pengurusan Pendaftaran</div>
+        <div class="breadcrumb-title pe-3">Participation Management</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Senarai Pendaftaran</li>
+                    <li class="breadcrumb-item active" aria-current="page">Participation List</li>
                 </ol>
             </nav>
         </div>
         @role('Superadmin')
             <div class="ms-auto">
                 <a href="{{ route('registration.trash') }}">
-                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Senarai Rekod Dipadam</button>
+                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Deleted Record List</button>
                 </a>
             </div>
         @endrole
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">Senarai Pendaftaran</h6>
+    <h6 class="mb-0 text-uppercase">Participation List</h6>
     <hr />
     <div class="card">
         <div class="card-body">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="ms-auto">
                     <a href="{{ route('registration.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0">
-                        <i class="bx bxs-plus-square"></i> Daftar
+                        <i class="bx bxs-plus-square"></i> Register
                     </a>
                 </div>
             </div>
@@ -54,11 +54,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Institusi</th>
-                            <th>Nama Kumpulan</th>
-                            <th>Tarian Tradisional</th>
-                            <th>Tarian Kreatif</th>
-                            <th>Tindakan</th>
+                            <th>Institution Name</th>
+                            <th>Group Name</th>
+                            <th>Ethnic Borneo Traditional Dance Name</th>
+                            <th>Ethnic Borneo Creative Dance Name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +91,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6">Tiada rekod</td>
+                                <td colspan="6">No record</td>
                             </tr>
                         @endif
                     </tbody>
@@ -99,7 +99,7 @@
             </div>
             <div class="mt-3 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <span class="mr-2 mx-1">Jumlah rekod per halaman</span>
+                    <span class="mr-2 mx-1">Records per page</span>
                     <form action="{{ route('registration.search') }}" method="GET" id="perPageForm"
                         class="d-flex align-items-center">
                         <input type="hidden" name="search" value="{{ request('search') }}">
@@ -114,9 +114,9 @@
 
                 <div class="d-flex justify-content-end align-items-center">
                     <span class="mx-2 mt-2 small text-muted">
-                        Menunjukkan {{ $registrationList->firstItem() }} hingga {{ $registrationList->lastItem() }}
-                        daripada
-                        {{ $registrationList->total() }} rekod
+                        Showing {{ $registrationList->firstItem() }} hingga {{ $registrationList->lastItem() }}
+                        from
+                        {{ $registrationList->total() }} record(s)
                     </span>
                     <div class="pagination-wrapper">
                         {{ $registrationList->appends([
@@ -135,25 +135,25 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Pengesahan Padam Rekod</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Record Deletion Confirmation</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         @isset($registration)
-                            Adakah anda pasti ingin memadam rekod <span style="font-weight: 600;">
+                            Are you sure you want to delete this record? <span style="font-weight: 600;">
                                 {{ ucfirst($registration->name) }}</span>?
                         @else
-                            Tiada rekod
+                            No record
                         @endisset
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         @isset($registration)
                             <form class="d-inline" method="POST"
                                 action="{{ route('registration.destroy', $registration->id) }}">
                                 {{ method_field('delete') }}
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger">Padam</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         @endisset
                     </div>
