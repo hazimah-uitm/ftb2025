@@ -211,7 +211,7 @@
 
                     {{-- GROUP MEMBER --}}
                     <hr class="my-4">
-                    <h6>Group Members (Max 25)</h6>
+                    <h6 class="text-primary">Group Members (Max 25)</h6>
 
                     <div id="members-container">
                         <div class="card mb-3 member-item">
@@ -315,53 +315,106 @@
                         </div>
                     </template>
 
+                    {{-- Payment --}}
+                    <hr class="my-2">
+                    <h6 class="text-primary">Payment Details</h6>
 
-                    <hr class="my-4">
-                    <h6>Payment Details</h6>
-                    <div class="row g-3">
+                    <div class="mb-2 mt-0">
+                        <div class="alert alert-secondary small mb-0">
+                            <strong>Bank Information:</strong><br>
+                            Account Name: <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong><br>
+                            Bank Name: <strong>BANK ISLAM MALAYSIA BERHAD</strong><br>
+                            Account Number: <strong>11040010001473</strong><br>
+                            Branch Address: <strong>UiTM Kampus Samarahan, Jalan Meranek, 94300 Kota
+                                Samarahan</strong><br>
+                            Swift Code: <strong>BIMBMYKL</strong><br>
+                            Fee Amount: <strong>RM1,500 / Group</strong><br>
+                            Payment Reference: <strong>FTB2025</strong>
+                        </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Payment Method</label>
-                            <input type="text"
-                                class="form-control {{ $errors->has('payment.payment_type') ? 'is-invalid' : '' }}"
-                                name="payment[payment_type]"
-                                value="{{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') }}">
+                        <div class="alert alert-warning mt-2 small">
+                            <strong>Important:</strong>
+                            <ol class="mb-0 ps-3">
+                                <li>Participants may choose one of the following methods to pay the participation fee:
+                                    <ul>
+                                        <li>Direct deposit into UiTMKS account at BANK ISLAM MALAYSIA BERHAD, account
+                                            number: 11040010001473.</li>
+                                        <li>Payment via Interbank GIRO (IBG) Transfer or Telegraphic Transfer (for
+                                            international payments).</li>
+                                    </ul>
+                                </li>
+                                <li>Each group is required to attach a copy of the proof of payment transaction together
+                                    with this form.</li>
+                                <li>Bank details for international payments are shown above.</li>
+                            </ol>
+                        </div>
+
+                        <p class="mb-3">
+                            <i class="bx bx-info-circle"></i>
+                            <span class="ms-1">
+                                We have made the payment for the Commitment Fee under the name of
+                                <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
+                                (Bank Account Number : <strong>11040010001473</strong>) - BANK ISLAM MALAYSIA BERHAD via
+                                the following method:
+                            </span>
+                        </p>
+
+                        <div class="border rounded p-3 mb-3 bg-light">
+                            <div class="mb-2 fw-semibold">Choose Payment Method <span class="text-danger">*</span>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="payment[payment_type]"
+                                    id="method1" value="Direct Deposit"
+                                    {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Direct Deposit' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="method1">
+                                    Direct deposit into the UiTMKS account at BANK ISLAM MALAYSIA BERHAD branch.
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment[payment_type]"
+                                    id="method2" value="Interbank GIRO / Telegraphic Transfer"
+                                    {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Interbank GIRO / Telegraphic Transfer' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="method2">
+                                    Payment made via Interbank GIRO (IBG) Transfer or Telegraphic Transfer (for
+                                    international payments).
+                                </label>
+                            </div>
                             @if ($errors->has('payment.payment_type'))
-                                <div class="invalid-feedback">
-                                    @foreach ($errors->get('payment.payment_type') as $error)
-                                        {{ $error }}
-                                    @endforeach
+                                <div class="text-danger mt-1 small">
+                                    {{ $errors->first('payment.payment_type') }}
                                 </div>
                             @endif
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Payment Date</label>
-                            <input type="date"
-                                class="form-control {{ $errors->has('payment.date') ? 'is-invalid' : '' }}"
-                                name="payment[date]"
-                                value="{{ old('payment.date', $registration->payments[0]->date ?? '') }}">
-                            @if ($errors->has('payment.date'))
-                                <div class="invalid-feedback">
-                                    @foreach ($errors->get('payment.date') as $error)
-                                        {{ $error }}
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Payment Date <span
+                                        class="text-danger">*</span></label>
+                                <input type="date"
+                                    class="form-control {{ $errors->has('payment.date') ? 'is-invalid' : '' }}"
+                                    name="payment[date]"
+                                    value="{{ old('payment.date', $registration->payments[0]->date ?? '') }}">
+                                @if ($errors->has('payment.date'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('payment.date') }}
+                                    </div>
+                                @endif
+                            </div>
 
-                        <div class="col-12">
-                            <label class="form-label">Upload Payment Slip (PDF / Image)</label>
-                            <input type="file" name="payment[payment_file]" class="form-control">
-                            @if (!empty($registration->payments[0]->payment_file))
-                                <small>Current File: <a
-                                        href="{{ asset('storage/' . $registration->payments[0]->payment_file) }}"
-                                        target="_blank">View</a></small>
-                            @endif
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Upload Payment Proof (PDF / Image) <span
+                                        class="text-danger">*</span></label>
+                                <input type="file" name="payment[payment_file]" class="form-control">
+                                @if (!empty($registration->payments[0]->payment_file))
+                                    <small class="d-block mt-1">
+                                        Current File:
+                                        <a href="{{ asset('storage/' . $registration->payments[0]->payment_file) }}"
+                                            target="_blank">View</a>
+                                    </small>
+                                @endif
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <button type="submit" class="btn btn-primary">{{ $str_mode }}</button>
