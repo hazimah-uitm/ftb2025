@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/registration/trash', 'RegistrationController@trashList')->name('registration.trash');
     Route::get('/registration/{id}/restore', 'RegistrationController@restore')->name('registration.restore');
     Route::delete('/registration/{id}/force-delete', 'RegistrationController@forceDelete')->name('registration.forceDelete');
+    Route::post('registration/{id}/approval', 'RegistrationController@approval')->name('registration.approval');
 
     // User Role Management
     Route::get('user-role', 'UserRoleController@index')->name('user-role');

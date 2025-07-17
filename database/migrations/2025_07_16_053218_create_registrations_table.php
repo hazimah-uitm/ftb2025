@@ -27,6 +27,12 @@ class CreateRegistrationsTable extends Migration
             $table->string('fax_no');
             $table->string('doc_link');
             $table->string('status')->default('Submitted & waiting for approval');
+            $table->text('remarks_submitter')->nullable();
+            $table->unsignedBigInteger('submitted_by')->nullable();
+            $table->timestamp('submitted_at')->nullable();
+            $table->text('remarks_checker')->nullable();
+            $table->unsignedBigInteger('checked_by')->nullable();
+            $table->timestamp('checked_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

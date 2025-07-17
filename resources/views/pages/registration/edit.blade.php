@@ -168,11 +168,11 @@
                     @endif
                 </div>
 
-                <div class="col-12">
+                <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-select">
-                        <option value="submitted & waiting for approval"
-                            {{ $registration->status == 'submitted & waiting for approval' ? 'selected' : '' }}>Submitted &
+                        <option value="Submitted & waiting for approval"
+                            {{ $registration->status == 'Submitted & waiting for approval' ? 'selected' : '' }}>Submitted &
                             Waiting for Approval</option>
                         <option value="approved" {{ $registration->status == 'approved' ? 'selected' : '' }}>Approved
                         </option>

@@ -74,6 +74,9 @@ class RegistrationController extends Controller
         $registration->user_id = Auth::id();
         $registration->fill($request->except(['members', 'escort_officers', 'payment']));
         $registration->status = 'Submitted & waiting for approval';
+        $registration->remarks_submitter = $request->input('remarks_submitter');
+        $registration->submitted_by = Auth::id();
+        $registration->submitted_at = now();
         $registration->save();
 
         // Save Members
@@ -98,6 +101,23 @@ class RegistrationController extends Controller
         }
 
         return redirect()->route('registration')->with('success', 'Maklumat berjaya disimpan');
+    }
+
+    public function approval(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Approved,Rejected',
+            'remarks_checker' => 'nullable|string',
+        ]);
+
+        $registration = Registration::findOrFail($id);
+        $registration->status = $request->status;
+        $registration->remarks_checker = $request->remarks_checker;
+        $registration->checked_by = Auth::id();
+        $registration->checked_at = now();
+        $registration->save();
+
+        return redirect()->route('registration')->with('success', 'Permohonan telah ' . strtolower($request->status));
     }
 
     public function show($id)

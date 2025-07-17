@@ -209,6 +209,19 @@
                         @endif
                     </div>
 
+                    <div class="col-12">
+                        <label for="remarks_submitter" class="form-label">Remarks</label>
+                        <textarea class="form-control {{ $errors->has('remarks_submitter') ? 'is-invalid' : '' }}" id="remarks_submitter"
+                            name="remarks_submitter">{{ old('remarks_submitter', $registration->remarks_submitter ?? '') }}</textarea>
+                        @if ($errors->has('remarks_submitter'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('remarks_submitter') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
                     {{-- GROUP MEMBER --}}
                     <hr class="my-4">
                     <h6 class="text-primary text-uppercase">Group Members (Max 25)</h6>

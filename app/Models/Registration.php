@@ -29,11 +29,27 @@ class Registration extends Model
         'fax_no',
         'doc_link',
         'status',
+        'remarks_submitter',
+        'submitted_by',
+        'submitted_at',
+        'remarks_checker',
+        'checked_by',
+        'checked_by',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function checker()
+    {
+        return $this->belongsTo(User::class, 'checked_by');
+    }
+
+    public function submitter()
+    {
+        return $this->belongsTo(User::class, 'submitted_by');
     }
 
     public function members()

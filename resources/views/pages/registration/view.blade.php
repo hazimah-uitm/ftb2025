@@ -27,84 +27,84 @@
     <hr />
 
     <!-- Registration Information -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <table class="table table-borderless">
-                <tr>
-                    <th style="width: 30%">Institution Name</th>
-                    <td>{{ $registration->user->institution_name ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Group Name</th>
-                    <td>{{ $registration->group_name }}</td>
-                </tr>
-                <tr>
-                    <th>Ethnic Borneo Traditional Dance Name</th>
-                    <td>{{ $registration->traditional_dance_name }}</td>
-                </tr>
-                <tr>
-                    <th>Ethnic Borneo Creative Dance Name</th>
-                    <td>{{ $registration->creative_dance_name }}</td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>{!! nl2br(e($registration->address)) !!}</td>
-                </tr>
-                <tr>
-                    <th>Phone No.</th>
-                    <td>{{ $registration->user->phone_no ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Fax No.</th>
-                    <td>{{ $registration->fax_no ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Email Address</th>
-                    <td>{{ $registration->user->email ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Escort Officers</th>
-                    <td>
-                        @if ($registration->escortOfficers && $registration->escortOfficers->count())
-                            @foreach ($registration->escortOfficers as $index => $officer)
-                                {{ $officer->name }}<br>
-                            @endforeach
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Choreographer Name</th>
-                    <td>{{ $registration->koreografer_name }}</td>
-                </tr>
-                <tr>
-                    <th>Assistant Choreographer Name</th>
-                    <td>{{ $registration->assistant_koreografer_name ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <th>Synopsis of Ethnic Borneo Traditional Dance</th>
-                    <td>{!! nl2br(e($registration->sinopsis_traditional)) !!}</td>
-                </tr>
-                <tr>
-                    <th>Synopsis of Ethnic Borneo Creative Dance</th>
-                    <td>{!! nl2br(e($registration->sinopsis_creative)) !!}</td>
-                </tr>
-                <tr>
-                    <th>Shared Folder Link</th>
-                    <td>
-                        @if (!empty($registration->doc_link))
-                            <a href="{{ $registration->doc_link }}" target="_blank">
-                                <i class='bx bxs-folder-open' style="font-size: 1.2rem; color: #007bff;"></i>
-                            </a>
-                        @else
-                            -
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td>{{ $registration->status }}</td>
-                </tr>
-            </table>
+    <div class="row">
+        <div class="col-md">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th style="width: 30%">Institution Name</th>
+                            <td>{{ $registration->user->institution_name ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Group Name</th>
+                            <td>{{ $registration->group_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ethnic Borneo Traditional Dance Name</th>
+                            <td>{{ $registration->traditional_dance_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ethnic Borneo Creative Dance Name</th>
+                            <td>{{ $registration->creative_dance_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{!! nl2br(e($registration->address)) !!}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone No.</th>
+                            <td>{{ $registration->user->phone_no ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fax No.</th>
+                            <td>{{ $registration->fax_no ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email Address</th>
+                            <td>{{ $registration->user->email ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Escort Officers</th>
+                            <td>
+                                @if ($registration->escortOfficers && $registration->escortOfficers->count())
+                                    @foreach ($registration->escortOfficers as $index => $officer)
+                                        {{ $officer->name }}<br>
+                                    @endforeach
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Choreographer Name</th>
+                            <td>{{ $registration->koreografer_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Assistant Choreographer Name</th>
+                            <td>{{ $registration->assistant_koreografer_name ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Synopsis of Ethnic Borneo Traditional Dance</th>
+                            <td>{!! nl2br(e($registration->sinopsis_traditional)) !!}</td>
+                        </tr>
+                        <tr>
+                            <th>Synopsis of Ethnic Borneo Creative Dance</th>
+                            <td>{!! nl2br(e($registration->sinopsis_creative)) !!}</td>
+                        </tr>
+                        <tr>
+                            <th>Shared Folder Link</th>
+                            <td>
+                                @if (!empty($registration->doc_link))
+                                    <a href="{{ $registration->doc_link }}" target="_blank">
+                                        <i class='bx bxs-folder-open' style="font-size: 1.2rem; color: #007bff;"></i>
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -180,5 +180,49 @@
             </div>
         </div>
     @endif
+
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h6 class="mb-0">Application Status</h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless mb-0">
+                <tr>
+                    <th>Status</th>
+                    <td>{{ $registration->status }}</td>
+                </tr>
+                <tr>
+                    <th>Submitted at</th>
+                    <td>
+                        {{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
+                        oleh
+                        {{ $registration->submitter->name ?? '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Catatan Pemohon</th>
+                    <td>
+                        {!! nl2br(e($registration->remarks_submitter ?? '-')) !!}
+                    </td>
+                </tr>
+                @if ($registration->checked_by)
+                    <tr>
+                        <th>Disemak pada</th>
+                        <td>
+                            {{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}
+                            oleh
+                            {{ $registration->checker->name ?? '-' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Catatan Penyemak</th>
+                        <td>
+                            {!! nl2br(e($registration->remarks_checker ?? '-')) !!}
+                        </td>
+                    </tr>
+                @endif
+            </table>
+        </div>
+    </div>
 
 @endsection

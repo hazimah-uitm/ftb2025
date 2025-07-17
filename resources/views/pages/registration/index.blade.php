@@ -56,8 +56,9 @@
                             <th>#</th>
                             <th>Institution Name</th>
                             <th>Group Name</th>
-                            <th>Ethnic Borneo Traditional Dance Name</th>
-                            <th>Ethnic Borneo Creative Dance Name</th>
+                            <th>Name</th>
+                            <th>Phone No.</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -69,8 +70,9 @@
                                     </td>
                                     <td>{{ $registration->user->institution_name ?? '-' }}</td>
                                     <td>{{ $registration->group_name }}</td>
-                                    <td>{{ $registration->traditional_dance_name }}</td>
-                                    <td>{{ $registration->creative_dance_name }}</td>
+                                    <td>{{ $registration->name ?? '-' }}</td>
+                                    <td>{{ $registration->user->phone_no ?? '-' }}</td>
+                                    <td>{{ $registration->status }}</td>
                                     <td>
                                         <a href="{{ route('registration.show', $registration->id) }}"
                                             class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Papar">
@@ -81,6 +83,13 @@
                                                 class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
                                             </a>
+                                            @if ($registration->status == 'Submitted & waiting for approval')
+                                                <button class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#approvalModal{{ $registration->id }}"><i
+                                                        class='bx bx-check-circle'></i>
+                                                    Approval
+                                                </button>
+                                            @endif
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{ $registration->id }}" title="Padam">
                                                 <i class="bx bx-trash"></i>
@@ -161,6 +170,136 @@
             </div>
         </div>
     @endforeach
+
+    <!-- Approval Modal -->
+    @foreach ($registrationList as $registration)
+        <div class="modal fade" id="approvalModal{{ $registration->id }}" tabindex="-1"
+            aria-labelledby="approvalModalLabel{{ $registration->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Review Participation: {{ $registration->institution_name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-sm table-striped table-borderless mb-3">
+                            <tr>
+                                <th>Institution Name</th>
+                                <td>{{ $registration->user->institution_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Group Name</th>
+                                <td>{{ $registration->group_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Traditional Dance Name</th>
+                                <td>{{ $registration->traditional_dance_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Creative Dance Name</th>
+                                <td>{{ $registration->creative_dance_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{!! nl2br(e($registration->address)) !!}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{ $registration->user->phone_no ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ $registration->user->email ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Escort Officers</th>
+                                <td>
+                                    @if ($registration->escortOfficers && $registration->escortOfficers->count())
+                                        @foreach ($registration->escortOfficers as $index => $officer)
+                                            {{ $officer->name }}<br>
+                                        @endforeach
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Shared Folder</th>
+                                <td>
+                                    @if (!empty($registration->doc_link))
+                                        <a href="{{ $registration->doc_link }}" target="_blank">
+                                            <i class='bx bxs-folder-open' style="font-size: 1.2rem; color: #007bff;"></i>
+                                        </a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                            </tr>
+
+                            @if ($registration->payments && $registration->payments->count())
+                                @foreach ($registration->payments as $payment)
+                                    <tr>
+                                        <th style="width: 30%">Payment Method</th>
+                                        <td>{{ $payment->payment_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Payment Date</th>
+                                        <td>{{ $payment->date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Proof of Payment</th>
+                                        <td>
+                                            @if ($payment->payment_file)
+                                                <a href="{{ asset('public/storage/' . $payment->payment_file) }}"
+                                                    target="_blank">
+                                                    <i class='bx bxs-file-pdf'
+                                                        style="font-size: 1.5rem; color: #007bff;"></i>
+                                                </a>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            <tr>
+                                <th>Submitted At</th>
+                                <td>
+                                    {{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
+                                    by {{ $registration->submitter->name ?? '-' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Submitter's Remarks</th>
+                                <td>{!! nl2br(e($registration->remarks_submitter ?? '-')) !!}</td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <form method="POST" action="{{ route('registration.approval', $registration->id) }}">
+                            {{ csrf_field() }}
+                            <div class="mb-3">
+                                <label for="tindakan" class="form-label">Approval Status</label>
+                                <select name="tindakan" class="form-select" required>
+                                    <option value="">-- Please Select --</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="remarks_checker" class="form-label">Checker's Remarks</label>
+                                <textarea name="remarks_checker" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Submit Decision</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
