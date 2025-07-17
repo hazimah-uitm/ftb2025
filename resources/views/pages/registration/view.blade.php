@@ -9,7 +9,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
                     @hasanyrole('Superadmin|Admin')
-                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Participation List</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('registration') }}">Participation List</a></li>
                     @endhasanyrole
                     <li class="breadcrumb-item active" aria-current="page">{{ $registration->user->institution_name }}</li>
                 </ol>
@@ -226,5 +226,37 @@
             </table>
         </div>
     </div>
+
+    @hasanyrole('Superadmin|Admin')
+        @if ($registration->status === 'Submitted & waiting for approval')
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">Participation Approval</h6>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('registration.approval', $registration->id) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="mb-3">
+                            <label for="remarks_checker" class="form-label fw-bold">Remarks</label>
+                            <textarea class="form-control" name="remarks_checker" id="remarks_checker" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label fw-bold">Approval Status</label>
+                            <select class="form-select" name="status" id="status" required>
+                                <option value="">Select Approval Status</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="bx bx-check-circle"></i> Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
+    @endhasanyrole
 
 @endsection
