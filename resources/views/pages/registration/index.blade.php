@@ -70,7 +70,7 @@
                                     </td>
                                     <td>{{ $registration->user->institution_name ?? '-' }}</td>
                                     <td>{{ $registration->group_name }}</td>
-                                    <td>{{ $registration->name ?? '-' }}</td>
+                                    <td>{{ $registration->user->name ?? '-' }}</td>
                                     <td>{{ $registration->user->phone_no ?? '-' }}</td>
                                     <td>{{ $registration->status }}</td>
                                     <td>
@@ -79,10 +79,10 @@
                                             <i class="bx bx-show"></i>
                                         </a>
                                         @hasanyrole('Superadmin|Admin')
-                                            <a href="{{ route('registration.edit', $registration->id) }}"
+                                            {{-- <a href="{{ route('registration.edit', $registration->id) }}"
                                                 class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
-                                            </a>
+                                            </a> --}}
                                             @if ($registration->status == 'Submitted & waiting for approval')
                                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#approvalModal{{ $registration->id }}"><i
@@ -90,10 +90,10 @@
                                                     Approval
                                                 </button>
                                             @endif
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            {{-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{ $registration->id }}" title="Padam">
                                                 <i class="bx bx-trash"></i>
-                                            </button>
+                                            </button> --}}
                                         @endhasanyrole
                                     </td>
                                 </tr>
@@ -278,9 +278,9 @@
                         <form method="POST" action="{{ route('registration.approval', $registration->id) }}">
                             {{ csrf_field() }}
                             <div class="mb-3">
-                                <label for="tindakan" class="form-label">Approval Status</label>
-                                <select name="tindakan" class="form-select" required>
-                                    <option value="">-- Please Select --</option>
+                                <label for="status" class="form-label">Approval Status</label>
+                                <select name="status" class="form-select" required>
+                                    <option value="">Select Approval Status</option>
                                     <option value="Approved">Approved</option>
                                     <option value="Rejected">Rejected</option>
                                 </select>

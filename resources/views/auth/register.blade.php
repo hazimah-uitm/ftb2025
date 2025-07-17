@@ -36,20 +36,31 @@
                                     <div class="col-md-6 mb-2">
                                         <input type="text" id="institutionInput"
                                             class="form-control form-control-sm border-0 border-bottom rounded-0 shadow-none"
-                                            placeholder="Institution Name" required>
+                                            placeholder="Institution Name" required value="{{ old('institution_name') }}">
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <select id="jenisIptaSelect"
                                             class="form-select form-select-sm border-0 border-bottom rounded-0 shadow-none"
                                             required>
-                                            <option value="" disabled selected>Type of Higher Education Institution
+                                            <option value="" disabled {{ old('jenis_ipta') ? '' : 'selected' }}>Type
+                                                of Higher Education Institution</option>
+                                            <option value="University"
+                                                {{ old('jenis_ipta') == 'University' ? 'selected' : '' }}>University
                                             </option>
-                                            <option>University</option>
-                                            <option>University College</option>
-                                            <option>College </option>
-                                            <option>Teacher Training Institute </option>
-                                            <option>Polytechnic</option>
-                                            <option>Community College </option>
+                                            <option value="University College"
+                                                {{ old('jenis_ipta') == 'University College' ? 'selected' : '' }}>University
+                                                College</option>
+                                            <option value="College" {{ old('jenis_ipta') == 'College' ? 'selected' : '' }}>
+                                                College</option>
+                                            <option value="Teacher Training Institute"
+                                                {{ old('jenis_ipta') == 'Teacher Training Institute' ? 'selected' : '' }}>
+                                                Teacher Training Institute</option>
+                                            <option value="Polytechnic"
+                                                {{ old('jenis_ipta') == 'Polytechnic' ? 'selected' : '' }}>Polytechnic
+                                            </option>
+                                            <option value="Community College"
+                                                {{ old('jenis_ipta') == 'Community College' ? 'selected' : '' }}>Community
+                                                College</option>
                                         </select>
                                     </div>
                                 </div>
@@ -77,7 +88,8 @@
                                         the participants.</li>
                                 </ol>
                                 <div class="form-check mt-3">
-                                    <input class="form-check-input" type="checkbox" id="consentCheckbox">
+                                    <input class="form-check-input" type="checkbox" id="consentCheckbox" name="consent"
+                                        {{ old('consent') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="consentCheckbox">
                                         I have read and agreed to the above Competition Declaration Letter.
                                     </label>
@@ -277,6 +289,15 @@
                 step2Card.style.display = 'none';
                 step1Card.style.display = 'block';
             });
+
+            @if ($errors->any())
+                step1Card.style.display = 'none';
+                step2Card.style.display = 'block';
+
+                // Sync back to step 2 display fields (in case of back navigation)
+                document.getElementById('displayInstitution').value = '{{ old('institution_name') }}';
+                document.getElementById('displayJenisIpta').value = '{{ old('jenis_ipta') }}';
+            @endif
         });
     </script>
 @endsection

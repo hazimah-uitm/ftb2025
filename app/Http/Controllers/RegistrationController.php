@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registration;
+use App\Models\User;
+use App\Notifications\NewRegistrationSubmitted;
+use App\Notifications\RegistrationStatusUpdated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class RegistrationController extends Controller
 {
@@ -100,6 +104,16 @@ class RegistrationController extends Controller
             $registration->payments()->create($paymentData);
         }
 
+        // Hantar notification ke semua Admin/Superadmin
+        $admins = User::role('Admin')->get();
+        if ($admins->isNotEmpty()) {
+            foreach ($admins as $admin) {
+                $admin->notify(new NewRegistrationSubmitted($registration));
+            }
+        } else {
+            Log::error('Tiada Admin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
+        }
+
         return redirect()->route('registration')->with('success', 'Maklumat berjaya disimpan');
     }
 
@@ -116,6 +130,8 @@ class RegistrationController extends Controller
         $registration->checked_by = Auth::id();
         $registration->checked_at = now();
         $registration->save();
+
+        $registration->user->notify(new RegistrationStatusUpdated($registration));
 
         return redirect()->route('registration')->with('success', 'Permohonan telah ' . strtolower($request->status));
     }

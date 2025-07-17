@@ -186,7 +186,7 @@ class UserController extends Controller
     public function storePublicRegister(Request $request)
     {
         $request->validate([
-            'institution_name' => 'required',
+            'institution_name' => 'required|unique:users,institution_name',
             'jenis_ipta' => 'required',
             'name'     => 'required',
             'ic_no' => 'required|unique:users,ic_no',
@@ -195,14 +195,15 @@ class UserController extends Controller
             'phone_no' => 'required|string',
             'password' => 'required|min:8|confirmed',
         ], [
-            'name.required'     => 'Sila isi nama pengguna',
-            'ic_no.required' => 'Sila isi no. pekerja pengguna',
-            'ic_no.unique' => 'No. pekerja telah wujud',
-            'email.required'    => 'Sila isi emel pengguna',
-            'email.unique'    => 'Emel telah wujud',
-            'position.required' => 'Sila isi jawatan pengguna',
-            'institution_name.required' => 'Sila isi nama institusi',
-            'jenis_ipta.required' => 'Sila pilih jenis ipta',
+            'name.required'     => 'Please enter your name',
+            'ic_no.required'    => 'Please enter your id',
+            'ic_no.unique'      => 'The id already exists',
+            'email.required'    => 'Please enter your email',
+            'email.unique'      => 'The email already exists',
+            'position.required' => 'Please enter your position',
+            'institution_name.required' => 'Please enter the institution name',
+            'institution_name.unique' => 'The institution name already exists',
+            'jenis_ipta.required' => 'Please select the type of higher education institution',
         ]);
 
         $user = new User();
