@@ -63,6 +63,16 @@
                     <td>{{ $registration->user->email ?? '-' }}</td>
                 </tr>
                 <tr>
+                    <th>Escort Officers</th>
+                    <td>
+                        @if ($registration->escortOfficers && $registration->escortOfficers->count())
+                            @foreach ($registration->escortOfficers as $index => $officer)
+                                {{ $officer->name }}<br>
+                            @endforeach
+                        @endif
+                    </td>
+                </tr>
+                <tr>
                     <th>Choreographer Name</th>
                     <td>{{ $registration->koreografer_name }}</td>
                 </tr>
@@ -98,37 +108,10 @@
         </div>
     </div>
 
-    <!-- Escort Officers -->
-    @if ($registration->escortOfficers && $registration->escortOfficers->count())
-        <div class="card mb-4">
-            <div class="card-header">
-                <h6 class="mb-0">Escort Officer</h6>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($registration->escortOfficers as $index => $officer)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $officer->name }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    @endif
-
     <!-- Group Members -->
     @if ($registration->members && $registration->members->count())
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-light">
                 <h6 class="mb-0">Group Members</h6>
             </div>
             <div class="card-body">
@@ -137,12 +120,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama</th>
+                                <th>Nam2</th>
                                 <th>IC / Passport / KTP</th>
-                                <th>ID Pelajar</th>
-                                <th>Peranan</th>
-                                <th>Jantina</th>
-                                <th>Saiz Baju</th>
+                                <th>Student ID</th>
+                                <th>Role</th>
+                                <th>Gender</th>
+                                <th>Shirt Size</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -167,7 +150,7 @@
     <!-- Payment Details -->
     @if ($registration->payments && $registration->payments->count())
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header bg-light">
                 <h6 class="mb-0">Commitment Fee Payment Confirmation</h6>
             </div>
             <div class="card-body">
@@ -186,7 +169,7 @@
                             <td>
                                 @if ($payment->payment_file)
                                     <a href="{{ asset('public/storage/' . $payment->payment_file) }}" target="_blank"><i
-                                            class='bx bxs-file-pdf' style="font-size: 1.2rem; color: #007bff;"></i></a>
+                                            class='bx bxs-file-pdf' style="font-size: 1.5rem; color: #007bff;"></i></a>
                                 @else
                                     -
                                 @endif

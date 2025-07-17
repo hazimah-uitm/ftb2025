@@ -390,8 +390,8 @@
                         </div>
 
                         <div class="alert alert-info mt-2 small p-3">
-                            <h6 class="mb-3"><strong>Payment Note & Instructions</strong></h6>
-                            <ol class="mb-3 ps-3">
+                            <p class="mb-2"><strong>Note:</strong></p>
+                            <ol class="mb-2 ps-3">
                                 <li class="mb-2">
                                     Participants may choose <b>one</b> of the following methods to pay the participation
                                     fee:
