@@ -49,7 +49,8 @@
         </li>
     @endhasanyrole
 
-    @can('Lihat Participant')
+
+    @hasanyrole('Superadmin|Admin')
         <li class="menu-label">User Management</li>
 
         <li class="{{ Request::is('user*') && !Request::is('user-role*') ? 'mm-active' : '' }}">
@@ -58,7 +59,7 @@
                 <div class="menu-title">User</div>
             </a>
         </li>
-    @endcan
+    @endhasanyrole
 
     @role('Superadmin')
         <li class="{{ Request::is('user-role*') ? 'mm-active' : '' }}">
