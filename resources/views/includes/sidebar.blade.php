@@ -22,7 +22,7 @@
         $registration = \App\Models\Registration::where('user_id', auth()->id())->first();
     @endphp
 
-    @role('Pengguna')
+    @role('Participant')
         @if ($registration)
             <li class="{{ request()->routeIs('registration.view') ? 'mm-active' : '' }}">
                 <a href="{{ route('registration.view', $registration->id) }}">
@@ -49,7 +49,7 @@
         </li>
     @endhasanyrole
 
-    @can('Lihat Pengguna')
+    @can('Lihat Participant')
         <li class="menu-label">User Management</li>
 
         <li class="{{ Request::is('user*') && !Request::is('user-role*') ? 'mm-active' : '' }}">

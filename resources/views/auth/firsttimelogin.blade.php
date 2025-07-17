@@ -6,12 +6,13 @@
             <div class="container-fluid">
                 <div class="text-center">
                     <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
-                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="logo-icon-login" alt="logo icon">
+                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="img-fluid logo-icon-login"
+                            alt="logo icon" style="max-width: 100%; height: auto;">
                     </div>
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ANJURAN UiTM CAWANGAN SARAWAK
+                            ORGANISED BY UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>

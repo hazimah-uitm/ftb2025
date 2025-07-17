@@ -150,7 +150,7 @@ class RegistrationController extends Controller
         }
 
         $user = User::find(auth()->id());
-        if ($user->hasRole('Pengguna')) {
+        if ($user->hasRole('Participant')) {
             return redirect()->route('registration.view', $registration->id)
                 ->with('success', 'Maklumat berjaya disimpan');
         } else {
