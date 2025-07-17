@@ -9,7 +9,7 @@
                         <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="logo-icon-login" alt="logo icon">
                     </div>
                     <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
-                    <h6 class="logo-subtitle-login mb-0">ANJURAN UiTM CAWANGAN SARAWAK</h6>
+                    <h6 class="logo-subtitle-login mb-0">ORGANISED BY UiTM CAWANGAN SARAWAK</h6>
                 </div>
 
                 <div class="row justify-content-center">
@@ -18,7 +18,7 @@
                         <!-- Step 1: Surat Akuan -->
                         <div class="card shadow mb-4" id="step1Card">
                             <div class="card-header text-center text-white" style="background-color: #03244c;">
-                                <h5 class="mb-0 text-white">SURAT AKUAN PERTANDINGAN</h5>
+                                <h5 class="mb-0 text-white">COMPETITION DECLARATION LETTER</h5>
                             </div>
                             <div class="card-body p-4" style="max-height: 500px; overflow-y: auto;">
                                 {{-- <p class="text-center fw-bold mb-2">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</p>
@@ -29,63 +29,58 @@
                                 </p>
                                 <hr> --}}
                                 <p>
-                                    Sukacita dimaklumkan bahawa pasukan kami dari:
+                                    We are pleased to inform you that our team from:
                                 </p>
 
                                 <div class="row mb-3">
                                     <div class="col-md-6 mb-2">
                                         <input type="text" id="institutionInput"
                                             class="form-control form-control-sm border-0 border-bottom rounded-0 shadow-none"
-                                            placeholder="Nama Institusi" required>
+                                            placeholder="Institution Name" required>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <select id="jenisIptaSelect"
                                             class="form-select form-select-sm border-0 border-bottom rounded-0 shadow-none"
                                             required>
-                                            <option value="" disabled selected>Jenis IPTA</option>
-                                            <option>Universiti</option>
-                                            <option>Kolej Universiti</option>
-                                            <option>Kolej</option>
-                                            <option>Institusi Perguruan</option>
-                                            <option>Politeknik</option>
-                                            <option>Kolej Komuniti</option>
+                                            <option value="" disabled selected>IPTA Type</option>
+                                            <option>University</option>
+                                            <option>University College</option>
+                                            <option>College </option>
+                                            <option>Teacher Training Institute </option>
+                                            <option>Polytechnic</option>
+                                            <option>Community College </option>
                                         </select>
                                     </div>
                                 </div>
 
 
                                 <p>
-                                    berminat untuk menyertai Festival Tari Borneo IX (Edisi Ke-9) 2025 pada:
+                                    is interested in participating in the <b>Festival Tari Borneo IX 2025</b> to be held on:
                                 </p>
 
                                 <ul>
-                                    <li>Tarikh: 18 November - 21 November 2025</li>
-                                    <li>Tempat: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</li>
+                                    <li>Date: 18 November - 21 November 2025</li>
+                                    <li>Venue: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</li>
                                 </ul>
-                                <p>Dengan ini;</p>
+                                <p>Hereby, we declare that;</p>
                                 <ol>
-                                    <li>Kami akan mematuhi setiap peraturan dan syarat seperti yang ditetapkan oleh pihak
-                                        Jawatankuasa Penganjur sepanjang berlangsungnya festival.</li>
-                                    <li>Kami mengakui bahawa pihak Jawatankuasa Penganjur berhak membuat sebarang pindaan
-                                        sepanjang program mengikut kesesuaian demi kebaikan semua pihak.</li>
-                                    <li>Kami juga mengakui bahawa pihak Jawatankuasa Penganjur berhak membatalkan penyertaan
-                                        kami sekiranya kami melanggar peraturan penyertaan yang telah ditetapkan.</li>
-                                    <li>Pihak penganjur akan memastikan festival berjalan dengan lancar dan selamat. Namun
-                                        begitu, sebarang kecederaan atau kemalangan sepanjang FTB 2025 berlangsung adalah
-                                        atas tanggung jawab peserta.</li>
+                                    <li>We will adhere to all rules and regulations set by the Organising Committee throughout the duration of the Festival Tari Borneo IX 2025.</li>
+                                    <li>We acknowledge that the Organising Committee reserves the right to make any amendments throughout the programme as deemed appropriate for the benefit of all parties.</li>
+                                    <li>We also acknowledge that the Organising Committee has the right to revoke our participation should we violate any of the participation rules.</li>
+                                    <li>The organiser will ensure the festival runs smoothly and safely. However, any injuries or accidents occurring during FTB 2025 will be the sole responsibility of the participants.</li>
                                 </ol>
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" id="consentCheckbox">
                                     <label class="form-check-label" for="consentCheckbox">
-                                        Saya telah membaca dan bersetuju dengan Surat Akuan Pertandingan di atas.
+                                        I have read and agreed to the above Competition Declaration Letter.
                                     </label>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <p class="mb-0">
-                                    Sudah ada akaun? <a href="{{ route('login') }}">Log Masuk</a>
+                                    Already have account? <a href="{{ route('login') }}">Login</a>
                                 </p>
-                                <button id="nextButton" class="btn btn-primary btn-sm" disabled>Seterusnya <i
+                                <button id="nextButton" class="btn btn-primary btn-sm" disabled>Next <i
                                         class='bx bx-right-arrow-alt'></i></button>
                             </div>
                         </div>

@@ -261,7 +261,7 @@
                                 @endforeach
                             @endif
                             <tr>
-                                <th>Submitted At</th>
+                                <th>Submitted at</th>
                                 <td>
                                     {{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
                                     by {{ $registration->submitter->name ?? '-' }}
@@ -291,7 +291,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success">Submit Decision</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </form>
                     </div>

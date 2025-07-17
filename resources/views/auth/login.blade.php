@@ -7,12 +7,13 @@
             <div class="container-fluid">
                 <div class="text-center">
                     <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
-                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="logo-icon-login" alt="logo icon">
+                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="img-fluid logo-icon-login"
+                            alt="logo icon" style="max-width: 100%; height: auto;">
                     </div>
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ANJURAN UiTM CAWANGAN SARAWAK
+                            ORGANISED BY UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>
@@ -22,7 +23,7 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3 class="">LOG MASUK</h3>
+                                        <h3 class="">LOGIN</h3>
                                     </div>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
@@ -41,12 +42,12 @@
                                         <form method="POST" action="{{ route('login') }}" class="row g-3">
                                             {{ csrf_field() }}
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Emel</label>
+                                                <label for="email" class="form-label">Email</label>
                                                 <input type="text" class="form-control" id="email" name="email"
                                                     value="{{ old('email') }}" required autocomplete="email" autofocus>
                                             </div>
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Kata Laluan</label>
+                                                <label for="password" class="form-label">Password</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0" id="password"
                                                         name="password" required autocomplete="current-password">
@@ -58,26 +59,25 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="remember"
                                                         id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Ingat
-                                                        saya</label>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Remember
+                                                        Me</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 text-end">
                                                 <a class="text-muted" href="{{ route('password.request') }}">Reset
-                                                    Kata Laluan</a>
+                                                    Password</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary"><i
-                                                            class="bx bxs-lock-open"></i> Log Masuk</button>
+                                                            class="bx bxs-lock-open"></i> Login</button>
                                                 </div>
                                             </div>
                                             <div class="col-12 text-center">
                                                 <div class="d-grid">
-                                                <a href="{{ route('register') }}"
-                                                    class="btn btn-warning">
-                                                    <i class='bx bxs-user-plus'></i> Daftar
-                                                </a>
+                                                    <a href="{{ route('register') }}" class="btn btn-warning">
+                                                        <i class='bx bxs-user-plus'></i> Register
+                                                    </a>
                                                 </div>
                                             </div>
                                         </form>
