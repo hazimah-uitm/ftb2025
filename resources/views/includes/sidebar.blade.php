@@ -41,7 +41,7 @@
     </li>
 
 
-
+{{-- 
     <li class="menu-label">Setting</li>
 
     <li class="{{ Request::is('campus*') ? 'mm-active' : '' }}">
@@ -56,7 +56,7 @@
         </ul>
     </li>
 
-    {{-- <li class="{{ Request::is('position*') ? 'mm-active' : '' }}">
+    <li class="{{ Request::is('position*') ? 'mm-active' : '' }}">
         <a class="has-arrow" href="#">
             <div class="parent-icon"><i class="bx bx-cog"></i></div>
             <div class="menu-title">Tetapan Umum</div>
@@ -68,6 +68,7 @@
         </ul>
     </li> --}}
 
+    <li class="menu-label">Setting</li>
     <li class="{{ Request::routeIs('activity-log') ? 'mm-active' : '' }}">
         <a href="{{ route('activity-log') }}">
             <div class="parent-icon"><i class='bx bx-history'></i></div>

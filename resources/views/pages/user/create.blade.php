@@ -14,7 +14,6 @@
         </nav>
     </div>
 </div>
-<!-- End Breadcrumb -->
 
 <h6 class="mb-0 text-uppercase">{{ $str_mode }} Pengguna</h6>
 <hr />
@@ -24,6 +23,36 @@
 
         <form method="POST" action="{{ $save_route }}">
             {{ csrf_field() }}
+
+            <div class="mb-3">
+                <label for="institution_name" class="form-label">Institution Name</label>
+                <input type="text" class="form-control {{ $errors->has('institution_name') ? 'is-invalid' : '' }}"
+                    name="institution_name" id="institution_name" value="{{ old('institution_name') }}">
+                @if ($errors->has('institution_name'))
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('institution_name') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="jenis_ipta" class="form-label">Type of Higher Education Institution</label>
+                <select class="form-select {{ $errors->has('jenis_ipta') ? 'is-invalid' : '' }}" name="jenis_ipta" id="jenis_ipta">
+                    <option disabled {{ old('jenis_ipta') == '' ? 'selected' : '' }}>Select Type</option>
+                    @foreach (['University', 'University College', 'College', 'Teacher Training Institute', 'Polytechnic', 'Community College'] as $type)
+                        <option value="{{ $type }}" {{ old('jenis_ipta') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('jenis_ipta'))
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('jenis_ipta') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
+                @endif
+            </div>
 
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
@@ -40,7 +69,7 @@
 
             <div class="mb-3">
                 <label for="ic_no" class="form-label">IC. No / Passport / KTP</label>
-                 <input type="text" class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
+                <input type="text" class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
                     name="ic_no" value="{{ old('ic_no') }}">
                 @if ($errors->has('ic_no'))
                 <div class="invalid-feedback">
@@ -78,7 +107,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="position_id" class="form-label">Position</label>
+                <label for="position" class="form-label">Position</label>
                 <input type="text" class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" id="position"
                     name="position" value="{{ old('position') }}">
                 @if ($errors->has('position'))
@@ -104,9 +133,9 @@
                     </div>
                     @endforeach
                 </div>
-                @if ($errors->has('role'))
-                <div class="invalid-feedback">
-                    @foreach ($errors->get('role') as $error)
+                @if ($errors->has('roles'))
+                <div class="invalid-feedback d-block">
+                    @foreach ($errors->get('roles') as $error)
                     {{ $error }}
                     @endforeach
                 </div>
@@ -117,18 +146,16 @@
                 <label for="publish_status" class="form-label">Status</label>
                 <div class="form-check">
                     <input type="radio" id="aktif" name="publish_status" value="1"
-                        {{ old('publish_status') == '1' || ($user->publish_status ?? false) ? 'checked' : '' }}
-                        required>
+                        {{ old('publish_status') == '1' ? 'checked' : '' }} required>
                     <label class="form-check-label" for="aktif">Aktif</label>
                 </div>
                 <div class="form-check">
                     <input type="radio" id="tidak_aktif" name="publish_status" value="0"
-                        {{ old('publish_status') == '0' || !($user->publish_status ?? true) ? 'checked' : '' }}
-                        required>
+                        {{ old('publish_status') == '0' ? 'checked' : '' }} required>
                     <label class="form-check-label" for="tidak_aktif">Tidak Aktif</label>
                 </div>
                 @if ($errors->has('publish_status'))
-                <div class="invalid-feedback">
+                <div class="invalid-feedback d-block">
                     @foreach ($errors->get('publish_status') as $error)
                     {{ $error }}
                     @endforeach
@@ -140,7 +167,6 @@
         </form>
     </div>
 </div>
-<!-- End Page Wrapper -->
 
 <script>
     document.getElementById('phone_no').addEventListener('input', function(e) {
