@@ -27,9 +27,9 @@
 
                 {{-- Institution Name from User --}}
 
-                <div class="row g-3 mb-3">
+                <div class="row g-3 mb-2">
 
-                    <h6>Group Details</h6>
+                    <h6 class="text-primary text-uppercase">Group Details</h6>
                     <div class="col-12">
                         <label class="form-label">Institution Name</label>
                         <input type="text" class="form-control"
@@ -211,11 +211,11 @@
 
                     {{-- GROUP MEMBER --}}
                     <hr class="my-4">
-                    <h6 class="text-primary">Group Members (Max 25)</h6>
+                    <h6 class="text-primary text-uppercase">Group Members (Max 25)</h6>
 
                     <div id="members-container">
                         <div class="card mb-3 member-item">
-                            <div class="card-header d-flex justify-content-between align-items-center py-2">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
                                 <span class="fw-semibold">Member <span class="member-number">1</span></span>
                                 <!-- This Remove button is hidden for the first member -->
                                 <button type="button" class="btn btn-danger btn-sm remove-member d-none">
@@ -270,7 +270,7 @@
                     <!-- Template for new members -->
                     <template id="member-template">
                         <div class="card mb-3 member-item">
-                            <div class="card-header d-flex justify-content-between align-items-center py-2">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
                                 <span class="fw-semibold">Member <span class="member-number">__NO__</span></span>
                                 <button type="button" class="btn btn-danger btn-sm remove-member">
                                     <i class="bx bx-trash"></i> Remove
@@ -317,39 +317,11 @@
 
                     {{-- Payment --}}
                     <hr class="my-2">
-                    <h6 class="text-primary">Payment Details</h6>
+                    <h6 class="text-primary">COMMITMENT FEE PAYMENT CONFIRMATION</h6>
 
-                    <div class="mb-2 mt-0">
-                        <div class="alert alert-secondary small mb-0">
-                            <strong>Bank Information:</strong><br>
-                            Account Name: <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong><br>
-                            Bank Name: <strong>BANK ISLAM MALAYSIA BERHAD</strong><br>
-                            Account Number: <strong>11040010001473</strong><br>
-                            Branch Address: <strong>UiTM Kampus Samarahan, Jalan Meranek, 94300 Kota
-                                Samarahan</strong><br>
-                            Swift Code: <strong>BIMBMYKL</strong><br>
-                            Fee Amount: <strong>RM1,500 / Group</strong><br>
-                            Payment Reference: <strong>FTB2025</strong>
-                        </div>
+                    <div class="mb-1 mt-0">
 
-                        <div class="alert alert-warning mt-2 small">
-                            <strong>Important:</strong>
-                            <ol class="mb-0 ps-3">
-                                <li>Participants may choose one of the following methods to pay the participation fee:
-                                    <ul>
-                                        <li>Direct deposit into UiTMKS account at BANK ISLAM MALAYSIA BERHAD, account
-                                            number: 11040010001473.</li>
-                                        <li>Payment via Interbank GIRO (IBG) Transfer or Telegraphic Transfer (for
-                                            international payments).</li>
-                                    </ul>
-                                </li>
-                                <li>Each group is required to attach a copy of the proof of payment transaction together
-                                    with this form.</li>
-                                <li>Bank details for international payments are shown above.</li>
-                            </ol>
-                        </div>
-
-                        <p class="mb-3">
+                        <p class="mb-2 mt-2">
                             <i class="bx bx-info-circle"></i>
                             <span class="ms-1">
                                 We have made the payment for the Commitment Fee under the name of
@@ -359,12 +331,13 @@
                             </span>
                         </p>
 
-                        <div class="border rounded p-3 mb-3 bg-light">
+                        <div class="border rounded p-3 mb-2 bg-light">
                             <div class="mb-2 fw-semibold">Choose Payment Method <span class="text-danger">*</span>
                             </div>
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="payment[payment_type]"
-                                    id="method1" value="Direct Deposit"
+                                    id="method1"
+                                    value="Direct deposit into the UiTMKS account at BANK ISLAM MALAYSIA BERHAD branch"
                                     {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Direct Deposit' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="method1">
                                     Direct deposit into the UiTMKS account at BANK ISLAM MALAYSIA BERHAD branch.
@@ -372,7 +345,8 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment[payment_type]"
-                                    id="method2" value="Interbank GIRO / Telegraphic Transfer"
+                                    id="method2"
+                                    value="Payment made via Interbank GIRO (IBG) Transfer or Telegraphic Transfer (for international payments)"
                                     {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Interbank GIRO / Telegraphic Transfer' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="method2">
                                     Payment made via Interbank GIRO (IBG) Transfer or Telegraphic Transfer (for
@@ -386,7 +360,7 @@
                             @endif
                         </div>
 
-                        <div class="row g-3">
+                        <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Payment Date <span
                                         class="text-danger">*</span></label>
@@ -413,6 +387,77 @@
                                     </small>
                                 @endif
                             </div>
+                        </div>
+
+                        <div class="alert alert-info mt-2 small p-3">
+                            <h6 class="mb-3"><strong>Payment Note & Instructions</strong></h6>
+                            <ol class="mb-3 ps-3">
+                                <li class="mb-2">
+                                    Participants may choose <b>one</b> of the following methods to pay the participation
+                                    fee:
+                                    <ul class="mb-2">
+                                        <li>Direct deposit into UiTMKS account at <b>BANK ISLAM MALAYSIA BERHAD</b>, account
+                                            number: <b>11040010001473</b>, at any branch.</li>
+                                        <li><b>Interbank GIRO (IBG) Transfer</b> or <b>Telegraphic Transfer</b> (for
+                                            international payments).</li>
+                                    </ul>
+                                </li>
+                                <li class="mb-2">
+                                    Each group is required to upload a copy of the <b>proof of payment transaction</b>
+                                    together with this form.
+                                </li>
+                                <li class="mb-2">
+                                    Bank information for payments is as follows:
+                                    <div class="card border-0 shadow-sm mt-2 mb-1">
+                                        <div class="card-body p-2">
+                                            <table class="table table-borderless table-striped table-sm mb-0">
+                                                <tr>
+                                                    <td>Account Name:</td>
+                                                    <td><strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bank Account Number:</td>
+                                                    <td><strong>11040010001473</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bank Name:</td>
+                                                    <td><strong>BANK ISLAM MALAYSIA BERHAD</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bank Address:</td>
+                                                    <td><strong>UITM KAMPUS SAMARAHAN, JALAN MERANEK, 94300 KOTA
+                                                            SAMARAHAN</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Swift Code:</td>
+                                                    <td><strong>BIMBMYKL</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fee Amount:</td>
+                                                    <td><strong>RM1,500 / Group</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Payment Reference:</td>
+                                                    <td><strong>FTB2025</strong></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    The <b>Registration Form</b> along with the <b>proof of payment</b> must be submitted to
+                                    the organiser on or before <b>31 August 2025 (Sunday)</b>.
+                                </li>
+                                <li>
+                                    For further information or inquiries, please contact:
+                                    <ul class="mb-0">
+                                        <li>Cik Melinda Anak Jindu (082 678 059) / <a
+                                                href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
+                                        <li>Cik Lydia Jimbie Anak Anthony (082 677 058) / <a
+                                                href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                                    </ul>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
