@@ -72,7 +72,15 @@
                                     <td>{{ $registration->group_name }}</td>
                                     <td>{{ $registration->user->name ?? '-' }}</td>
                                     <td>{{ $registration->user->phone_no ?? '-' }}</td>
-                                    <td>{{ $registration->status }}</td>
+                                    <td>
+                                        @if ($registration->status == 'Approved')
+                                            <span class="badge bg-success">Approved</span>
+                                        @elseif ($registration->status == 'Rejected')
+                                            <span class="badge bg-danger">Rejected</span>
+                                        @else
+                                            <span class="badge bg-warning">Pending Approval</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('registration.view', $registration->id) }}"
                                             class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Papar">
@@ -83,7 +91,7 @@
                                                 class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
                                             </a>
-                                            @if ($registration->status == 'Submitted & waiting for approval')
+                                            @if ($registration->status == 'Pending Approval')
                                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#approvalModal{{ $registration->id }}"><i
                                                         class='bx bx-check-circle'></i>

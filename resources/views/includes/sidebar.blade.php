@@ -58,16 +58,17 @@
                 <div class="menu-title">User</div>
             </a>
         </li>
+    @endcan
 
+    @role('Superadmin')
         <li class="{{ Request::is('user-role*') ? 'mm-active' : '' }}">
             <a href="{{ route('user-role') }}">
                 <div class="parent-icon"><i class='bx bx-shield'></i></div>
                 <div class="menu-title">User Role</div>
             </a>
         </li>
-    @endcan
 
-    {{-- 
+        {{-- 
     <li class="menu-label">Setting</li>
 
     <li class="{{ Request::is('campus*') ? 'mm-active' : '' }}">
@@ -94,21 +95,20 @@
         </ul>
     </li> --}}
 
-    @role('Superadmin')
-    <li class="menu-label">Setting</li>
-    <li class="{{ Request::routeIs('activity-log') ? 'mm-active' : '' }}">
-        <a href="{{ route('activity-log') }}">
-            <div class="parent-icon"><i class='bx bx-history'></i></div>
-            <div class="menu-title">Activity Log</div>
-        </a>
-    </li>
+        <li class="menu-label">Setting</li>
+        <li class="{{ Request::routeIs('activity-log') ? 'mm-active' : '' }}">
+            <a href="{{ route('activity-log') }}">
+                <div class="parent-icon"><i class='bx bx-history'></i></div>
+                <div class="menu-title">Activity Log</div>
+            </a>
+        </li>
 
-    <li class="{{ Request::routeIs('logs.debug') ? 'mm-active' : '' }}">
-        <a href="{{ route('logs.debug') }}">
-            <div class="parent-icon"><i class='bx bxs-bug'></i></div>
-            <div class="menu-title">Debug Log</div>
-        </a>
-    </li>
+        <li class="{{ Request::routeIs('logs.debug') ? 'mm-active' : '' }}">
+            <a href="{{ route('logs.debug') }}">
+                <div class="parent-icon"><i class='bx bxs-bug'></i></div>
+                <div class="menu-title">Debug Log</div>
+            </a>
+        </li>
     @endrole
 </ul>
 <!--end navigation-->

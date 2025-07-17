@@ -91,20 +91,24 @@
                             @endif
                         </td>
                         <td>
+                            @can('Edit Pengguna')
                             <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info btn-sm"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kemaskini">
                                 <i class="bx bxs-edit"></i>
                             </a>
+                            @endcan
                             <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary btn-sm"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
                                 <i class="bx bx-show"></i>
                             </a>
+                            @can('Padam Pengguna')
                             <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="Padam">
                                 <span class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal{{ $user->id }}"><i
                                         class="bx bx-trash"></i></span>
                             </a>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

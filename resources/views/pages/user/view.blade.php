@@ -13,11 +13,11 @@
             </ol>
         </nav>
     </div>
-    <div class="ms-auto">
+    {{-- <div class="ms-auto">
         <a href="{{ route('user.edit', $user->id) }}">
             <button type="button" class="btn btn-primary mt-2 mt-lg-0">Kemaskini Maklumat</button>
         </a>
-    </div>
+    </div> --}}
 </div>
 <!-- End Breadcrumb -->
 

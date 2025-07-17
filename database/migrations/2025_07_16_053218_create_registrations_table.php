@@ -26,7 +26,7 @@ class CreateRegistrationsTable extends Migration
             $table->text('sinopsis_creative');
             $table->string('fax_no');
             $table->string('doc_link');
-            $table->string('status')->default('Submitted & waiting for approval');
+            $table->string('status')->default('Pending Approval');
             $table->text('remarks_submitter')->nullable();
             $table->unsignedBigInteger('submitted_by')->nullable();
             $table->timestamp('submitted_at')->nullable();

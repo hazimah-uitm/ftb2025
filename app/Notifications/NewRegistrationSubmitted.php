@@ -26,7 +26,7 @@ class NewRegistrationSubmitted extends Notification
     {
         return (new MailMessage)
             ->subject('New Registration Submitted')
-            ->greeting('Hello Admin,')
+            ->greeting('Hi,')
             ->line('A new registration has been submitted by ' . $this->registration->user->institution_name)
             ->line('Group Name: ' . $this->registration->group_name)
             ->action('View Registration', url(route('registration.view', $this->registration->id)))

@@ -191,7 +191,15 @@
             <table class="table table-borderless mb-0">
                 <tr>
                     <th>Status</th>
-                    <td>{{ $registration->status }}</td>
+                    <td>
+                        @if ($registration->status == 'Approved')
+                            <span class="badge bg-success">Approved</span>
+                        @elseif ($registration->status == 'Rejected')
+                            <span class="badge bg-danger">Rejected</span>
+                        @else
+                            <span class="badge bg-warning">Pending Approval</span>
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <th>Submitted at</th>
@@ -202,14 +210,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Catatan Pemohon</th>
+                    <th>Submitter's Remarks</th>
                     <td>
                         {!! nl2br(e($registration->remarks_submitter ?? '-')) !!}
                     </td>
                 </tr>
                 @if ($registration->checked_by)
                     <tr>
-                        <th>Disemak pada</th>
+                        <th>Checked at</th>
                         <td>
                             {{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}
                             oleh
@@ -217,7 +225,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Catatan Penyemak</th>
+                        <th>Checker's Remarks</th>
                         <td>
                             {!! nl2br(e($registration->remarks_checker ?? '-')) !!}
                         </td>
@@ -228,7 +236,7 @@
     </div>
 
     @hasanyrole('Superadmin|Admin')
-        @if ($registration->status === 'Submitted & waiting for approval')
+        @if ($registration->status === 'Pending Approval')
             <div class="card mb-4">
                 <div class="card-header bg-light">
                     <h6 class="mb-0">Participation Approval</h6>

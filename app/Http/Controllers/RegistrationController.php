@@ -45,7 +45,7 @@ class RegistrationController extends Controller
 
         if ($user->hasRole('Admin') || $user->hasRole('Superadmin')) {
             $totalRegistrations = Registration::count();
-            $pendingRegistrations = Registration::where('status', 'Submitted & waiting for approval')->count();
+            $pendingRegistrations = Registration::where('status', 'Pending Approval')->count();
             $approvedRegistrations = Registration::where('status', 'Approved')->count();
         }
 
@@ -111,7 +111,7 @@ class RegistrationController extends Controller
         $registration = new Registration();
         $registration->user_id = Auth::id();
         $registration->fill($request->except(['members', 'escort_officers', 'payment']));
-        $registration->status = 'Submitted & waiting for approval';
+        $registration->status = 'Pending Approval';
         $registration->remarks_submitter = $request->input('remarks_submitter');
         $registration->submitted_by = Auth::id();
         $registration->submitted_at = now();
@@ -139,13 +139,14 @@ class RegistrationController extends Controller
         }
 
         // Hantar notification ke semua Admin/Superadmin
-        $admins = User::role('Admin')->get();
+        $admins = User::role(['Admin', 'Superadmin'])->get();
+
         if ($admins->isNotEmpty()) {
             foreach ($admins as $admin) {
                 $admin->notify(new NewRegistrationSubmitted($registration));
             }
         } else {
-            Log::error('Tiada Admin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
+            Log::error('Tiada Admin atau Superadmin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
         }
 
         $user = User::find(auth()->id());
