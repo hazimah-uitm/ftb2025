@@ -20,6 +20,13 @@ class UserController extends Controller
 {
     use SoftDeletes;
 
+    public function __construct()
+    {
+        $this->middleware('permission:Lihat Pengguna')->only(['index', 'show', 'search']);
+        $this->middleware('permission:Tambah Pengguna')->only(['create', 'store']);
+        $this->middleware('permission:Edit Pengguna')->only(['edit', 'update']);
+        $this->middleware('permission:Padam Pengguna')->only(['destroy', 'trashList', 'restore', 'forceDelete']);
+    }
     /**
      * Display a listing of the resource.
      *

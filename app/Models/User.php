@@ -9,6 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @method bool hasRole(string|array $roles)
+ * @method bool hasAnyRole(string|array $roles)
+ * @method \Spatie\Permission\Models\Role[] getRoleNames()
+ */
+
+
 class User extends Authenticatable
 {
     use Notifiable, LogsActivity, HasRoles, SoftDeletes;

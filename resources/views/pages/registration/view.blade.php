@@ -8,7 +8,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
+                    @hasanyrole('Superadmin|Admin')
                     <li class="breadcrumb-item"><a href="{{ route('registration') }}">Participation List</a></li>
+                    @endhasanyrole
                     <li class="breadcrumb-item active" aria-current="page">{{ $registration->user->institution_name }}</li>
                 </ol>
             </nav>

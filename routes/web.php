@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/position/search', 'PositionController@search')->name('position.search');
 
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'RegistrationController@userDashboard')->name('home');
 
     // User Profile
     Route::get('profile/{id}', 'UserProfileController@show')->name('profile.show');
@@ -77,13 +77,14 @@ Route::middleware('auth')->group(function () {
     Route::post('registration/store', 'RegistrationController@store')->name('registration.store');
     Route::get('registration/{id}/edit', 'RegistrationController@edit')->name('registration.edit');
     Route::post('registration/{id}', 'RegistrationController@update')->name('registration.update');
-    Route::get('registration/view/{id}', 'RegistrationController@show')->name('registration.show');
+    Route::get('registration/view/{id}', 'RegistrationController@show')->name('registration.view');
     Route::get('/registration/search', 'RegistrationController@search')->name('registration.search');
     Route::delete('registration/{id}', 'RegistrationController@destroy')->name('registration.destroy');
     Route::get('/registration/trash', 'RegistrationController@trashList')->name('registration.trash');
     Route::get('/registration/{id}/restore', 'RegistrationController@restore')->name('registration.restore');
     Route::delete('/registration/{id}/force-delete', 'RegistrationController@forceDelete')->name('registration.forceDelete');
     Route::post('registration/{id}/approval', 'RegistrationController@approval')->name('registration.approval');
+    Route::get('dashboard', 'RegistrationController@userDashboard')->name('dashboard');
 
     // User Role Management
     Route::get('user-role', 'UserRoleController@index')->name('user-role');

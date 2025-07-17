@@ -30,7 +30,7 @@ class RegistrationStatusUpdated extends Notification
             ->greeting('Hello ' . $this->registration->user->name . ',')
             ->line('Your registration for "' . $this->registration->group_name . '" has been ' . $this->registration->status . '.')
             ->line('Remarks from admin: ' . ($this->registration->remarks_checker ?? '-'))
-            ->action('View Details', url(route('registration.show', $this->registration->id))) // adjust route name
+            ->action('View Details', url(route('registration.view', $this->registration->id))) // adjust route name
             ->line('Thank you for your registration.');
     }
 

@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Log;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:View Participation')->only('show');
+        $this->middleware('permission:View List Participation')->only(['index', 'search']);
+        $this->middleware('permission:Add Participation')->only(['create', 'store']);
+        $this->middleware('permission:Edit Participation')->only(['edit', 'update']);
+        $this->middleware('permission:Delete Participation')->only(['destroy', 'trashList', 'restore', 'forceDelete']);
+    }
+
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 10);
@@ -22,6 +31,31 @@ class RegistrationController extends Controller
             'registrationList' => $registrationList,
             'perPage' => $perPage,
         ]);
+    }
+
+    public function userDashboard()
+    {
+        $user = User::find(auth()->id());
+
+        $registration = Registration::where('user_id', $user->id)->first();
+
+        $totalRegistrations = null;
+        $pendingRegistrations = null;
+        $approvedRegistrations = null;
+
+        if ($user->hasRole('Admin') || $user->hasRole('Superadmin')) {
+            $totalRegistrations = Registration::count();
+            $pendingRegistrations = Registration::where('status', 'Submitted & waiting for approval')->count();
+            $approvedRegistrations = Registration::where('status', 'Approved')->count();
+        }
+
+        return view('pages.registration.dashboard', compact(
+            'user',
+            'registration',
+            'totalRegistrations',
+            'pendingRegistrations',
+            'approvedRegistrations'
+        ));
     }
 
     public function create()
@@ -114,7 +148,14 @@ class RegistrationController extends Controller
             Log::error('Tiada Admin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
         }
 
-        return redirect()->route('registration')->with('success', 'Maklumat berjaya disimpan');
+        $user = User::find(auth()->id());
+        if ($user->hasRole('Pengguna')) {
+            return redirect()->route('registration.view', $registration->id)
+                ->with('success', 'Maklumat berjaya disimpan');
+        } else {
+            return redirect()->route('registration')
+                ->with('success', 'Maklumat berjaya disimpan');
+        }
     }
 
     public function approval(Request $request, $id)
@@ -139,6 +180,12 @@ class RegistrationController extends Controller
     public function show($id)
     {
         $registration = Registration::findOrFail($id);
+        $user = User::find(auth()->id());
+
+        // If not admin/superadmin, check ownership
+        if (!$user->hasAnyRole(['Admin', 'Superadmin']) && $registration->user_id !== $user->id) {
+            abort(403, 'You are not authorized to view this registration.');
+        }
 
         return view('pages.registration.view', [
             'registration' => $registration,

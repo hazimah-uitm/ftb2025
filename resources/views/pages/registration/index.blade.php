@@ -74,15 +74,15 @@
                                     <td>{{ $registration->user->phone_no ?? '-' }}</td>
                                     <td>{{ $registration->status }}</td>
                                     <td>
-                                        <a href="{{ route('registration.show', $registration->id) }}"
+                                        <a href="{{ route('registration.view', $registration->id) }}"
                                             class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Papar">
                                             <i class="bx bx-show"></i>
                                         </a>
                                         @hasanyrole('Superadmin|Admin')
-                                            {{-- <a href="{{ route('registration.edit', $registration->id) }}"
+                                            <a href="{{ route('registration.edit', $registration->id) }}"
                                                 class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
-                                            </a> --}}
+                                            </a>
                                             @if ($registration->status == 'Submitted & waiting for approval')
                                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#approvalModal{{ $registration->id }}"><i
@@ -90,10 +90,10 @@
                                                     Approval
                                                 </button>
                                             @endif
-                                            {{-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{ $registration->id }}" title="Padam">
                                                 <i class="bx bx-trash"></i>
-                                            </button> --}}
+                                            </button>
                                         @endhasanyrole
                                     </td>
                                 </tr>

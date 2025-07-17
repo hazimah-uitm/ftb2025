@@ -32,6 +32,13 @@ class PermissionSeeder extends Seeder
                 ['name' => 'Padam Jawatan', 'category' => 'Pengurusan Jawatan'],
                 ['name' => 'Lihat Jawatan', 'category' => 'Pengurusan Jawatan'],
             ],
+            'Participation Management' => [
+                ['name' => 'Add Participation', 'category' => 'Participation Management'],
+                ['name' => 'View List Participation', 'category' => 'Participation Management'],
+                ['name' => 'Edit Participation', 'category' => 'Participation Management'],
+                ['name' => 'Delete Participation', 'category' => 'Participation Management'],
+                ['name' => 'View Participation', 'category' => 'Participation Management'],
+            ],
         ];
 
         foreach ($permissions as $category => $permissionArray) {

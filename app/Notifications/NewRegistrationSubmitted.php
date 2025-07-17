@@ -29,7 +29,7 @@ class NewRegistrationSubmitted extends Notification
             ->greeting('Hello Admin,')
             ->line('A new registration has been submitted by ' . $this->registration->user->institution_name)
             ->line('Group Name: ' . $this->registration->group_name)
-            ->action('View Registration', url(route('registration.show', $this->registration->id)))
+            ->action('View Registration', url(route('registration.view', $this->registration->id)))
             ->line('Thank you.');
     }
 
