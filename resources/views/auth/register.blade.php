@@ -42,7 +42,8 @@
                                         <select id="jenisIptaSelect"
                                             class="form-select form-select-sm border-0 border-bottom rounded-0 shadow-none"
                                             required>
-                                            <option value="" disabled selected>IPTA Type</option>
+                                            <option value="" disabled selected>Type of Higher Education Institution
+                                            </option>
                                             <option>University</option>
                                             <option>University College</option>
                                             <option>College </option>
@@ -59,15 +60,21 @@
                                 </p>
 
                                 <ul>
-                                    <li>Date: 18 November - 21 November 2025</li>
-                                    <li>Venue: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</li>
+                                    <li><b>Date: 18 November - 21 November 2025</b></li>
+                                    <li><b>Venue: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</b></li>
                                 </ul>
                                 <p>Hereby, we declare that;</p>
                                 <ol>
-                                    <li>We will adhere to all rules and regulations set by the Organising Committee throughout the duration of the Festival Tari Borneo IX 2025.</li>
-                                    <li>We acknowledge that the Organising Committee reserves the right to make any amendments throughout the programme as deemed appropriate for the benefit of all parties.</li>
-                                    <li>We also acknowledge that the Organising Committee has the right to revoke our participation should we violate any of the participation rules.</li>
-                                    <li>The organiser will ensure the festival runs smoothly and safely. However, any injuries or accidents occurring during FTB 2025 will be the sole responsibility of the participants.</li>
+                                    <li>We will adhere to all rules and regulations set by the Organising Committee
+                                        throughout the duration of the Festival Tari Borneo IX 2025.</li>
+                                    <li>We acknowledge that the Organising Committee reserves the right to make any
+                                        amendments throughout the programme as deemed appropriate for the benefit of all
+                                        parties.</li>
+                                    <li>We also acknowledge that the Organising Committee has the right to revoke our
+                                        participation should we violate any of the participation rules.</li>
+                                    <li>The organiser will ensure the festival runs smoothly and safely. However, any
+                                        injuries or accidents occurring during FTB 2025 will be the sole responsibility of
+                                        the participants.</li>
                                 </ol>
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" id="consentCheckbox">
@@ -88,7 +95,7 @@
                         <!-- Step 2: Form Pendaftaran -->
                         <div class="card shadow" id="step2Card" style="display: none;">
                             <div class="card-header text-center text-white" style="background-color: #03244c;">
-                                <h5 class="mb-0 text-white">Borang Pendaftaran Akaun</h5>
+                                <h5 class="mb-0 text-white">ACCOUNT REGISTRATION</h5>
                             </div>
 
                             <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
@@ -104,18 +111,18 @@
                                     <div class="row g-3">
 
                                         <div class="col-md-6">
-                                            <label class="form-label">Nama Institusi</label>
+                                            <label class="form-label">Institution Name</label>
                                             <input type="text" id="displayInstitution" class="form-control" readonly
                                                 value="{{ old('institution_name', '') }}">
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Jenis IPTA</label>
+                                            <label class="form-label">Type of Higher Education Institution</label>
                                             <input type="text" id="displayJenisIpta" class="form-control" readonly
                                                 value="{{ old('jenis_ipta', '') }}">
                                         </div>
 
                                         <div class="col-md-12">
-                                            <label for="name" class="form-label">Nama Penuh</label>
+                                            <label for="name" class="form-label">Full Name</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                                 id="name" name="name" value="{{ old('name') }}" required>
@@ -129,8 +136,8 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="ic_no" class="form-label">Nombor Pengenalan (IC / Passport /
-                                                KTP)</label>
+                                            <label for="ic_no" class="form-label">Identification Card / Passport / KTP
+                                                Number</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}"
                                                 id="ic_no" name="ic_no" value="{{ old('ic_no') }}" required>
@@ -144,21 +151,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="email" class="form-label">Alamat Emel</label>
-                                            <input type="email"
-                                                class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                                id="email" name="email" value="{{ old('email') }}" required>
-                                            @if ($errors->has('email'))
-                                                <div class="invalid-feedback">
-                                                    @foreach ($errors->get('email') as $error)
-                                                        {{ $error }}
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <label for="position" class="form-label">Jawatan</label>
+                                            <label for="position" class="form-label">Position</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}"
                                                 id="position" name="position" value="{{ old('position') }}" required>
@@ -172,7 +165,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="phone_no" class="form-label">Nombor Telefon</label>
+                                            <label for="phone_no" class="form-label">Phone Number</label>
                                             <input type="number"
                                                 class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
                                                 id="phone_no" name="phone_no" value="{{ old('phone_no') }}" required>
@@ -186,7 +179,21 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="password" class="form-label">Kata Laluan</label>
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email"
+                                                class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                                id="email" name="email" value="{{ old('email') }}" required>
+                                            @if ($errors->has('email'))
+                                                <div class="invalid-feedback">
+                                                    @foreach ($errors->get('email') as $error)
+                                                        {{ $error }}
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="password" class="form-label">Password</label>
                                             <input type="password"
                                                 class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                                 id="password" name="password" required>
@@ -200,7 +207,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="password-confirm" class="form-label">Sahkan Kata Laluan</label>
+                                            <label for="password-confirm" class="form-label">Confirm Password</label>
                                             <input type="password" class="form-control" id="password-confirm"
                                                 name="password_confirmation" required>
                                         </div>
