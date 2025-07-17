@@ -11,7 +11,7 @@
                     <img src="{{ !empty(Auth::user()->profile_image) ? asset('public/storage/' . Auth::user()->profile_image) : asset('public/assets/images/avatars/user.png') }}"
                         alt="Profile Image" class="rounded-circle border border-2 border-primary me-2" width="40" height="40">
                     <!-- Staff ID with improved styling -->
-                    <p class="user-name mb-0 text-dark fs-6">{{ Auth::user()->staff_id }}<i class='bx bxs-chevron-down' style="margin-left: 5px;"></i></p>
+                    <p class="user-name mb-0 text-dark fs-6">{{ Auth::user()->name }}<i class='bx bxs-chevron-down' style="margin-left: 5px;"></i></p>
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">

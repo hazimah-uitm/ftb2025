@@ -22,15 +22,11 @@ class UserProfileController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $campusList = Campus::where('publish_status', 1)->get();
-        $positionList = Position::where('publish_status', 1)->get();
 
         return view('pages.user.profile.edit', [
             'save_route' => route('profile.update', $id),
             'str_mode' => 'Kemas Kini',
             'user' => $user,
-            'campusList' => $campusList,
-            'positionList' => $positionList,
         ]);
     }
 

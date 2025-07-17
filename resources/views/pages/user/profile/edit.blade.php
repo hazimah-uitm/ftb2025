@@ -103,7 +103,7 @@
                                     <label for="ic_no" class="form-label">IC. No / Passport / KTP</label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
-                                        name="ic_no" value="{{ old('ic_no') }}">
+                                        name="ic_no" value="{{ old('ic_no') ?? ($user->ic_no ?? '') }}">
                                     @if ($errors->has('ic_no'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('ic_no') as $error)
@@ -118,7 +118,8 @@
                                     <label for="position_id" class="form-label">Jawatan</label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}"
-                                        id="position" name="position" value="{{ old('position') }}">
+                                        id="position" name="position"
+                                        value="{{ old('position') ?? ($user->position ?? '') }}">
                                     @if ($errors->has('position'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('position') as $error)
@@ -130,10 +131,11 @@
 
                                 <!-- Office Phone Field -->
                                 <div class="mb-3">
-                                    <label for="phone_no" class="form-label">No. Tel</label>
+                                    <label for="phone_no" class="form-label">Phone Number</label>
                                     <input type="number"
                                         class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
-                                        id="phone_no" name="phone_no" value="{{ old('phone_no') }}">
+                                        id="phone_no" name="phone_no"
+                                        value="{{ old('phone_no') ?? ($user->phone_no ?? '') }}">
                                     @if ($errors->has('phone_no'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('phone_no') as $error)

@@ -226,7 +226,7 @@ class UserController extends Controller
         $user->email_verified_at = null;
         $user->save();
 
-        $user->assignRole('Pengguna');
+        $user->assignRole('Participant');
 
         $token = Str::random(40);
 

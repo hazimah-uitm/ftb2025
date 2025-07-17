@@ -253,8 +253,8 @@
                                         <label class="form-label">Role</label>
                                         <select name="members[0][peranan]" class="form-select">
                                             <option value="">Select</option>
-                                            <option value="Penari">Penari</option>
-                                            <option value="Krew">Krew</option>
+                                            <option value="Dancer">Dancer</option>
+                                            <option value="Crew">Crew</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -307,8 +307,8 @@
                                         <label class="form-label">Role</label>
                                         <select name="members[__INDEX__][peranan]" class="form-select">
                                             <option value="">Select</option>
-                                            <option value="Penari">Penari</option>
-                                            <option value="Krew">Krew</option>
+                                            <option value="Dancer">Dancer</option>
+                                            <option value="Crew">Crew</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
