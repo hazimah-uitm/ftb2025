@@ -5,9 +5,10 @@
 
         {{-- Header --}}
         <div class="text-center my-4">
-            <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="FTB Logo" class="mb-2"
+            <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="FTB Logo" class="img-fluid mb-2"
                 style="max-height: 80px;">
             <h4 class="fw-bold mb-1">FESTIVAL TARI BORNEO IX (9th EDITION) 2025</h4>
+            <hr class="mx-auto" style="width: 120px; border-top: 2px solid #6c757d; opacity: 0.6;">
             <h6 class="mb-0">DEWAN JUBLI, SAMARAHAN CAMPUS</h6>
             <h6 class="mb-0">UiTM SARAWAK BRANCH</h6>
             <p class="text-muted small mt-1 mb-0"><strong>18 – 21 NOVEMBER 2025</strong></p>
@@ -104,24 +105,35 @@
 
             <!-- Additional Info -->
             <div class="card border shadow-sm mb-4" style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
-                <div
-                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
-                    <div class="d-flex align-items-start">
-                        <i class="bx bx-info-circle fs-4 text-primary me-3"></i>
-                        <div>
-                            <div class="fw-semibold">Additional Information</div>
-                            <ul class="mb-0 mt-2 small">
-                                <li>For more info, visit <a href="https://kenyalang.uitm.edu.my/ftb2025"
-                                        target="_blank">kenyalang.uitm.edu.my/ftb2025</a>.</li>
-                                <li>All registrations must be completed via the system, along with the declaration letter,
-                                    by <strong>31 August 2025
-                                        (Sunday)</strong>.</li>
+                <div class="card-body py-3 px-4">
+                    <div class="d-flex flex-column flex-md-row">
+                        {{-- Icon --}}
+                        <div class="mb-3 mb-md-0 me-md-3 text-center text-md-start">
+                            <i class="bx bx-info-circle fs-4 text-primary"></i>
+                        </div>
+
+                        {{-- Text content --}}
+                        <div class="flex-fill">
+                            <div class="fw-semibold mb-2">Additional Information</div>
+                            <ul class="mb-0 small ps-3 ps-md-0">
+                                <li>
+                                    For more info, visit
+                                    <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">
+                                        kenyalang.uitm.edu.my/ftb2025
+                                    </a>.
+                                </li>
+                                <li>
+                                    All registrations must be completed via the system, along with the declaration letter,
+                                    by <strong>31 August 2025 (Sunday)</strong>.
+                                </li>
                                 <li>Contact:
-                                    <ul>
-                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 / <a
-                                                href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
-                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 / <a
-                                                href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                                    <ul class="mb-0">
+                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 /
+                                            <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a>
+                                        </li>
+                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 /
+                                            <a href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -146,7 +158,7 @@
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-dark"
+                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-warning"
                             target="_blank">
                             <i class="bx bx-book-open me-1"></i> View Competition Rules
                         </a>
@@ -155,12 +167,12 @@
             </div>
 
             <!-- Participation Status -->
-            <div class="card border-start border-4 border-dark shadow-sm mb-4"
+            <div class="card border-start border-4 border-primary shadow-sm mb-4"
                 style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
                 <div
                     class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
                     <div class="d-flex align-items-start">
-                        <i class="bx bx-user-check fs-4 text-dark me-3"></i>
+                        <i class="bx bx-user-check fs-4 text-primary me-3"></i>
                         <div>
                             <div class="fw-semibold">Participation Status</div>
                             @if ($registration)
@@ -170,7 +182,7 @@
                                     @elseif ($registration->status == 'Rejected')
                                         <span class="badge bg-danger">Rejected</span>
                                     @else
-                                        <span class="badge bg-warning text-dark">Pending Approval</span>
+                                        <span class="badge bg-warningxt-primary">Pending Approval</span>
                                     @endif
                                 </p>
                             @else
@@ -184,7 +196,7 @@
                                 <i class="bx bx-show me-1"></i> View Registration Details
                             </a>
                         @else
-                            <a href="{{ route('registration.create') }}" class="btn btn-sm btn-success">
+                            <a href="{{ route('registration.create') }}" class="btn btn-sm btn-primary">
                                 <i class="bx bx-pencil me-1"></i> Register Now
                             </a>
                         @endif
@@ -194,24 +206,35 @@
 
             <!-- Additional Info -->
             <div class="card border shadow-sm mb-4" style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
-                <div
-                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
-                    <div class="d-flex align-items-start">
-                        <i class="bx bx-info-circle fs-4 text-primary me-3"></i>
-                        <div>
-                            <div class="fw-semibold">Additional Information</div>
-                            <ul class="mb-0 mt-2 small">
-                                <li>For more info, visit <a href="https://kenyalang.uitm.edu.my/ftb2025"
-                                        target="_blank">kenyalang.uitm.edu.my/ftb2025</a>.</li>
-                                <li>All registrations must be completed via the system, along with the declaration letter,
-                                    by <strong>31 August 2025
-                                        (Sunday)</strong>.</li>
+                <div class="card-body py-3 px-4">
+                    <div class="d-flex flex-column flex-md-row">
+                        {{-- Icon --}}
+                        <div class="mb-3 mb-md-0 me-md-3 text-center text-md-start">
+                            <i class="bx bx-info-circle fs-4 text-primary"></i>
+                        </div>
+
+                        {{-- Text content --}}
+                        <div class="flex-fill">
+                            <div class="fw-semibold mb-2">Additional Information</div>
+                            <ul class="mb-0 small ps-3 ps-md-0">
+                                <li>
+                                    For more info, visit
+                                    <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">
+                                        kenyalang.uitm.edu.my/ftb2025
+                                    </a>.
+                                </li>
+                                <li>
+                                    All registrations must be completed via the system, along with the declaration letter,
+                                    by <strong>31 August 2025 (Sunday)</strong>.
+                                </li>
                                 <li>Contact:
-                                    <ul>
-                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 / <a
-                                                href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
-                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 / <a
-                                                href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                                    <ul class="mb-0">
+                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 /
+                                            <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a>
+                                        </li>
+                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 /
+                                            <a href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -219,6 +242,7 @@
                     </div>
                 </div>
             </div>
+
         @endif
     </div>
 @endsection
