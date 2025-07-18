@@ -106,7 +106,7 @@
                             </div>
 
                             <!-- Registration Card -->
-                            <div class="card shadow">
+                            <div class="card shadow mt-4" id="account-registration">
                                 <div class="card-header text-center text-white" style="background-color: #03244c;">
                                     <h5 class="mb-0 text-white">ACCOUNT REGISTRATION</h5>
                                 </div>
@@ -209,7 +209,7 @@
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <p class="mb-0">Already have account? <a href="{{ route('login') }}">Login</a></p>
                                     <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="bx bxs-user-plus"></i> Daftar Akaun
+                                        <i class="bx bxs-user-plus"></i> Register Account
                                     </button>
                                 </div>
                             </div>
@@ -221,4 +221,15 @@
             </div>
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkbox = document.getElementById('consentCheckbox');
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                document.getElementById('account-registration').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
 @endsection
