@@ -143,19 +143,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="fax_no" class="form-label">No. Faks</label>
-                    <input type="text" class="form-control {{ $errors->has('fax_no') ? 'is-invalid' : '' }}"
-                        id="fax_no" name="fax_no" value="{{ old('fax_no', $registration->fax_no ?? '') }}">
-                    @if ($errors->has('fax_no'))
-                        <div class="invalid-feedback">
-                            @foreach ($errors->get('fax_no') as $error)
-                                {{ $error }}
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
-
-                <div class="mb-3">
                     <label for="doc_link" class="form-label">Pautan Dokumen</label>
                     <input type="text" class="form-control {{ $errors->has('doc_link') ? 'is-invalid' : '' }}"
                         id="doc_link" name="doc_link" value="{{ old('doc_link', $registration->doc_link ?? '') }}">

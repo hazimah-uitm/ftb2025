@@ -83,7 +83,6 @@ class RegistrationController extends Controller
             'address' => 'required|string',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
-            'fax_no' => 'nullable|string|max:50',
             'doc_link' => 'nullable|string|max:255',
             'members' => 'required|array|min:1',
             'members.*.name' => 'required|string|max:255',
@@ -216,7 +215,6 @@ class RegistrationController extends Controller
             'address' => 'required|string',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
-            'fax_no' => 'nullable|string|max:50',
             'doc_link' => 'nullable|string|max:255',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',

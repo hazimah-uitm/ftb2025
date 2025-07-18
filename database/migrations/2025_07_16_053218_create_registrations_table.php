@@ -24,7 +24,6 @@ class CreateRegistrationsTable extends Migration
             $table->text('address');
             $table->text('sinopsis_traditional');
             $table->text('sinopsis_creative');
-            $table->string('fax_no');
             $table->string('doc_link');
             $table->string('status')->default('Pending Approval');
             $table->text('remarks_submitter')->nullable();

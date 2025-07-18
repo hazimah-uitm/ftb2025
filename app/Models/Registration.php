@@ -26,7 +26,6 @@ class Registration extends Model
         'address',
         'sinopsis_traditional',
         'sinopsis_creative',
-        'fax_no',
         'doc_link',
         'status',
         'remarks_submitter',
