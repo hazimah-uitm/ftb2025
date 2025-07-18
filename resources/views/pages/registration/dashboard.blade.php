@@ -61,57 +61,110 @@
             </div>
 
             <!-- Approval Management -->
-            <div class="card border shadow-sm mb-4" style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
+            <div class="card border-start border-4 border-info shadow-sm mb-4"
+                style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
                 <div
                     class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
                     <div class="d-flex align-items-start">
-                        <i class="bx bx-cog fs-4 text-secondary me-3"></i>
+                        <i class="bx bx-cog fs-4 text-info me-3"></i>
                         <div>
                             <div class="fw-semibold">Approval Management</div>
                             <small class="text-muted">View and manage participant registrations</small>
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ route('registration') }}" class="btn btn-sm btn-primary">
-                            <i class="bx bx-list-check me-1"></i> Manage
+                        <a href="{{ route('registration') }}" class="btn btn-sm btn-info">
+                            <i class="bx bx-list-check me-1"></i> Manage Application
                         </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competition Rules -->
+            <div class="card border-start border-4 border-secondary shadow-sm mb-4"
+                style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
+                <div
+                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                    <div class="d-flex align-items-start">
+                        <i class="bx bx-book fs-4 text-secondary me-3"></i>
+                        <div>
+                            <div class="fw-semibold">Competition Rules & Judging Criteria</div>
+                            <small class="text-muted">Please read the rules and judging criteria before
+                                registering.</small>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-0">
+                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-secondary"
+                            target="_blank">
+                            <i class="bx bx-book-open me-1"></i> View Competition Rules
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="card border shadow-sm mb-4" style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
+                <div
+                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                    <div class="d-flex align-items-start">
+                        <i class="bx bx-info-circle fs-4 text-primary me-3"></i>
+                        <div>
+                            <div class="fw-semibold">Additional Information</div>
+                            <ul class="mb-0 mt-2 small">
+                                <li>For more info, visit <a href="https://kenyalang.uitm.edu.my/ftb2025"
+                                        target="_blank">kenyalang.uitm.edu.my/ftb2025</a>.</li>
+                                <li>All registrations must be completed via the system, along with the declaration letter,
+                                    by <strong>31 August 2025
+                                        (Sunday)</strong>.</li>
+                                <li>Contact:
+                                    <ul>
+                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 / <a
+                                                href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
+                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 / <a
+                                                href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         @else
             {{-- USER VIEW --}}
-            
-            <div class="card border-0 shadow-sm bg-light mb-4">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-3">Additional Information</h6>
-                    <ul class="mb-2">
-                        <li>For more information regarding the Festival Tari Borneo IX 2025, please visit the official
-                            FTB2025 website at <a href="https://kenyalang.uitm.edu.my/ftb2025"
-                                target="_blank">kenyalang.uitm.edu.my/ftb2025</a>.</li>
-                        <li>The competition declaration letter and participation form can be downloaded from the stated
-                            website and must be fully completed on or before <strong>31 August 2025 (Sunday)</strong>.</li>
-                        <li>For any announcements or inquiries related to this matter, please contact the following
-                            officers:
-                            <ul>
-                                <li><strong>Cik Melinda Anak Jindu</strong> (082 678 059) / <a
-                                        href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
-                                <li><strong>Cik Lydia Jimbie Anak Anthony</strong> (082 677 058) / <a
-                                        href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+
+            <!-- Competition Rules -->
+            <div class="card border-start border-4 border-warning shadow-sm mb-4"
+                style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
+                <div
+                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                    <div class="d-flex align-items-start">
+                        <i class="bx bx-book fs-4 text-warning me-3"></i>
+                        <div>
+                            <div class="fw-semibold">Competition Rules & Judging Criteria</div>
+                            <small class="text-muted">Please read the rules and judging criteria before
+                                registering.</small>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-0">
+                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-dark"
+                            target="_blank">
+                            <i class="bx bx-book-open me-1"></i> View Competition Rules
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="row g-3 mb-4">
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header bg-dark text-white">
-                            Participation Status
-                        </div>
-                        <div class="card-body">
+            <!-- Participation Status -->
+            <div class="card border-start border-4 border-dark shadow-sm mb-4"
+                style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
+                <div
+                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                    <div class="d-flex align-items-start">
+                        <i class="bx bx-user-check fs-4 text-dark me-3"></i>
+                        <div>
+                            <div class="fw-semibold">Participation Status</div>
                             @if ($registration)
-                                <p class="mb-2"><strong>Status </strong>
+                                <p class="mb-2 small"><strong>Status:</strong>
                                     @if ($registration->status == 'Approved')
                                         <span class="badge bg-success">Approved</span>
                                     @elseif ($registration->status == 'Rejected')
@@ -120,37 +173,52 @@
                                         <span class="badge bg-warning text-dark">Pending Approval</span>
                                     @endif
                                 </p>
-                                <a href="{{ route('registration.view', $registration->id) }}"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="bx bx-show me-1"></i> View Registration Details
-                                </a>
                             @else
-                                <p class="mb-2">You have not submitted a registration yet.</p>
-                                <a href="{{ route('registration.create') }}" class="btn btn-sm btn-success">
-                                    <i class="bx bx-pencil me-1"></i> Register Now
-                                </a>
+                                <p class="mb-2 small">You have not submitted a registration yet.</p>
                             @endif
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-header bg-dark text-white">
-                            Competition Rules & Judging Criteria
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-2">Please read the competition rules and judging criteria before
-                                register.</p>
-                            <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-dark btn-sm"
-                                target="_blank">
-                                <i class="bx bx-book me-1"></i> View Full Competition Rules
+                    <div class="mt-3 mt-md-0">
+                        @if ($registration)
+                            <a href="{{ route('registration.view', $registration->id) }}" class="btn btn-sm btn-primary">
+                                <i class="bx bx-show me-1"></i> View Registration Details
                             </a>
+                        @else
+                            <a href="{{ route('registration.create') }}" class="btn btn-sm btn-success">
+                                <i class="bx bx-pencil me-1"></i> Register Now
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="card border shadow-sm mb-4" style="background: linear-gradient(to right, #f8f9fa, #ffffff);">
+                <div
+                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                    <div class="d-flex align-items-start">
+                        <i class="bx bx-info-circle fs-4 text-primary me-3"></i>
+                        <div>
+                            <div class="fw-semibold">Additional Information</div>
+                            <ul class="mb-0 mt-2 small">
+                                <li>For more info, visit <a href="https://kenyalang.uitm.edu.my/ftb2025"
+                                        target="_blank">kenyalang.uitm.edu.my/ftb2025</a>.</li>
+                                <li>All registrations must be completed via the system, along with the declaration letter,
+                                    by <strong>31 August 2025
+                                        (Sunday)</strong>.</li>
+                                <li>Contact:
+                                    <ul>
+                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 / <a
+                                                href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
+                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 / <a
+                                                href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         @endif
-
     </div>
 @endsection

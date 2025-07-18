@@ -256,7 +256,7 @@ class RegistrationController extends Controller
     {
         $registration = Registration::findOrFail($id);
 
-        $registration->delete();
+        $registration->forceDelete();
 
         return redirect()->route('registration')->with('success', 'Maklumat berjaya dihapuskan');
     }
