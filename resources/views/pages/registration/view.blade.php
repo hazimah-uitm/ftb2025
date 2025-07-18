@@ -108,11 +108,11 @@
                                 <td>{{ $registration->group_name }}</td>
                             </tr>
                             <tr>
-                                <th>Name of Traditional Dance</th>
+                                <th>Name of Ethnic Borneo Traditional Dance</th>
                                 <td>{{ $registration->traditional_dance_name }}</td>
                             </tr>
                             <tr>
-                                <th>Name of Creative Dance</th>
+                                <th>Name of Ethnic Borneo Creative Dance</th>
                                 <td>{{ $registration->creative_dance_name }}</td>
                             </tr>
                             <tr>
@@ -144,11 +144,11 @@
                                 <td>{{ $registration->user->email ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Traditional Dance Synopsis</th>
+                                <th>Synopsis of Ethnic Borneo Traditional Dance</th>
                                 <td>{!! nl2br(e($registration->sinopsis_traditional)) !!}</td>
                             </tr>
                             <tr>
-                                <th>Creative Dance Synopsis</th>
+                                <th>Synopsis of Ethnic Borneo Creative Dance</th>
                                 <td>{!! nl2br(e($registration->sinopsis_creative)) !!}</td>
                             </tr>
                             <tr>

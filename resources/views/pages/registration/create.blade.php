@@ -33,13 +33,13 @@
 
                     <h6 class="text-primary text-uppercase">Group Details</h6>
                     <div class="col-12">
-                        <label class="form-label">Institution Name</label>
+                        <label class="form-label">Name of Institution</label>
                         <input type="text" class="form-control"
                             value="{{ $institution_name ?? ($registration->user->institution_name ?? '-') }}" readonly>
                     </div>
 
                     <div class="col-12">
-                        <label for="group_name" class="form-label">Group Name</label>
+                        <label for="group_name" class="form-label">Name of Dance Group</label>
                         <input type="text" class="form-control {{ $errors->has('group_name') ? 'is-invalid' : '' }}"
                             id="group_name" name="group_name"
                             value="{{ old('group_name', $registration->group_name ?? '') }}">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="traditional_dance_name" class="form-label">Ethnic Borneo Traditional Dance Name</label>
+                        <label for="traditional_dance_name" class="form-label">Name of Ethnic Borneo Traditional Dance</label>
                         <input type="text"
                             class="form-control {{ $errors->has('traditional_dance_name') ? 'is-invalid' : '' }}"
                             id="traditional_dance_name" name="traditional_dance_name"
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="creative_dance_name" class="form-label">Ethnic Borneo Creative Dance Name</label>
+                        <label for="creative_dance_name" class="form-label">Name of Ethnic Borneo Creative Dance</label>
                         <input type="text"
                             class="form-control {{ $errors->has('creative_dance_name') ? 'is-invalid' : '' }}"
                             id="creative_dance_name" name="creative_dance_name"
@@ -84,7 +84,7 @@
 
                     @for ($i = 0; $i < 2; $i++)
                         <div class="col-6">
-                            <label for="escort_officers_{{ $i }}_name" class="form-label">Escort Officer Name
+                            <label for="escort_officers_{{ $i }}_name" class="form-label">Name of Accompanying Officer
                                 {{ $i + 1 }}</label>
                             <input type="text"
                                 class="form-control {{ $errors->has('escort_officers.' . $i . '.name') ? 'is-invalid' : '' }}"
@@ -102,7 +102,7 @@
                     @endfor
 
                     <div class="col-6">
-                        <label for="koreografer_name" class="form-label">Choreographer Name</label>
+                        <label for="koreografer_name" class="form-label">Name of Choreographer</label>
                         <input type="text"
                             class="form-control {{ $errors->has('koreografer_name') ? 'is-invalid' : '' }}"
                             id="koreografer_name" name="koreografer_name"
@@ -117,7 +117,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label for="assistant_koreografer_name" class="form-label">Choreographer Name (If any)</label>
+                        <label for="assistant_koreografer_name" class="form-label">Name of Assistant Choreographer <i>(if any)</i></label>
                         <input type="text"
                             class="form-control {{ $errors->has('assistant_koreografer_name') ? 'is-invalid' : '' }}"
                             id="assistant_koreografer_name" name="assistant_koreografer_name"
@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="col-6">
-                        <label class="form-label">Telephone No.</label>
+                        <label class="form-label">Telephone Number</label>
                         <input type="text" class="form-control"
                             value="{{ $phone_no ?? ($registration->user->phone_no ?? '-') }}" readonly>
                     </div>

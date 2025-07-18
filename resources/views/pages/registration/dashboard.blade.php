@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         {{-- Header --}}
-        <div class="text-center">
+        <div class="text-center mb-3">
             <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="FTB Logo" class="img-fluid mb-2"
                 style="max-height: 80px;">
             <h4 class="fw-bold mb-1">FESTIVAL TARI BORNEO IX (9th EDITION) 2025</h4>
