@@ -143,26 +143,13 @@
                         @endif
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-6">
                         <label class="form-label">Telephone No.</label>
                         <input type="text" class="form-control"
                             value="{{ $phone_no ?? ($registration->user->phone_no ?? '-') }}" readonly>
                     </div>
 
-                    <div class="col-4">
-                        <label for="fax_no" class="form-label">Fax No.</label>
-                        <input type="text" class="form-control {{ $errors->has('fax_no') ? 'is-invalid' : '' }}"
-                            id="fax_no" name="fax_no" value="{{ old('fax_no', $registration->fax_no ?? '') }}">
-                        @if ($errors->has('fax_no'))
-                            <div class="invalid-feedback">
-                                @foreach ($errors->get('fax_no') as $error)
-                                    {{ $error }}
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="col-4">
+                    <div class="col-6">
                         <label class="form-label">Email Address</label>
                         <input type="text" class="form-control"
                             value="{{ $email ?? ($registration->user->email ?? '-') }}" readonly>
