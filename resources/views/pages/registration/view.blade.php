@@ -71,11 +71,11 @@
                                 <td>{{ $registration->user->position ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Identification Card / Passport / KTP Number</th>
+                                <th>Identification Card / Passport / KTP No.</th>
                                 <td>{{ $registration->user->ic_no ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Phone No</th>
+                                <th>Phone No.</th>
                                 <td>{{ $registration->user->phone_no ?? '-' }}</td>
                             </tr>
                             <tr>
@@ -100,39 +100,23 @@
                     <div class="card-body">
                         <table class="table table-borderless table-sm">
                             <tr>
-                                <th style="width: 30%">Institution Name</th>
+                                <th style="width: 47%">Name of Institution</th>
                                 <td>{{ $registration->user->institution_name ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Group Name</th>
+                                <th>Name of Dance Group</th>
                                 <td>{{ $registration->group_name }}</td>
                             </tr>
                             <tr>
-                                <th>Traditional Dance Name</th>
+                                <th>Name of Traditional Dance</th>
                                 <td>{{ $registration->traditional_dance_name }}</td>
                             </tr>
                             <tr>
-                                <th>Creative Dance Name</th>
+                                <th>Name of Creative Dance</th>
                                 <td>{{ $registration->creative_dance_name }}</td>
                             </tr>
                             <tr>
-                                <th>Address</th>
-                                <td>{!! nl2br(e($registration->address)) !!}</td>
-                            </tr>
-                            <tr>
-                                <th>Phone No.</th>
-                                <td>{{ $registration->user->phone_no ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Fax No.</th>
-                                <td>{{ $registration->fax_no ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Email Address</th>
-                                <td>{{ $registration->user->email ?? '-' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Escort Officers</th>
+                                <th>Name of Accompanying Officer</th>
                                 <td>
                                     @foreach ($registration->escortOfficers as $officer)
                                         <span class="d-block">{{ $officer->name }}</span>
@@ -140,12 +124,24 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Choreographer</th>
+                                <th>Name of Choreographer</th>
                                 <td>{{ $registration->koreografer_name }}</td>
                             </tr>
                             <tr>
-                                <th>Assistant Choreographer</th>
+                                <th>Name of Assistant Choreographer <i>(if any)</i></th>
                                 <td>{{ $registration->assistant_koreografer_name ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{!! nl2br(e($registration->address)) !!}</td>
+                            </tr>
+                            <tr>
+                                <th>Telephone Number</th>
+                                <td>{{ $registration->user->phone_no ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email Address</th>
+                                <td>{{ $registration->user->email ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <th>Traditional Dance Synopsis</th>
@@ -190,11 +186,11 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Name</th>
-                                                    <th>ID</th>
-                                                    <th>Student ID</th>
+                                                    <th>Identification Card / Passport / KTP No.</th>
+                                                    <th>Matric No. / Student ID</th>
                                                     <th>Role</th>
                                                     <th>Gender</th>
-                                                    <th>Shirt Size</th>
+                                                    <th>T-Shirt Size</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -223,9 +219,16 @@
                 @if ($registration->payments && $registration->payments->count())
                     <div class="card mb-2">
                         <div class="card-header bg-light">
-                            <h6 class="mb-0 fw-bold text-uppercase">Commitment Fee</h6>
+                            <h6 class="mb-0 fw-bold text-uppercase">Commitment Fee Payment</h6>
                         </div>
                         <div class="card-body">
+                            
+                        <p class="mb-3 small">
+                            We have made the payment for the Commitment Fee under the name of
+                            <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
+                            (Bank Account Number: <strong>11040010001473</strong>) -
+                            <strong>BANK ISLAM MALAYSIA BERHAD</strong> via the following method:
+                        </p>
                             @foreach ($registration->payments as $payment)
                                 <table class="table table-borderless table-sm">
                                     <tr>
@@ -258,7 +261,9 @@
             <div class="col-md-4">
                 <!-- Application Status -->
                 <div class="card mb-2">
-                    <div class="card-header bg-light"> <h6 class="mb-0 fw-bold text-uppercase">Application Status</h6></div>
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0 fw-bold text-uppercase">Application Status</h6>
+                    </div>
                     <div class="card-body">
                         <table class="table table-borderless table-sm mb-0">
                             <tr>
@@ -301,7 +306,9 @@
                 @hasanyrole('Superadmin|Admin')
                     @if ($registration->status === 'Pending Approval')
                         <div class="card mb-2">
-                            <div class="card-header bg-light"> <h6 class="mb-0 fw-bold text-uppercase">Approval Status</h6></div>
+                            <div class="card-header bg-light">
+                                <h6 class="mb-0 fw-bold text-uppercase">Approval Status</h6>
+                            </div>
                             <div class="card-body">
                                 <form action="{{ route('registration.approval', $registration->id) }}" method="POST">
                                     {{ csrf_field() }}
