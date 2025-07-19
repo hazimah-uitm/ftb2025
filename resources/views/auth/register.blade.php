@@ -24,17 +24,17 @@
 
                             <!-- Declaration Card -->
                             <div class="card shadow mb-4">
-                                <div class="card-header text-center text-white" style="background-color: #03244c;">
-                                    <h5 class="mb-0 text-white">COMPETITION DECLARATION LETTER</h5>
+                                <div class="card-header text-center bg-light">
+                                    <h5 class="mb-0">SURAT AKUAN PERTANDINGAN</h5>
                                 </div>
                                 <div class="card-body p-4" style="max-height: 500px; overflow-y: auto;">
-                                    <p>We are pleased to inform you that our team from:</p>
+                                    <p>Sukacita dimaklumkan bahawa pasukan kami:</p>
 
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-2">
                                             <input type="text" name="institution_name"
                                                 class="form-control form-control-sm border-0 border-bottom rounded-0 shadow-none"
-                                                placeholder="Institution Name" required
+                                                placeholder="Sila isikan nama institusi" required
                                                 value="{{ old('institution_name') }}">
                                             @if ($errors->has('institution_name'))
                                                 <div class="text-danger small">
@@ -49,57 +49,49 @@
                                                 class="form-select form-select-sm border-0 border-bottom rounded-0 shadow-none"
                                                 required>
                                                 <option value="" disabled {{ old('jenis_ipta') ? '' : 'selected' }}>
-                                                    Type of Higher Education Institution</option>
-                                                <option value="University"
-                                                    {{ old('jenis_ipta') == 'University' ? 'selected' : '' }}>University
+                                                    Jenis Institut Pengajian Tinggi</option>
+                                                <option value="Universiti"
+                                                    {{ old('jenis_ipta') == 'Universiti' ? 'selected' : '' }}>Universiti
                                                 </option>
-                                                <option value="University College"
-                                                    {{ old('jenis_ipta') == 'University College' ? 'selected' : '' }}>
-                                                    University College</option>
-                                                <option value="College"
-                                                    {{ old('jenis_ipta') == 'College' ? 'selected' : '' }}>College</option>
-                                                <option value="Teacher Training Institute"
-                                                    {{ old('jenis_ipta') == 'Teacher Training Institute' ? 'selected' : '' }}>
-                                                    Teacher Training Institute</option>
-                                                <option value="Polytechnic"
-                                                    {{ old('jenis_ipta') == 'Polytechnic' ? 'selected' : '' }}>Polytechnic
+                                                <option value="Kolej Universiti"
+                                                    {{ old('jenis_ipta') == 'Kolej Universiti' ? 'selected' : '' }}>
+                                                    Kolej Universiti</option>
+                                                <option value="Kolej"
+                                                    {{ old('jenis_ipta') == 'Kolej' ? 'selected' : '' }}>Kolej</option>
+                                                <option value="Institut Perguruan"
+                                                    {{ old('jenis_ipta') == 'Institut Perguruan' ? 'selected' : '' }}>
+                                                    Institut Perguruan</option>
+                                                <option value="Politeknik"
+                                                    {{ old('jenis_ipta') == 'Politeknik' ? 'selected' : '' }}>Politeknik
                                                 </option>
-                                                <option value="Community College"
-                                                    {{ old('jenis_ipta') == 'Community College' ? 'selected' : '' }}>
-                                                    Community College</option>
+                                                <option value="Kolej Komuniti"
+                                                    {{ old('jenis_ipta') == 'Kolej Komuniti' ? 'selected' : '' }}>
+                                                    Kolej Komuniti</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <p>
-                                        is interested in participating in the <b>Festival Tari Borneo IX 2025</b> to be held
-                                        on:
+                                        berminat untuk menyertai <b>Festival Tari Borneo IX (Edisi ke-9) 2025</b> pada:
                                     </p>
 
                                     <ul>
-                                        <li><b>Date: 18 November - 21 November 2025</b></li>
-                                        <li><b>Venue: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</b></li>
+                                        <li><b>Tarikh: 18 November - 21 November 2025</b></li>
+                                        <li><b>Tempat: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</b></li>
                                     </ul>
-                                    <p>Hereby, we declare that;</p>
+                                    <p>Dengan ini;</p>
                                     <ol>
-                                        <li>We will adhere to all rules and regulations set by the Organising Committee
-                                            throughout the duration of the Festival Tari Borneo IX 2025.</li>
-                                        <li>We acknowledge that the Organising Committee reserves the right to make any
-                                            amendments throughout the programme as deemed appropriate for the benefit of all
-                                            parties.</li>
-                                        <li>We also acknowledge that the Organising Committee has the right to revoke our
-                                            participation should we violate any of the participation rules.</li>
-                                        <li>The organiser will ensure the festival runs smoothly and safely. However, any
-                                            injuries or accidents occurring during FTB 2025 will be the sole responsibility
-                                            of
-                                            the participants.</li>
+                                        <li>Kami akan mematuhi setiap peraturan dan syarat seperti yang ditetapkan oleh pihak Jawatankuasa Penganjur sepanjang berlangsungnya Festival Tari Borneo IX (Edisi Ke-9) 2025.</li>
+                                        <li>Kami mengakui bahawa pihak Jawatankuasa Penganjur berhak membuat sebarang pindaan sepanjang program mengikut kesesuaian demi kebaikan semua pihak.</li>
+                                        <li>Kami juga mengakui bahawa pihak Jawatankuasa Penganjur berhak membatalkan penyertaan kami sekiranya kami melanggar peraturan penyertaan yang telah ditetapkan.</li>
+                                        <li>Pihak penganjur akan memastikan festival berjalan dengan lancar dan selamat. Namun begitu, sebarang kecederaan atau kemalangan sepanjang FTB 2025 berlangsung adalah atas tanggung jawab peserta.</li>
                                     </ol>
 
                                     <div class="form-check mt-3">
                                         <input class="form-check-input" type="checkbox" id="consentCheckbox" name="consent"
                                             {{ old('consent') ? 'checked' : '' }} required>
                                         <label class="form-check-label" for="consentCheckbox">
-                                            I have read and agreed to the above Competition Declaration Letter.
+                                            Saya telah membaca dan bersetuju dengan Surat Akuan Pertandingan di atas.
                                         </label>
                                     </div>
                                 </div>
@@ -107,14 +99,14 @@
 
                             <!-- Registration Card -->
                             <div class="card shadow mt-4" id="account-registration">
-                                <div class="card-header text-center text-white" style="background-color: #03244c;">
-                                    <h5 class="mb-0 text-white">ACCOUNT REGISTRATION</h5>
+                                <div class="card-header bg-light text-center">
+                                    <h5 class="mb-0">DAFTAR AKAUN</h5>
                                 </div>
 
                                 <div class="card-body p-4">
                                     <div class="row g-3">
                                         <div class="col-md-12">
-                                            <label for="name" class="form-label">Full Name</label>
+                                            <label for="name" class="form-label">Nama Penuh</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                                 id="name" name="name" value="{{ old('name') }}" required>
@@ -128,8 +120,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="ic_no" class="form-label">Identification Card / Passport / KTP
-                                                Number</label>
+                                            <label for="ic_no" class="form-label">No. Kad Pengenalan / Passport / KTP</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}"
                                                 id="ic_no" name="ic_no" value="{{ old('ic_no') }}" required>
@@ -143,7 +134,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="position" class="form-label">Position</label>
+                                            <label for="position" class="form-label">Jawatan</label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}"
                                                 id="position" name="position" value="{{ old('position') }}" required>
@@ -157,7 +148,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="phone_no" class="form-label">Phone Number</label>
+                                            <label for="phone_no" class="form-label">No. Telefon</label>
                                             <input type="number"
                                                 class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
                                                 id="phone_no" name="phone_no" value="{{ old('phone_no') }}" required>
@@ -171,7 +162,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="email" class="form-label">Email Address</label>
+                                            <label for="email" class="form-label">Alamat Emel</label>
                                             <input type="email"
                                                 class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                 id="email" name="email" value="{{ old('email') }}" required>
@@ -185,7 +176,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="password" class="form-label">Password</label>
+                                            <label for="password" class="form-label">Kata Laluan</label>
                                             <input type="password"
                                                 class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                                 id="password" name="password" required>
@@ -199,7 +190,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="password-confirm" class="form-label">Confirm Password</label>
+                                            <label for="password-confirm" class="form-label">Sahkan Kata Laluan</label>
                                             <input type="password" class="form-control" id="password-confirm"
                                                 name="password_confirmation" required>
                                         </div>
@@ -207,9 +198,9 @@
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-between align-items-center">
-                                    <p class="mb-0">Already have account? <a href="{{ route('login') }}">Login</a></p>
+                                    <p class="mb-0">Anda sudah mempunyai akaun? <a href="{{ route('login') }}">Log Masuk</a></p>
                                     <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="bx bxs-user-plus"></i> Register Account
+                                        <i class="bx bxs-user-plus"></i> Daftar Akaun
                                     </button>
                                 </div>
                             </div>

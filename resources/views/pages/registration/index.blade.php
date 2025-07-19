@@ -275,10 +275,6 @@
                                     by {{ $registration->submitter->name ?? '-' }}
                                 </td>
                             </tr>
-                            <tr>
-                                <th>Submitter's Remarks</th>
-                                <td>{!! nl2br(e($registration->remarks_submitter ?? '-')) !!}</td>
-                            </tr>
                         </table>
 
                         <hr>

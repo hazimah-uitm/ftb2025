@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ORGANISED BY UiTM CAWANGAN SARAWAK
+                            ANJURAN UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3 class="">LOGIN</h3>
+                                        <h3 class="">LOG MASUK</h3>
                                     </div>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
@@ -39,15 +39,15 @@
                                         </div>
                                     @endif
                                     <div class="form-body">
-                                        <form method="POST" action="{{ route('login') }}" class="row g-3">
+                                        <form method="POST" action="{{ route('login') }}" class="row g-2">
                                             {{ csrf_field() }}
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email</label>
+                                                <label for="email" class="form-label">Alamat Emel</label>
                                                 <input type="text" class="form-control" id="email" name="email"
                                                     value="{{ old('email') }}" required autocomplete="email" autofocus>
                                             </div>
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Password</label>
+                                                <label for="password" class="form-label">Kata Laluan</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0" id="password"
                                                         name="password" required autocomplete="current-password">
@@ -59,24 +59,22 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="remember"
                                                         id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Remember
-                                                        Me</label>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Ingat saya</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 text-end">
-                                                <a class="text-muted" href="{{ route('password.request') }}">Reset
-                                                    Password</a>
+                                                <a class="text-muted" href="{{ route('password.request') }}">Reset Kata Laluan</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary"><i
-                                                            class="bx bxs-lock-open"></i> Login</button>
+                                                            class="bx bxs-lock-open"></i> Log Masuk</button>
                                                 </div>
                                             </div>
                                             <div class="col-12 text-center">
                                                 <div class="d-grid">
                                                     <a href="{{ route('register') }}" class="btn btn-warning">
-                                                        <i class='bx bxs-user-plus'></i> Register
+                                                        <i class='bx bxs-user-plus'></i> Daftar
                                                     </a>
                                                 </div>
                                             </div>

@@ -283,10 +283,6 @@
                                 <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}<br>By:
                                     {{ $registration->submitter->name ?? '-' }}</td>
                             </tr>
-                            <tr>
-                                <th>Submitter's Remarks</th>
-                                <td>{!! nl2br(e($registration->remarks_submitter ?? '-')) !!}</td>
-                            </tr>
                             @if ($registration->checked_by)
                                 <tr>
                                     <th>Checked At</th>
