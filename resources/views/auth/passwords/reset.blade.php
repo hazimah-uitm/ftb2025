@@ -22,7 +22,7 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="border p-4 rounded">
-                                    <div class="text-center mb-4">
+                                    <div class="text-center mb-4 text-uppercase">
                                         @if (request()->query('type') == 'reset')
                                             <h3 class="">Reset Password</h3>
                                         @else
@@ -56,7 +56,7 @@
                                             <input type="hidden" name="token" value="{{ $token }}">
 
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email</label>
+                                                <label for="email" class="form-label">Alamat Emel</label>
                                                 <input type="email"
                                                     class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                                     id="email" name="email" value="{{ old('email', $email ?? '') }}"
@@ -71,7 +71,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="password" class="form-label">Password</label>
+                                                <label for="password" class="form-label">Kata Laluan</label>
                                                 <div class="input-group" id="show_hide_password">
                                                     <input type="password" class="form-control border-end-0" id="password"
                                                         name="password" required autocomplete="current-password">
@@ -81,7 +81,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="password-confirm" class="form-label">Confirm Password</label>
+                                                <label for="password-confirm" class="form-label">Sahkan Kata Laluan</label>
                                                 <div class="input-group" id="show_hide_password_confirm">
                                                     <input id="password-confirm" type="password"
                                                         class="form-control border-end-0" name="password_confirmation"
@@ -97,7 +97,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-12 text-center">
-                                                <a href="{{ route('login') }}">Back to Login</a>
+                                                <a href="{{ route('login') }}">Kembali ke Log Masuk</a>
                                             </div>
                                         </form>
                                     </div>

@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ORGANISED BY UiTM CAWANGAN SARAWAK
+                            ANJURAN UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>
@@ -22,8 +22,8 @@
                             <div class="card-body">
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3 class="">Pengesahan Akaun</h3>
-                                        <p class="text-muted">Masukkan emel UiTM anda untuk menerima pautan pengesahan emel baru
+                                        <h3 class="text-uppercase">Pengesahan Akaun</h3>
+                                        <p class="text-muted">Masukkan alamat emel anda untuk menerima pautan pengesahan emel baru
                                         </p>
                                     </div>
 
@@ -46,7 +46,7 @@
                                     <form method="POST" action="{{ route('firsttimelogin.send') }}">
                                         {{ csrf_field() }}
                                         <div class="mb-3">
-                                            <label for="email" class="form-label">Emel UiTM</label>
+                                            <label for="email" class="form-label">Alamat Emel</label>
                                             <input type="email" class="form-control" id="email" name="email"
                                                 required value="{{ old('email') }}">
                                         </div>

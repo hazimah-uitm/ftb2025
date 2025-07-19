@@ -21,7 +21,7 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="border p-2 rounded">
-                                    <div class="text-center mb-4">
+                                    <div class="text-center mb-4 text-uppercase">
                                         <h3>{{ __('Pendaftaran Berjaya!') }}</h3>
                                     </div>
 
