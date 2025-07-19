@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ORGANISED BY UiTM CAWANGAN SARAWAK
+                            ANJURAN UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>
@@ -22,13 +22,13 @@
                             <div class="card-body">
                                 <div class="border p-2 rounded">
                                     <div class="text-center mb-4">
-                                        <h3>{{ __('Registration Successful!') }}</h3>
+                                        <h3>{{ __('Pendaftaran Berjaya!') }}</h3>
                                     </div>
 
                                     <div class="text-center mb-3">
                                         <p class="mb-2">
                                             {{ __('
-                                            Please check your email for the verification link before logging in.') }}
+                                            Sila periksa e-mel anda dan klik pautan pengesahan sebelum log masuk ke sistem.') }}
                                         </p>
                                     </div>
 

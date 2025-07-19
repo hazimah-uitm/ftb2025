@@ -25,12 +25,12 @@ class NewRegistrationSubmitted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('New Registration Submitted')
-            ->greeting('Hi,')
-            ->line('A new registration has been submitted by ' . $this->registration->user->institution_name)
-            ->line('Group Name: ' . $this->registration->group_name)
-            ->action('View Registration', url(route('registration.view', $this->registration->id)))
-            ->line('Thank you.');
+            ->subject('Pendaftaran Baharu Telah Dihantar')
+            ->greeting('Salam sejahtera,')
+            ->line('Satu penyertaan baharu telah dihantar oleh ' . $this->registration->user->institution_name)
+            ->line('Nama Kumpulan: ' . $this->registration->group_name)
+            ->action('Papar Maklumat', url(route('registration.view', $this->registration->id)))
+            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
     }
 
     /**

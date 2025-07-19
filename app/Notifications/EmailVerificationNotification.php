@@ -28,10 +28,11 @@ class EmailVerificationNotification extends Notification
         $verificationUrl = url('/verify-email/' . $this->token);
 
         return (new MailMessage)
-            ->subject('Account Email Verification')
-            ->greeting('Hello')
-            ->line('Please click the link below to verify your account:')
-            ->action('Verify Email', $verificationUrl)
-            ->line('If you did not register, please ignore this email.');
+            ->subject('Pengesahan Akaun Emel')
+            ->greeting('Salam sejahtera,')
+            ->line('Sila klik pautan di bawah untuk mengesahkan akaun anda:')
+            ->action('Sahkan Emel', $verificationUrl)
+            ->line('Jika anda tidak membuat pendaftaran, abaikan emel ini.')
+            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
     }
 }

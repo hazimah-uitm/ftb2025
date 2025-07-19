@@ -28,11 +28,11 @@
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
                                             @if ($errors->count() == 1)
-                                                <p class="mb-0">{{ $errors->first() }}</p>
+                                               <p class="mb-0">{!! $errors->first() !!}</p>
                                             @else
                                                 <ul class="mb-0">
                                                     @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
+                                                         <li>{!! $error !!}</li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -63,7 +63,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7 text-end">
-                                                <a class="text-muted" href="{{ route('password.request') }}">Reset Kata Laluan</a>
+                                                <a class="text-muted" href="{{ route('password.request') }}">Reset Kata Laluan</a> <br> <a href="{{ route('firsttimelogin.form') }}">Pengesahan
+                                                    Akaun</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">

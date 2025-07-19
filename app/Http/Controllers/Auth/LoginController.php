@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailVerificationToken;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Notifications\EmailVerificationNotification;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -85,7 +88,7 @@ class LoginController extends Controller
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
-                    $this->username() => 'Emel anda belum disahkan. Sila semak inbox anda untuk pautan pengesahan.',
+                    $this->username() => 'Emel anda belum disahkan. Sila semak inbox anda untuk pautan pengesahan atau <a href="' . route('firsttimelogin.form') . '">Klik di sini</a> untuk hantar semula pautan pengesahan.',
                 ]);
         }
 
@@ -122,9 +125,18 @@ class LoginController extends Controller
         }
 
         // Create reset token and send notification
-        $token = Password::broker()->createToken($user);
-        $user->notify(new ResetPasswordNotification($token, true));
+        // $token = Password::broker()->createToken($user);
+        // $user->notify(new ResetPasswordNotification($token, true));
 
-        return back()->with('status', 'Pautan set kata laluan telah dihantar ke emel anda. Sila semak inbox anda.');
+        $token = Str::random(40);
+
+        EmailVerificationToken::updateOrCreate(
+            ['user_id' => $user->id],
+            ['token' => $token]
+        );
+
+        $user->notify(new EmailVerificationNotification($user, $token));
+
+        return back()->with('status', 'Pautan pengesahan emel telah dihantar semula ke emel anda. Sila semak inbox anda.');
     }
 }

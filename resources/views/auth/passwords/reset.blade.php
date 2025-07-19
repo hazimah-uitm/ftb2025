@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
                         <h6 class="logo-subtitle-login mb-0">
-                            ORGANISED BY UiTM CAWANGAN SARAWAK
+                            ANJURAN UiTM CAWANGAN SARAWAK
                         </h6>
                     </div>
                 </div>
@@ -38,11 +38,15 @@
                                     @endif
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
-                                            <ul class="mb-0">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
+                                            @if ($errors->count() == 1)
+                                                <p class="mb-0">{{ $errors->first() }}</p>
+                                            @else
+                                                <ul class="mb-0">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                         </div>
                                     @endif
                                     <div class="form-body">
@@ -55,7 +59,8 @@
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="email"
                                                     class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                                    id="email" name="email" value="{{ old('email') }}">
+                                                    id="email" name="email" value="{{ old('email', $email ?? '') }}"
+                                                    readonly>
                                                 @if ($errors->has('email'))
                                                     <div class="invalid-feedback">
                                                         @foreach ($errors->get('email') as $error)

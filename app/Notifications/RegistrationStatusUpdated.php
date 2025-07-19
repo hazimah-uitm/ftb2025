@@ -26,12 +26,12 @@ class RegistrationStatusUpdated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your Registration Has Been ' . $this->registration->status)
-            ->greeting('Hello ' . $this->registration->user->name . ',')
-            ->line('Your registration for "' . $this->registration->group_name . '" has been ' . $this->registration->status . '.')
-            ->line('Remarks from admin: ' . ($this->registration->remarks_checker ?? '-'))
-            ->action('View Details', url(route('registration.view', $this->registration->id))) // adjust route name
-            ->line('Thank you for your registration.');
+            ->subject('Pendaftaran anda telah ' . $this->registration->status)
+            ->greeting('Salam Sejahtera ' . $this->registration->user->name . ',')
+            ->line('Pendaftaran anda untuk "' . $this->registration->group_name . '" telah ' . $this->registration->status . '.')
+            ->line('Catatan daripada Admin: ' . ($this->registration->remarks_checker ?? '-'))
+            ->action('Papar Maklumat', url(route('registration.view', $this->registration->id))) // adjust route name
+            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
     }
 
     /**

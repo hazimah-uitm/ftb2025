@@ -23,7 +23,7 @@
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
                                         <h3 class="">Pengesahan Akaun</h3>
-                                        <p class="text-muted">Masukkan emel UiTM anda untuk menerima pautan set kata laluan
+                                        <p class="text-muted">Masukkan emel UiTM anda untuk menerima pautan pengesahan emel baru
                                         </p>
                                     </div>
 

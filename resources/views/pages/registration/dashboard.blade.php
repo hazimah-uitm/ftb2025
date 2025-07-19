@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-secondary"
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}" class="btn btn-sm btn-secondary"
                             target="_blank">
                             <i class="bx bx-book-open me-1"></i> View Competition Rules
                         </a>
@@ -158,7 +158,7 @@
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/rules_ftb2025.pdf') }}" class="btn btn-sm btn-warning"
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}" class="btn btn-sm btn-warning"
                             target="_blank">
                             <i class="bx bx-book-open me-1"></i> View Competition Rules
                         </a>
