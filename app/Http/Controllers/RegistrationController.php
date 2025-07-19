@@ -39,14 +39,15 @@ class RegistrationController extends Controller
 
         $registration = Registration::where('user_id', $user->id)->first();
 
+        $approvedRegistrations = Registration::where('status', 'Approved')->count();
+
+        // Hanya Admin/Superadmin boleh tengok total & pending
         $totalRegistrations = null;
         $pendingRegistrations = null;
-        $approvedRegistrations = null;
 
         if ($user->hasRole('Admin') || $user->hasRole('Superadmin')) {
             $totalRegistrations = Registration::count();
             $pendingRegistrations = Registration::where('status', 'Pending Approval')->count();
-            $approvedRegistrations = Registration::where('status', 'Approved')->count();
         }
 
         return view('pages.registration.dashboard', compact(

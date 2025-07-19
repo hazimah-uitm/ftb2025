@@ -90,12 +90,13 @@
                         <i class="bx bx-book fs-4 text-secondary me-3"></i>
                         <div>
                             <div class="fw-semibold">Syarat dan Kriteria Permarkahan Pertandingan</div>
-                            <small class="text-muted">Sila baca Syarat dan Kriteria Permarkahan Pertandingan sebelum mendaftar.</small>
+                            <small class="text-muted">Sila baca Syarat dan Kriteria Permarkahan Pertandingan sebelum
+                                mendaftar.</small>
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}" class="btn btn-sm btn-secondary"
-                            target="_blank">
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}"
+                            class="btn btn-sm btn-secondary" target="_blank">
                             <i class="bx bx-book-open me-1"></i> Papar Syarat dan Kriteria Permarkahan Pertandingan
                         </a>
                     </div>
@@ -122,7 +123,8 @@
                                     </a>.
                                 </li>
                                 <li>
-                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat pengisytiharan, selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
+                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat pengisytiharan,
+                                    selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
                                 </li>
                                 <li>Hubungi:
                                     <ul class="mb-0">
@@ -142,6 +144,62 @@
         @else
             {{-- USER VIEW --}}
 
+            <!-- Participation Status -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card border-start border-4 border-success shadow-sm h-100"
+                        style="background: linear-gradient(135deg, #e6fff5, #ffffff);">
+                        <div class="card-body d-flex align-items-center">
+                            <i class="bx bx-check-circle fs-1 text-success me-3"></i>
+                            <div>
+                                <h6 class="mb-1 text-muted">Pendaftaran Diluluskan</h6>
+                                <h4 class="fw-bold text-success mb-0">{{ $approvedRegistrations }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card border-start border-4 border-primary shadow-sm mb-4 h-100"
+                        style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
+                        <div
+                            class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
+                            <div class="d-flex align-items-start">
+                                <i class="bx bx-user-check fs-4 text-primary me-3"></i>
+                                <div>
+                                    <div class="fw-semibold">Status Penyertaan</div>
+                                    @if ($registration)
+                                        <p class="mb-2 small"><strong>Status:</strong>
+                                            @if ($registration->status == 'Approved')
+                                                <span class="badge bg-success">Diluluskan</span>
+                                            @elseif ($registration->status == 'Rejected')
+                                                <span class="badge bg-danger">Dibatalkan</span>
+                                            @else
+                                                <span class="badge bg-warningxt-primary">Menunggu Kelulusan</span>
+                                            @endif
+                                        </p>
+                                    @else
+                                        <p class="mb-2 small">Anda belum menghantar sebarang penyertaan.</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="mt-3 mt-md-0">
+                                @if ($registration)
+                                    <a href="{{ route('registration.view', $registration->id) }}"
+                                        class="btn btn-sm btn-primary">
+                                        <i class="bx bx-show me-1"></i> Papar Maklumat Penyertaan
+                                    </a>
+                                @else
+                                    <a href="{{ route('registration.create') }}" class="btn btn-sm btn-primary">
+                                        <i class="bx bx-pencil me-1"></i> Daftar Sekarang
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Competition Rules -->
             <div class="card border-start border-4 border-warning shadow-sm mb-4"
                 style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
@@ -151,52 +209,15 @@
                         <i class="bx bx-book fs-4 text-warning me-3"></i>
                         <div>
                             <div class="fw-semibold">Syarat dan Kriteria Permarkahan Pertandingan</div>
-                            <small class="text-muted">Sila baca Syarat dan Kriteria Permarkahan Pertandingan sebelum mendaftar.</small>
+                            <small class="text-muted">Sila baca Syarat dan Kriteria Permarkahan Pertandingan sebelum
+                                mendaftar.</small>
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}" class="btn btn-sm btn-warning"
-                            target="_blank">
-                            <i class="bx bx-book-open me-1"></i>  Papar Syarat dan Kriteria Permarkahan Pertandingan
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}"
+                            class="btn btn-sm btn-warning" target="_blank">
+                            <i class="bx bx-book-open me-1"></i> Papar Syarat dan Kriteria Permarkahan Pertandingan
                         </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Participation Status -->
-            <div class="card border-start border-4 border-primary shadow-sm mb-4"
-                style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
-                <div
-                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
-                    <div class="d-flex align-items-start">
-                        <i class="bx bx-user-check fs-4 text-primary me-3"></i>
-                        <div>
-                            <div class="fw-semibold">Status Penyertaan</div>
-                            @if ($registration)
-                                <p class="mb-2 small"><strong>Status:</strong>
-                                    @if ($registration->status == 'Approved')
-                                        <span class="badge bg-success">Diluluskan</span>
-                                    @elseif ($registration->status == 'Rejected')
-                                        <span class="badge bg-danger">Dibatalkan</span>
-                                    @else
-                                        <span class="badge bg-warningxt-primary">Menunggu Kelulusan</span>
-                                    @endif
-                                </p>
-                            @else
-                                <p class="mb-2 small">Anda belum menghantar sebarang penyertaan.</p>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="mt-3 mt-md-0">
-                        @if ($registration)
-                            <a href="{{ route('registration.view', $registration->id) }}" class="btn btn-sm btn-primary">
-                                <i class="bx bx-show me-1"></i> Papar Maklumat Penyertaan
-                            </a>
-                        @else
-                            <a href="{{ route('registration.create') }}" class="btn btn-sm btn-primary">
-                                <i class="bx bx-pencil me-1"></i> Daftar Sekarang
-                            </a>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -221,7 +242,9 @@
                                     </a>.
                                 </li>
                                 <li>
-                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat pengisytiharan, selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
+                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat
+                                    pengisytiharan,
+                                    selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
                                 </li>
                                 <li>Hubungi:
                                     <ul class="mb-0">
