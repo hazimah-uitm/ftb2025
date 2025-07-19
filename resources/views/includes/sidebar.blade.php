@@ -27,14 +27,14 @@
             <li class="{{ request()->routeIs('registration.view') ? 'mm-active' : '' }}">
                 <a href="{{ route('registration.view', $registration->id) }}">
                     <div class="parent-icon"><i class='bx bx-file'></i></div>
-                    <div class="menu-title">Participation</div>
+                    <div class="menu-title">Penyertaan</div>
                 </a>
             </li>
         @else
             <li class="{{ request()->routeIs('registration.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('registration.create') }}">
                     <div class="parent-icon"><i class='bx bx-plus-circle'></i></div>
-                    <div class="menu-title">Register Participation</div>
+                    <div class="menu-title">Daftar Penyertaan</div>
                 </a>
             </li>
         @endif
@@ -44,19 +44,25 @@
         <li class="{{ Request::routeIs('registration*') ? 'mm-active' : '' }}">
             <a href="{{ route('registration') }}">
                 <div class="parent-icon"><i class='bx bx-file'></i></div>
-                <div class="menu-title">Participation</div>
+                <div class="menu-title">Penyertaan</div>
             </a>
         </li>
     @endhasanyrole
 
+    <li>
+        <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank" rel="noopener">
+            <div class="parent-icon"><i class='bx bx-link'></i></div>
+            <div class="menu-title">FTB 2025</div>
+        </a>
+    </li>
 
     @hasanyrole('Superadmin|Admin')
-        <li class="menu-label">User Management</li>
+        <li class="menu-label">Pengurusan Pengguna</li>
 
         <li class="{{ Request::is('user*') && !Request::is('user-role*') ? 'mm-active' : '' }}">
             <a href="{{ route('user') }}">
                 <div class="parent-icon"><i class='bx bx-user-circle'></i></div>
-                <div class="menu-title">User</div>
+                <div class="menu-title">Pengguna</div>
             </a>
         </li>
     @endhasanyrole
@@ -65,7 +71,7 @@
         <li class="{{ Request::is('user-role*') ? 'mm-active' : '' }}">
             <a href="{{ route('user-role') }}">
                 <div class="parent-icon"><i class='bx bx-shield'></i></div>
-                <div class="menu-title">User Role</div>
+                <div class="menu-title">Peranan Pengguna</div>
             </a>
         </li>
 
@@ -96,11 +102,11 @@
         </ul>
     </li> --}}
 
-        <li class="menu-label">Setting</li>
+        <li class="menu-label">Tetapan</li>
         <li class="{{ Request::routeIs('activity-log') ? 'mm-active' : '' }}">
             <a href="{{ route('activity-log') }}">
                 <div class="parent-icon"><i class='bx bx-history'></i></div>
-                <div class="menu-title">Activity Log</div>
+                <div class="menu-title">Aktiviti Log</div>
             </a>
         </li>
 

@@ -96,7 +96,7 @@
 
         // Update the content of the element with the current year
         document.getElementById("copyright").innerHTML = '© ' + currentYear +
-            ' <a href="https://sarawak.uitm.edu.my/" target="_blank">UiTM Cawangan Sarawak</a>.';
+            ' <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">Festival Tari Borneo 2025</a>';
     </script>
     <script>
         window.onpageshow = function(event) {
