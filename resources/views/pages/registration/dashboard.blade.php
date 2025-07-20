@@ -246,10 +246,10 @@
                                 </li>
                                 <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
                                     <ul class="mb-0">
-                                        <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 /
+                                        <li><strong>Cik Melinda Anak Jindu</strong>: +6082 678 059 /
                                             <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a>
                                         </li>
-                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong> – 082 677 058 /
+                                        <li><strong>Cik Lydia Jimbie Anak Anthony</strong>: +6082 677 058 /
                                             <a href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a>
                                         </li>
                                     </ul>
