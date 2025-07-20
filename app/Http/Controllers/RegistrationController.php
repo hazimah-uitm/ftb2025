@@ -14,11 +14,11 @@ class RegistrationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:View Participation')->only('show');
-        $this->middleware('permission:View List Participation')->only(['index', 'search']);
-        $this->middleware('permission:Add Participation')->only(['create', 'store']);
-        $this->middleware('permission:Edit Participation')->only(['edit', 'update']);
-        $this->middleware('permission:Delete Participation')->only(['destroy', 'trashList', 'restore', 'forceDelete']);
+        $this->middleware('permission:Lihat Penyertaan')->only('show');
+        $this->middleware('permission:Lihat Senarai Penyertaan')->only(['index', 'search']);
+        $this->middleware('permission:Tambah Penyertaan')->only(['create', 'store']);
+        $this->middleware('permission:Edit Penyertaan')->only(['edit', 'update']);
+        $this->middleware('permission:Padam Penyertaan')->only(['destroy', 'trashList', 'restore', 'forceDelete']);
     }
 
     public function index(Request $request)
@@ -39,7 +39,7 @@ class RegistrationController extends Controller
 
         $registration = Registration::where('user_id', $user->id)->first();
 
-        $approvedRegistrations = Registration::where('status', 'Approved')->count();
+        $approvedRegistrations = Registration::where('status', 'Diluluskan')->count();
 
         // Hanya Admin/Superadmin boleh tengok total & pending
         $totalRegistrations = null;
@@ -47,7 +47,7 @@ class RegistrationController extends Controller
 
         if ($user->hasRole('Admin') || $user->hasRole('Superadmin')) {
             $totalRegistrations = Registration::count();
-            $pendingRegistrations = Registration::where('status', 'Pending Approval')->count();
+            $pendingRegistrations = Registration::where('status', 'Menunggu Kelulusan')->count();
         }
 
         return view('pages.registration.dashboard', compact(
@@ -65,7 +65,7 @@ class RegistrationController extends Controller
 
         return view('pages.registration.create', [
             'save_route' => route('registration.store'),
-            'str_mode' => 'Register',
+            'str_mode' => 'Hantar',
             'user_id' => $user->id,
             'institution_name' => $user->institution_name,
             'email' => $user->email,
@@ -79,8 +79,8 @@ class RegistrationController extends Controller
             'group_name' => 'required|string|max:255',
             'traditional_dance_name' => 'required|string|max:255',
             'creative_dance_name' => 'required|string|max:255',
-            'koreografer_name' => 'required|string|max:255',
-            'assistant_koreografer_name' => 'nullable|string|max:255',
+            // 'koreografer_name' => 'required|string|max:255',
+            // 'assistant_koreografer_name' => 'nullable|string|max:255',
             'address' => 'required|string',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
@@ -91,9 +91,10 @@ class RegistrationController extends Controller
             'members.*.peranan' => 'required|string|max:255',
             'members.*.jantina' => 'required|string',
             'members.*.saiz_baju' => 'required|string',
+            'members.*.student_id' => 'nullable|string|max:100',
 
-            'escort_officers' => 'nullable|array',
-            'escort_officers.*.name' => 'required|string|max:255',
+            // 'escort_officers' => 'nullable|array',
+            // 'escort_officers.*.name' => 'required|string|max:255',
 
             'payment.payment_type' => 'required|string|max:255',
             'payment.date' => 'required|date',
@@ -102,7 +103,7 @@ class RegistrationController extends Controller
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
             'creative_dance_name.required' => 'Sila isi nama tarian kreatif',
-            'koreografer_name.required' => 'Sila isi nama koreografer',
+            // 'koreografer_name.required' => 'Sila isi nama koreografer',
             'address.required' => 'Sila isi alamat',
             'sinopsis_traditional.required' => 'Sila isi sinopsis tradisional',
             'sinopsis_creative.required' => 'Sila isi sinopsis kreatif',
@@ -110,8 +111,8 @@ class RegistrationController extends Controller
 
         $registration = new Registration();
         $registration->user_id = Auth::id();
-        $registration->fill($request->except(['members', 'escort_officers', 'payment']));
-        $registration->status = 'Pending Approval';
+        $registration->fill($request->except(['members', 'payment']));
+        $registration->status = 'Menunggu Kelulusan';
         $registration->remarks_submitter = $request->input('remarks_submitter');
         $registration->submitted_by = Auth::id();
         $registration->submitted_at = now();
@@ -123,11 +124,11 @@ class RegistrationController extends Controller
         }
 
         // Save Escort Officers
-        if ($request->has('escort_officers')) {
-            foreach ($request->escort_officers as $officerData) {
-                $registration->escortOfficers()->create($officerData);
-            }
-        }
+        // if ($request->has('escort_officers')) {
+        //     foreach ($request->escort_officers as $officerData) {
+        //         $registration->escortOfficers()->create($officerData);
+        //     }
+        // }
 
         // Save Payment
         if ($request->has('payment')) {
@@ -150,7 +151,7 @@ class RegistrationController extends Controller
         }
 
         $user = User::find(auth()->id());
-        if ($user->hasRole('Participant')) {
+        if ($user->hasRole('Peserta')) {
             return redirect()->route('registration.view', $registration->id)
                 ->with('success', 'Maklumat berjaya disimpan');
         } else {
@@ -162,7 +163,7 @@ class RegistrationController extends Controller
     public function approval(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:Approved,Rejected',
+            'status' => 'required|in:Diluluskan,Dibatalkan',
             'remarks_checker' => 'nullable|string',
         ]);
 
@@ -211,8 +212,8 @@ class RegistrationController extends Controller
             'group_name' => 'required|string|max:255',
             'traditional_dance_name' => 'required|string|max:255',
             'creative_dance_name' => 'required|string|max:255',
-            'koreografer_name' => 'required|string|max:255',
-            'assistant_koreografer_name' => 'nullable|string|max:255',
+            // 'koreografer_name' => 'required|string|max:255',
+            // 'assistant_koreografer_name' => 'nullable|string|max:255',
             'address' => 'required|string',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',

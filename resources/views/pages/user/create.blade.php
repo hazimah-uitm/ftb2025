@@ -25,7 +25,7 @@
             {{ csrf_field() }}
 
             <div class="mb-3">
-                <label for="institution_name" class="form-label">Institution Name</label>
+                <label for="institution_name" class="form-label">Nama Institusi</label>
                 <input type="text" class="form-control {{ $errors->has('institution_name') ? 'is-invalid' : '' }}"
                     name="institution_name" id="institution_name" value="{{ old('institution_name') }}">
                 @if ($errors->has('institution_name'))
@@ -38,9 +38,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="jenis_ipta" class="form-label">Type of Higher Education Institution</label>
+                <label for="jenis_ipta" class="form-label">Jenis Insitusi Pengajian Tinggi</label>
                 <select class="form-select {{ $errors->has('jenis_ipta') ? 'is-invalid' : '' }}" name="jenis_ipta" id="jenis_ipta">
-                    <option disabled {{ old('jenis_ipta') == '' ? 'selected' : '' }}>Select Type</option>
+                    <option disabled {{ old('jenis_ipta') == '' ? 'selected' : '' }}>Pilih Jenis</option>
                     @foreach (['University', 'University College', 'College', 'Teacher Training Institute', 'Polytechnic', 'Community College'] as $type)
                         <option value="{{ $type }}" {{ old('jenis_ipta') == $type ? 'selected' : '' }}>{{ $type }}</option>
                     @endforeach
@@ -55,7 +55,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
+                <label for="name" class="form-label">Nama Penuh</label>
                 <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
                     name="name" value="{{ old('name') }}">
                 @if ($errors->has('name'))
@@ -68,7 +68,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="ic_no" class="form-label">IC. No / Passport / KTP</label>
+                <label for="ic_no" class="form-label">No. Kad Pengenalan / Passport / KTP</label>
                 <input type="text" class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
                     name="ic_no" value="{{ old('ic_no') }}">
                 @if ($errors->has('ic_no'))
@@ -81,7 +81,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
+                <label for="email" class="form-label">Alamat Emel</label>
                 <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
                     name="email" value="{{ old('email') }}">
                 @if ($errors->has('email'))
@@ -94,7 +94,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="phone_no" class="form-label">Phone Number</label>
+                <label for="phone_no" class="form-label">No. Telefon</label>
                 <input type="number" class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
                     id="phone_no" name="phone_no" value="{{ old('phone_no') }}">
                 @if ($errors->has('phone_no'))
@@ -107,7 +107,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="position" class="form-label">Position</label>
+                <label for="position" class="form-label">Jawatan</label>
                 <input type="text" class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" id="position"
                     name="position" value="{{ old('position') }}">
                 @if ($errors->has('position'))
@@ -120,7 +120,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">User Role</label>
+                <label class="form-label">Peranan Pengguna</label>
                 <div>
                     @foreach ($roles as $role)
                     <div class="form-check">

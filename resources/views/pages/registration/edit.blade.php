@@ -158,12 +158,11 @@
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-select">
-                        <option value="Pending Approval"
-                            {{ $registration->status == 'Pending Approval' ? 'selected' : '' }}>Submitted &
-                            Waiting for Approval</option>
-                        <option value="approved" {{ $registration->status == 'approved' ? 'selected' : '' }}>Approved
+                        <option value="Menunggu Kelulusan"
+                            {{ $registration->status == 'Menunggu Kelulusan' ? 'selected' : '' }}>Menunggu Kelulusan</option>
+                        <option value="Diluluskan" {{ $registration->status == 'Diluluskan' ? 'selected' : '' }}>Diluluskan
                         </option>
-                        <option value="rejected" {{ $registration->status == 'rejected' ? 'selected' : '' }}>Rejected
+                        <option value="Dibatalkan" {{ $registration->status == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan
                         </option>
                     </select>
                 </div>

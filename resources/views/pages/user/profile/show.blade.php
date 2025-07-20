@@ -38,7 +38,7 @@
                                 <!-- User Name and Position -->
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <h5 class="mt-3">{{ $user->name }}</h5>
-                                    <p class="text-muted">{{ $user->position->title ?? 'Position' }}</p>
+                                    <p class="text-muted">{{ $user->position ?? '-' }}</p>
                                     <!-- Button Group (Horizontal) -->
                                     <div class="d-flex gap-2 justify-content-center">
                                         <a href="{{ route('profile.edit', ['id' => $user->id]) }}"

@@ -19,7 +19,7 @@ class CreateRegistrationsTable extends Migration
             $table->string('group_name');
             $table->string('traditional_dance_name');
             $table->string('creative_dance_name');
-            $table->string('koreografer_name');
+            $table->string('koreografer_name')->nullable();;
             $table->string('assistant_koreografer_name')->nullable();
             $table->text('address');
             $table->text('sinopsis_traditional');

@@ -31,7 +31,7 @@ class RegistrationStatusUpdated extends Notification
             ->line('Pendaftaran anda untuk "' . $this->registration->group_name . '" telah ' . $this->registration->status . '.')
             ->line('Catatan daripada Admin: ' . ($this->registration->remarks_checker ?? '-'))
             ->action('Papar Maklumat', url(route('registration.view', $this->registration->id))) // adjust route name
-            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
+            ->salutation("Terima kasih.");
     }
 
     /**

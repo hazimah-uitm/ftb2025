@@ -54,22 +54,17 @@
                                 {{ method_field('put') }}
 
                                 @php
-                                    $isPemilik = auth()->user()->hasRole('pemilik');
-                                    $canEditAll = auth()
-                                        ->user()
-                                        ->hasAnyRole(['Superadmin', 'Admin', 'Pegawai Penyemak']);
+                                    $userRole = auth()->user();
+                                    $isPesertaAtauAdmin = $userRole->hasAnyRole(['Peserta', 'Admin']);
+                                    $isSuperadmin = $userRole->hasRole('Superadmin');
                                 @endphp
 
                                 <!-- Name Field -->
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nama</label>
-                                    <input type="text"
-                                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
-                                        name="name" value="{{ $user->name }}"
-                                        {{ $canEditAll || $isPemilik ? '' : 'disabled' }}>
-                                    @if (!($canEditAll || $isPemilik))
-                                        <input type="hidden" name="name" value="{{ $user->name }}">
-                                    @endif
+                                    <input type="text" name="name" id="name"
+                                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                        value="{{ old('name', $user->name) }}" {{ $isSuperadmin ? '' : 'readonly' }}>
                                     @if ($errors->has('name'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('name') as $error)
@@ -82,13 +77,9 @@
                                 <!-- Email Field -->
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Alamat Emel</label>
-                                    <input type="email"
-                                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
-                                        name="email" value="{{ $user->email }}"
-                                        {{ $canEditAll || $isPemilik ? '' : 'disabled' }}>
-                                    @if (!($canEditAll || $isPemilik))
-                                        <input type="hidden" name="email" value="{{ $user->email }}">
-                                    @endif
+                                    <input type="email" name="email" id="email"
+                                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                        value="{{ old('email', $user->email) }}" {{ $isSuperadmin ? '' : 'readonly' }}>
                                     @if ($errors->has('email'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('email') as $error)
@@ -100,10 +91,10 @@
 
                                 <!-- Staff ID Field -->
                                 <div class="mb-3">
-                                    <label for="ic_no" class="form-label">IC. No / Passport / KTP</label>
-                                    <input type="text"
-                                        class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}" id="ic_no"
-                                        name="ic_no" value="{{ old('ic_no') ?? ($user->ic_no ?? '') }}">
+                                    <label for="ic_no" class="form-label">No. Kad Pengenalan / Passport / KTP</label>
+                                    <input type="text" name="ic_no" id="ic_no"
+                                        class="form-control {{ $errors->has('ic_no') ? 'is-invalid' : '' }}"
+                                        value="{{ old('ic_no', $user->ic_no) }}" {{ $isSuperadmin ? '' : 'readonly' }}>
                                     @if ($errors->has('ic_no'))
                                         <div class="invalid-feedback">
                                             @foreach ($errors->get('ic_no') as $error)
@@ -131,7 +122,7 @@
 
                                 <!-- Office Phone Field -->
                                 <div class="mb-3">
-                                    <label for="phone_no" class="form-label">Phone Number</label>
+                                    <label for="phone_no" class="form-label">No. Tel</label>
                                     <input type="number"
                                         class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
                                         id="phone_no" name="phone_no"
@@ -145,8 +136,7 @@
                                     @endif
                                 </div>
 
-                                <button type="submit" class="btn btn-primary"
-                                    {{ $isPemilik ? 'disabled' : '' }}>Simpan</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
 
                             </div>
                         </form>

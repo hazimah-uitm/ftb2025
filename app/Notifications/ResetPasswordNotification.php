@@ -52,7 +52,7 @@ class ResetPasswordNotification extends Notification
                 'type' => $actionType 
             ], false)))
             ->line('Sila abaikan emel ini jika anda tidak membuat permohonan reset kata laluan.')
-            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
+            ->salutation("Terima kasih.");
     
         return $mailMessage;
     }

@@ -15,8 +15,8 @@ class CreateEscortOfficersTable extends Migration
     {
         Schema::create('escort_officers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('registration_id');
-            $table->string('name');
+            $table->unsignedBigInteger('registration_id')->nullable();
+            $table->string('name')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

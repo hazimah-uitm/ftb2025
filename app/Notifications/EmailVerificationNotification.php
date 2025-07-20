@@ -33,6 +33,6 @@ class EmailVerificationNotification extends Notification
             ->line('Sila klik pautan di bawah untuk mengesahkan akaun anda:')
             ->action('Sahkan Emel', $verificationUrl)
             ->line('Jika anda tidak membuat pendaftaran, abaikan emel ini.')
-            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
+            ->salutation("Terima kasih.");
     }
 }

@@ -30,7 +30,7 @@ class NewRegistrationSubmitted extends Notification
             ->line('Satu penyertaan baharu telah dihantar oleh ' . $this->registration->user->institution_name)
             ->line('Nama Kumpulan: ' . $this->registration->group_name)
             ->action('Papar Maklumat', url(route('registration.view', $this->registration->id)))
-            ->salutation("Terima kasih,\nFestival Tari Borneo 2025");
+            ->salutation("Terima kasih.");
     }
 
     /**

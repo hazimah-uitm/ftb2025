@@ -24,7 +24,7 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web',
             ],
             [
-                'name' => 'Participant',
+                'name' => 'Peserta',
                 'publish_status' => true,
                 'guard_name' => 'web',
             ],

@@ -18,7 +18,7 @@ class CreateGroupMembersTable extends Migration
             $table->unsignedBigInteger('registration_id');
             $table->string('name');
             $table->string('ic_no');
-            $table->string('student_id');
+            $table->string('student_id')->nullable();
             $table->string('peranan');
             $table->string('jantina');
             $table->string('saiz_baju');

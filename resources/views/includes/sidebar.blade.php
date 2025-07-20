@@ -22,7 +22,7 @@
         $registration = \App\Models\Registration::where('user_id', auth()->id())->first();
     @endphp
 
-    @role('Participant')
+    @role('Peserta')
         @if ($registration)
             <li class="{{ request()->routeIs('registration.view') ? 'mm-active' : '' }}">
                 <a href="{{ route('registration.view', $registration->id) }}">

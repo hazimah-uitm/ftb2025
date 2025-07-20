@@ -25,7 +25,7 @@
                         <div class="card-body d-flex align-items-center">
                             <i class="bx bx-user-circle fs-1 text-primary me-3"></i>
                             <div>
-                                <h6 class="mb-1 text-muted">Jumlah Pendaftaran</h6>
+                                <h6 class="mb-1 text-muted">Jumlah Penyertaan</h6>
                                 <h4 class="fw-bold text-primary mb-0">{{ $totalRegistrations }}</h4>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <div class="card-body d-flex align-items-center">
                             <i class="bx bx-check-circle fs-1 text-success me-3"></i>
                             <div>
-                                <h6 class="mb-1 text-muted">Pendaftaran Diluluskan</h6>
+                                <h6 class="mb-1 text-muted">Penyertaan Diluluskan</h6>
                                 <h4 class="fw-bold text-success mb-0">{{ $approvedRegistrations }}</h4>
                             </div>
                         </div>
@@ -69,13 +69,13 @@
                     <div class="d-flex align-items-start">
                         <i class="bx bx-cog fs-4 text-info me-3"></i>
                         <div>
-                            <div class="fw-semibold">Pengurusan Permohonan</div>
+                            <div class="fw-semibold">Pengurusan Penyertaan</div>
                             <small class="text-muted">Papar dan urus pendaftaran peserta</small>
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
                         <a href="{{ route('registration') }}" class="btn btn-sm btn-info">
-                            <i class="bx bx-list-check me-1"></i> Pengurusan Permohonan
+                            <i class="bx bx-list-check me-1"></i> Pengurusan Penyertaan
                         </a>
                     </div>
                 </div>
@@ -123,10 +123,10 @@
                                     </a>.
                                 </li>
                                 <li>
-                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat pengisytiharan,
+                                    Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat akuan pertandingan,
                                     selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
                                 </li>
-                                <li>Hubungi:
+                                <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
                                     <ul class="mb-0">
                                         <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 /
                                             <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a>
@@ -150,9 +150,9 @@
                     <div class="card border-start border-4 border-success shadow-sm h-100"
                         style="background: linear-gradient(135deg, #e6fff5, #ffffff);">
                         <div class="card-body d-flex align-items-center">
-                            <i class="bx bx-check-circle fs-1 text-success me-3"></i>
+                            <i class="bx bx-group fs-1 text-success me-3"></i>
                             <div>
-                                <h6 class="mb-1 text-muted">Pendaftaran Diluluskan</h6>
+                                <h6 class="mb-1 text-muted">Jumlah Penyertaan Semasa</h6>
                                 <h4 class="fw-bold text-success mb-0">{{ $approvedRegistrations }}</h4>
                             </div>
                         </div>
@@ -170,9 +170,9 @@
                                     <div class="fw-semibold">Status Penyertaan</div>
                                     @if ($registration)
                                         <p class="mb-2 small"><strong>Status:</strong>
-                                            @if ($registration->status == 'Approved')
+                                            @if ($registration->status == 'Diluluskan')
                                                 <span class="badge bg-success">Diluluskan</span>
-                                            @elseif ($registration->status == 'Rejected')
+                                            @elseif ($registration->status == 'Dibatalkan')
                                                 <span class="badge bg-danger">Dibatalkan</span>
                                             @else
                                                 <span class="badge bg-warningxt-primary">Menunggu Kelulusan</span>
@@ -243,10 +243,10 @@
                                 </li>
                                 <li>
                                     Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat
-                                    pengisytiharan,
+                                    akuan pertandingan,
                                     selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
                                 </li>
-                                <li>Hubungi:
+                                <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
                                     <ul class="mb-0">
                                         <li><strong>Cik Melinda Anak Jindu</strong> – 082 678 059 /
                                             <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a>

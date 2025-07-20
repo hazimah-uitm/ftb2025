@@ -226,7 +226,7 @@ class UserController extends Controller
         $user->email_verified_at = null;
         $user->save();
 
-        $user->assignRole('Participant');
+        $user->assignRole('Peserta');
 
         $token = Str::random(40);
 
@@ -261,7 +261,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->forceDelete();
 
         return redirect()->route('user')->with('success', 'Maklumat berjaya dihapuskan');
     }

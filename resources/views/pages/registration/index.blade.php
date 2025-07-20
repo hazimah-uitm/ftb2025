@@ -2,26 +2,26 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Participation Management</div>
+        <div class="breadcrumb-title pe-3">Pengurusan Penyertaan</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Participation List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Senarai Penyertaan</li>
                 </ol>
             </nav>
         </div>
-        @role('Superadmin')
+        {{-- @role('Superadmin')
             <div class="ms-auto">
                 <a href="{{ route('registration.trash') }}">
-                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Deleted Record List</button>
+                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Senarai Rekod Dipadam</button>
                 </a>
             </div>
-        @endrole
+        @endrole --}}
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">Participation List</h6>
+    <h6 class="mb-0 text-uppercase">Senarai Penyertaan</h6>
     <hr />
     <div class="card">
         <div class="card-body">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="ms-auto">
                     <a href="{{ route('registration.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0">
-                        <i class="bx bxs-plus-square"></i> Register
+                        <i class="bx bxs-plus-square"></i> Daftar
                     </a>
                 </div>
             </div>
@@ -54,12 +54,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Institution Name</th>
-                            <th>Group Name</th>
-                            <th>Name</th>
-                            <th>Phone No.</th>
+                            <th>Nama Institusi</th>
+                            <th>Nama Kumpulan</th>
+                            <th>Nama</th>
+                            <th>No. Telefon</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Tindakan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,12 +73,12 @@
                                     <td>{{ $registration->user->name ?? '-' }}</td>
                                     <td>{{ $registration->user->phone_no ?? '-' }}</td>
                                     <td>
-                                        @if ($registration->status == 'Approved')
-                                            <span class="badge bg-success">Approved</span>
-                                        @elseif ($registration->status == 'Rejected')
-                                            <span class="badge bg-danger">Rejected</span>
+                                        @if ($registration->status == 'Diluluskan')
+                                            <span class="badge bg-success">Diluluskan</span>
+                                        @elseif ($registration->status == 'Dibatalkan')
+                                            <span class="badge bg-danger">Dibatalkan</span>
                                         @else
-                                            <span class="badge bg-warning">Pending Approval</span>
+                                            <span class="badge bg-warning">Menunggu Kelulusan</span>
                                         @endif
                                     </td>
                                     <td>
@@ -91,11 +91,11 @@
                                                 class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
                                             </a>
-                                            @if ($registration->status == 'Pending Approval')
+                                            @if ($registration->status == 'Menunggu Kelulusan')
                                                 <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#approvalModal{{ $registration->id }}"><i
                                                         class='bx bx-check-circle'></i>
-                                                    Approval
+                                                    Semak
                                                 </button>
                                             @endif
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -108,7 +108,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="7">No record</td>
+                                <td colspan="7">Tiada rekod</td>
                             </tr>
                         @endif
                     </tbody>
@@ -186,51 +186,41 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Participation Approval: {{ $registration->user->institution_name }}</h5>
+                        <h5 class="modal-title">Kelulusan Penyertaan: {{ $registration->user->institution_name }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table table-sm table-striped table-borderless mb-3">
                             <tr>
-                                <th>Institution Name</th>
+                                <th>Nama Institusi</th>
                                 <td>{{ $registration->user->institution_name }}</td>
                             </tr>
                             <tr>
-                                <th>Group Name</th>
+                                <th>Nama Kumpulan</th>
                                 <td>{{ $registration->group_name }}</td>
                             </tr>
                             <tr>
-                                <th>Traditional Dance Name</th>
+                                <th>Nama Tarian Tradisional Etnik Borneo</th>
                                 <td>{{ $registration->traditional_dance_name }}</td>
                             </tr>
                             <tr>
-                                <th>Creative Dance Name</th>
+                                <th>Nama Tarian Kreatif Etnik Borneo</th>
                                 <td>{{ $registration->creative_dance_name }}</td>
                             </tr>
                             <tr>
-                                <th>Address</th>
+                                <th>Alamat Emel</th>
                                 <td>{!! nl2br(e($registration->address)) !!}</td>
                             </tr>
                             <tr>
-                                <th>Phone</th>
+                                <th>No. Telefon</th>
                                 <td>{{ $registration->user->phone_no ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Email</th>
+                                <th>Emel</th>
                                 <td>{{ $registration->user->email ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <th>Escort Officers</th>
-                                <td>
-                                    @if ($registration->escortOfficers && $registration->escortOfficers->count())
-                                        @foreach ($registration->escortOfficers as $index => $officer)
-                                            {{ $officer->name }}<br>
-                                        @endforeach
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Shared Folder</th>
+                                <th>Pautan Google Drive</th>
                                 <td>
                                     @if (!empty($registration->doc_link))
                                         <a href="{{ $registration->doc_link }}" target="_blank">
@@ -245,15 +235,15 @@
                             @if ($registration->payments && $registration->payments->count())
                                 @foreach ($registration->payments as $payment)
                                     <tr>
-                                        <th style="width: 30%">Payment Method</th>
+                                        <th style="width: 30%">Kaedah Pembayaran</th>
                                         <td>{{ $payment->payment_type }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Payment Date</th>
+                                        <th>Tarikh Bayaran</th>
                                         <td>{{ $payment->date }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Proof of Payment</th>
+                                        <th>Bukti Pembayaran</th>
                                         <td>
                                             @if ($payment->payment_file)
                                                 <a href="{{ asset('public/storage/' . $payment->payment_file) }}"
@@ -269,10 +259,10 @@
                                 @endforeach
                             @endif
                             <tr>
-                                <th>Submitted at</th>
+                                <th>Dihantar pada</th>
                                 <td>
                                     {{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
-                                    by {{ $registration->submitter->name ?? '-' }}
+                                    oleh {{ $registration->submitter->name ?? '-' }}
                                 </td>
                             </tr>
                         </table>
@@ -282,20 +272,20 @@
                         <form method="POST" action="{{ route('registration.approval', $registration->id) }}">
                             {{ csrf_field() }}
                             <div class="mb-3">
-                                <label for="status" class="form-label">Approval Status</label>
+                                <label for="status" class="form-label">Status Kelulusan</label>
                                 <select name="status" class="form-select" required>
-                                    <option value="">Select Approval Status</option>
-                                    <option value="Approved">Approved</option>
-                                    <option value="Rejected">Rejected</option>
+                                    <option value="">Pilih Status Kelulusan</option>
+                                    <option value="Diluluskan">Diluluskan</option>
+                                    <option value="Dibatalkan">Dibatalkan</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="remarks_checker" class="form-label">Checker's Remarks</label>
+                                <label for="remarks_checker" class="form-label">Catatan Admin</label>
                                 <textarea name="remarks_checker" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-success">Hantar</button>
                             </div>
                         </form>
                     </div>
