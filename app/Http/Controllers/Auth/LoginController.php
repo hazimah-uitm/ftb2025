@@ -114,7 +114,7 @@ class LoginController extends Controller
 
         if (!$user) {
             return back()->withErrors([
-                'email' => 'Emel anda tidak didaftarkan dalam sistem. Sila hubungi moderator (Hazimah - 082678118).'
+                'email' => 'Emel anda tidak didaftarkan dalam sistem. Sila hubungi moderator (Hazimah - +6082678118).'
             ]);
         }
 
