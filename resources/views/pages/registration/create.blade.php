@@ -230,283 +230,176 @@
                     </div>
 
                     <div id="members-container">
-                        <div class="card mb-3 member-item">
-                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
-                                <span class="fw-semibold">Ahli <span class="member-number">1</span></span>
-                                <!-- This Remove button is hidden for the first member -->
-                                <button type="button" class="btn btn-danger btn-sm remove-member d-none">
-                                    <i class="bx bx-trash"></i> Padam
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle" id="members-table">
+                                <thead class="table-light text-center">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama Penuh</th>
+                                        <th>No. KP / Passport</th>
+                                        <th>No. Matrik</th>
+                                        <th>Peranan</th>
+                                        <th>Jantina</th>
+                                        <th>Saiz Baju</th>
+                                        <th>Padam</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @php
-                                        $authUser = auth()->user();
+                                        $members = old('members') ?? [
+                                            [
+                                                'name' => auth()->user()->name,
+                                                'ic_no' => auth()->user()->ic_no,
+                                                'student_id' => '',
+                                                'peranan' => '',
+                                                'jantina' => '',
+                                                'saiz_baju' => '',
+                                            ],
+                                        ];
                                     @endphp
 
-                                    <div class="col-md-4">
-                                        <label class="form-label">Nama Penuh</label>
-                                        <input type="text" name="members[0][name]"
-                                            class="form-control {{ $errors->has('members.0.name') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.0.name', $authUser->name ?? '') }}">
-                                        @if ($errors->has('members.0.name'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.name') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">No. Kad Pengenalan / Passport / No. KTP</label>
-                                        <input type="text" name="members[0][ic_no]"
-                                            class="form-control {{ $errors->has('members.0.ic_no') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.0.ic_no', $authUser->ic_no ?? '') }}">
-                                        @if ($errors->has('members.0.ic_no'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.ic_no') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">No. Matrik / Kad Pelajar</label>
-                                        <input type="text" name="members[0][student_id]"
-                                            class="form-control {{ $errors->has('members.0.student_id') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.0.student_id') }}">
-                                        @if ($errors->has('members.0.student_id'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.student_id') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Peranan</label>
-                                        <select name="members[0][peranan]"
-                                            class="form-select {{ $errors->has('members.0.peranan') ? 'is-invalid' : '' }}">
-                                            <option value="">Sila Pilih Peranan</option>
-                                            <option value="Penari"
-                                                {{ old('members.0.peranan') == 'Penari' ? 'selected' : '' }}>Penari
-                                            </option>
-                                            <option value="Kru"
-                                                {{ old('members.0.peranan') == 'Kru' ? 'selected' : '' }}>Kru</option>
-                                            <option value="Pegawai Pengiring"
-                                                {{ old('members.0.peranan') == 'Pegawai Pengiring' ? 'selected' : '' }}>
-                                                Pegawai Pengiring</option>
-                                            <option value="Koreografer"
-                                                {{ old('members.0.peranan') == 'Koreografer' ? 'selected' : '' }}>
-                                                Koreografer</option>
-                                            <option value="Pembantu Koreografer"
-                                                {{ old('members.0.peranan') == 'Pembantu Koreografer' ? 'selected' : '' }}>
-                                                Pembantu Koreografer</option>
-                                        </select>
-                                        @if ($errors->has('members.0.peranan'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.peranan') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Jantina</label>
-                                        <select name="members[0][jantina]"
-                                            class="form-select {{ $errors->has('members.0.jantina') ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih Jantina</option>
-                                            <option value="Lelaki"
-                                                {{ old('members.0.jantina') == 'Lelaki' ? 'selected' : '' }}>Lelaki
-                                            </option>
-                                            <option value="Perempuan"
-                                                {{ old('members.0.jantina') == 'Perempuan' ? 'selected' : '' }}>Perempuan
-                                            </option>
-                                        </select>
-                                        @if ($errors->has('members.0.jantina'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.jantina') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Saiz Baju</label>
-                                        <select name="members[0][saiz_baju]"
-                                            class="form-select {{ $errors->has('members.0.saiz_baju') ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih Saiz Baju</option>
-                                            <option value="S"
-                                                {{ old('members.0.saiz_baju') == 'S' ? 'selected' : '' }}>S</option>
-                                            <option value="M"
-                                                {{ old('members.0.saiz_baju') == 'M' ? 'selected' : '' }}>M</option>
-                                            <option value="L"
-                                                {{ old('members.0.saiz_baju') == 'L' ? 'selected' : '' }}>L</option>
-                                            <option value="XL"
-                                                {{ old('members.0.saiz_baju') == 'XL' ? 'selected' : '' }}>XL</option>
-                                            <option value="XXL"
-                                                {{ old('members.0.saiz_baju') == 'XXL' ? 'selected' : '' }}>XXL</option>
-                                        </select>
-                                        @if ($errors->has('members.0.saiz_baju'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.0.saiz_baju') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
+                                    @foreach ($members as $index => $member)
+                                        <tr class="member-row">
+                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][name]"
+                                                    class="form-control {{ $errors->has("members.$index.name") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.name", $member['name']) }}">
+                                                @if ($errors->has("members.$index.name"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.name") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][ic_no]"
+                                                    class="form-control {{ $errors->has("members.$index.ic_no") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.ic_no", $member['ic_no']) }}">
+                                                @if ($errors->has("members.$index.ic_no"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.ic_no") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][student_id]"
+                                                    class="form-control {{ $errors->has("members.$index.student_id") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.student_id", $member['student_id']) }}">
+                                                @if ($errors->has("members.$index.student_id"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.student_id") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][peranan]"
+                                                    class="form-select {{ $errors->has("members.$index.peranan") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
+                                                        <option value="{{ $role }}"
+                                                            {{ old("members.$index.peranan", $member['peranan']) == $role ? 'selected' : '' }}>
+                                                            {{ $role }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has("members.$index.peranan"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.peranan") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][jantina]"
+                                                    class="form-select {{ $errors->has("members.$index.jantina") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    <option value="Lelaki"
+                                                        {{ old("members.$index.jantina", $member['jantina']) == 'Lelaki' ? 'selected' : '' }}>
+                                                        Lelaki</option>
+                                                    <option value="Perempuan"
+                                                        {{ old("members.$index.jantina", $member['jantina']) == 'Perempuan' ? 'selected' : '' }}>
+                                                        Perempuan</option>
+                                                </select>
+                                                @if ($errors->has("members.$index.jantina"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.jantina") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][saiz_baju]"
+                                                    class="form-select {{ $errors->has("members.$index.saiz_baju") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $size)
+                                                        <option value="{{ $size }}"
+                                                            {{ old("members.$index.saiz_baju", $member['saiz_baju']) == $size ? 'selected' : '' }}>
+                                                            {{ $size }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has("members.$index.saiz_baju"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.saiz_baju") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($index > 0)
+                                                    <button type="button" class="btn btn-danger btn-sm remove-member">
+                                                        <i class="bx bx-trash"></i>
+                                                    </button>
+                                                @else
+                                                    –
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-
-                    <div class="d-flex justify-content-end mt-2">
-                        <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
-                            <i class="bx bx-plus"></i> Tambah Ahli
-                        </button>
+                        <div class="text-end mt-2">
+                            <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
+                                <i class="bx bx-plus"></i> Tambah Ahli
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Template for new members -->
-                    <template id="member-template">
-                        <div class="card mb-3 member-item">
-                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
-                                <span class="fw-semibold">Ahli <span class="member-number">__NO__</span></span>
+                    <template id="member-row-template">
+                        <tr class="member-row">
+                            <td class="text-center">__NO__</td>
+                            @foreach (['name', 'ic_no', 'student_id'] as $field)
+                                <td>
+                                    <input type="text" name="members[__INDEX__][{{ $field }}]"
+                                        class="form-control">
+                                </td>
+                            @endforeach
+                            <td>
+                                <select name="members[__INDEX__][peranan]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
+                                        <option value="{{ $role }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="members[__INDEX__][jantina]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    <option value="Lelaki">Lelaki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="members[__INDEX__][saiz_baju]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $s)
+                                        <option value="{{ $s }}">{{ $s }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm remove-member">
-                                    <i class="bx bx-trash"></i> Padam
+                                    <i class="bx bx-trash"></i>
                                 </button>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Nama Penuh</label>
-                                        <input type="text" name="members[__INDEX__][name]"
-                                            class="form-control {{ $errors->has('members.__INDEX__.name') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.__INDEX__.name') }}">
-                                        @if ($errors->has('members.__INDEX__.name'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.name') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">No. Kad Pengenalan / Passport / No. KTP</label>
-                                        <input type="text" name="members[__INDEX__][ic_no]"
-                                            class="form-control {{ $errors->has('members.__INDEX__.ic_no') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.__INDEX__.ic_no') }}">
-                                        @if ($errors->has('members.__INDEX__.ic_no'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.ic_no') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">ID Pelajar</label>
-                                        <input type="text" name="members[__INDEX__][student_id]"
-                                            class="form-control {{ $errors->has('members.__INDEX__.student_id') ? 'is-invalid' : '' }}"
-                                            value="{{ old('members.__INDEX__.student_id') }}">
-                                        @if ($errors->has('members.__INDEX__.student_id'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.student_id') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Peranan</label>
-                                        <select name="members[__INDEX__][peranan]"
-                                            class="form-select {{ $errors->has('members.__INDEX__.peranan') ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih</option>
-                                            <option value="Penari"
-                                                {{ old('members.__INDEX__.peranan') == 'Penari' ? 'selected' : '' }}>Penari
-                                            </option>
-                                            <option value="Kru"
-                                                {{ old('members.__INDEX__.peranan') == 'Kru' ? 'selected' : '' }}>Kru
-                                            </option>
-                                            <option value="Pegawai Pengiring"
-                                                {{ old('members.__INDEX__.peranan') == 'Pegawai Pengiring' ? 'selected' : '' }}>
-                                                Pegawai Pengiring</option>
-                                            <option value="Koreografer"
-                                                {{ old('members.__INDEX__.peranan') == 'Koreografer' ? 'selected' : '' }}>
-                                                Koreografer</option>
-                                            <option value="Pembantu Koreografer"
-                                                {{ old('members.__INDEX__.peranan') == 'Pembantu Koreografer' ? 'selected' : '' }}>
-                                                Pembantu Koreografer</option>
-                                        </select>
-                                        @if ($errors->has('members.__INDEX__.peranan'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.peranan') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Jantina</label>
-                                        <select name="members[__INDEX__][jantina]"
-                                            class="form-select {{ $errors->has('members.__INDEX__.jantina') ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih</option>
-                                            <option value="Lelaki"
-                                                {{ old('members.__INDEX__.jantina') == 'Lelaki' ? 'selected' : '' }}>Lelaki
-                                            </option>
-                                            <option value="Perempuan"
-                                                {{ old('members.__INDEX__.jantina') == 'Perempuan' ? 'selected' : '' }}>
-                                                Perempuan</option>
-                                        </select>
-                                        @if ($errors->has('members.__INDEX__.jantina'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.jantina') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Saiz Baju</label>
-                                        <select name="members[__INDEX__][saiz_baju]"
-                                            class="form-control {{ $errors->has('members.__INDEX__.saiz_baju') ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih Saiz</option>
-                                            <option value="S"
-                                                {{ old('members.__INDEX__.saiz_baju') == 'S' ? 'selected' : '' }}>S
-                                            </option>
-                                            <option value="M"
-                                                {{ old('members.__INDEX__.saiz_baju') == 'M' ? 'selected' : '' }}>M
-                                            </option>
-                                            <option value="L"
-                                                {{ old('members.__INDEX__.saiz_baju') == 'L' ? 'selected' : '' }}>L
-                                            </option>
-                                            <option value="XL"
-                                                {{ old('members.__INDEX__.saiz_baju') == 'XL' ? 'selected' : '' }}>XL
-                                            </option>
-                                            <option value="XXL"
-                                                {{ old('members.__INDEX__.saiz_baju') == 'XXL' ? 'selected' : '' }}>XXL
-                                            </option>
-                                        </select>
-
-                                        @if ($errors->has('members.__INDEX__.saiz_baju'))
-                                            <div class="invalid-feedback">
-                                                @foreach ($errors->get('members.__INDEX__.saiz_baju') as $error)
-                                                    {{ $error }}
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                     </template>
 
                     {{-- Payment --}}
@@ -669,126 +562,52 @@
         </div>
     </div>
     <!-- End Page Wrapper -->
-    <!-- End Page Wrapper -->
-    @if (old('members'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const oldMembers = @json(old('members'));
-                const container = document.getElementById('members-container');
-                const templateHtml = document.getElementById('member-template').innerHTML;
-
-                // Kosongkan semua yang dimount dari DB supaya guna old sahaja
-                container.innerHTML = '';
-
-                oldMembers.forEach((member, index) => {
-                    let html = templateHtml
-                        .replace(/__INDEX__/g, index)
-                        .replace(/__NO__/g, index + 1);
-
-                    const div = document.createElement('div');
-                    div.innerHTML = html;
-                    container.appendChild(div);
-
-                    // Isi semula value lama ke dalam field
-                    Object.keys(member).forEach((key) => {
-                        const input = div.querySelector(`[name="members[${index}][${key}]"]`);
-                        if (input) {
-                            if (input.tagName === 'SELECT') {
-                                [...input.options].forEach(opt => {
-                                    if (opt.value == member[key]) opt.selected = true;
-                                });
-                            } else {
-                                input.value = member[key];
-                            }
-                        }
-                    });
-                });
-
-                // Update nombor ahli
-                const updateNumbers = () => {
-                    const numbers = container.querySelectorAll('.member-number');
-                    numbers.forEach((el, idx) => {
-                        el.textContent = idx + 1;
-                    });
-                };
-                updateNumbers();
-            });
-        </script>
-    @endif
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const addBtn = document.getElementById('add-member-btn');
-            const container = document.getElementById('members-container');
-            const templateHtml = document.getElementById('member-template').innerHTML;
+            const tableBody = document.querySelector('#members-table tbody');
+            const rowTemplate = document.getElementById('member-row-template').innerHTML;
 
-            function updateMemberNumbers() {
-                const numbers = container.querySelectorAll('.member-number');
-                numbers.forEach((el, idx) => {
-                    el.textContent = idx + 1;
+            function updateNumbers() {
+                [...tableBody.querySelectorAll('tr')].forEach((tr, idx) => {
+                    tr.querySelector('td:first-child').textContent = idx + 1;
                 });
             }
 
-            function attachRemoveButtons() {
-                container.querySelectorAll('.remove-member').forEach(button => {
-                    button.removeEventListener('click', removeHandler);
-                    button.addEventListener('click', removeHandler);
-                });
-            }
+            function addRow(data = {}) {
+                const index = tableBody.querySelectorAll('tr').length;
+                let html = rowTemplate.replace(/__INDEX__/g, index).replace(/__NO__/g, index + 1);
 
-            function removeHandler(e) {
-                e.target.closest('.member-item').remove();
-                updateMemberNumbers();
-            }
+                const temp = document.createElement('tbody');
+                temp.innerHTML = html.trim();
+                const row = temp.firstElementChild;
 
-            function addMember(memberData = {}) {
-                const index = container.querySelectorAll('.member-item').length;
-                let html = templateHtml
-                    .replace(/__INDEX__/g, index)
-                    .replace(/__NO__/g, index + 1);
-
-                const div = document.createElement('div');
-                div.innerHTML = html;
-                container.appendChild(div);
-
-                // Set value if provided
-                Object.keys(memberData).forEach((key) => {
-                    const input = div.querySelector(`[name="members[${index}][${key}]"]`);
-                    if (input) {
-                        if (input.tagName === 'SELECT') {
-                            [...input.options].forEach(opt => {
-                                if (opt.value == memberData[key]) opt.selected = true;
-                            });
-                        } else {
-                            input.value = memberData[key];
-                        }
-                    }
+                // Fill data
+                Object.keys(data).forEach(key => {
+                    const input = row.querySelector(`[name="members[${index}][${key}]"]`);
+                    if (input) input.value = data[key];
                 });
 
-                updateMemberNumbers();
-                attachRemoveButtons();
+                tableBody.appendChild(row);
+                updateNumbers();
             }
 
-            // Initialize remove buttons if not using old
-            attachRemoveButtons();
+            // ✅ This ensures all `.remove-member` buttons (Blade + JS added) work
+            tableBody.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-member')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                    updateNumbers();
+                }
+            });
 
-            // Tambah ahli baru apabila klik
-            if (addBtn) {
-                addBtn.addEventListener('click', () => {
-                    const currentCount = container.querySelectorAll('.member-item').length;
-                    if (currentCount >= 25) {
-                        alert('Jumlah maksimum 25 ahli telah dicapai.');
-                        return;
-                    }
-                    addMember();
-                });
-            }
-
-            // Kalau guna old(members), tambah semula ahli
-            @if (old('members'))
-                const oldMembers = @json(old('members'));
-                container.innerHTML = '';
-                oldMembers.forEach(m => addMember(m));
-            @endif
+            addBtn.addEventListener('click', function() {
+                if (tableBody.querySelectorAll('tr').length >= 25) {
+                    alert('Jumlah maksimum 25 ahli telah dicapai.');
+                    return;
+                }
+                addRow();
+            });
         });
     </script>
 

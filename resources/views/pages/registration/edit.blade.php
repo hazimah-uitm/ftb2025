@@ -227,147 +227,188 @@
                     <h6 class="text-primary text-uppercase mb-0">Ahli Kumpulan <i>(Maksimum 25)</i></h6>
                     <div class="text-muted small ps-3 mt-2 mb-1">
                         <i class="bx bx-info-circle me-1"></i>
-                        Tidak lebih daripada <b>25 orang termasuk Pegawai Pengiring, Koreografer, Penari & Kru.</b><br>
+                        Tidak lebih daripada <b>25 orang termasuk Pegawai Pengiring, Koreografer, Penari & Kru.</b>
+                        <br>
+                        <i class="bx bx-info-circle me-1"></i>
                         Bilangan penari di atas pentas adalah <b>minimum 10 orang dan maksimum 14 orang.</b>
                     </div>
 
                     <div id="members-container">
-                        @foreach ($registration->members as $index => $member)
-                            <div class="card mb-3 member-item">
-                                <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
-                                    <span class="fw-semibold">Ahli <span
-                                            class="member-number">{{ $index + 1 }}</span></span>
-                                    <button type="button"
-                                        class="btn btn-danger btn-sm remove-member {{ $index == 0 ? 'd-none' : '' }}">
-                                        <i class="bx bx-trash"></i> Padam
-                                    </button>
-                                </div>
-                                <div class="card-body row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Nama Penuh</label>
-                                        <input type="text" name="members[{{ $index }}][name]"
-                                            class="form-control {{ $errors->has("members.$index.name") ? 'is-invalid' : '' }}"
-                                            value="{{ old("members.$index.name", $member->name) }}">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">No. Kad Pengenalan / Passport / No. KTP</label>
-                                        <input type="text" name="members[{{ $index }}][ic_no]"
-                                            class="form-control {{ $errors->has("members.$index.ic_no") ? 'is-invalid' : '' }}"
-                                            value="{{ old("members.$index.ic_no", $member->ic_no) }}">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">No. Matrik / Kad Pelajar</label>
-                                        <input type="text" name="members[{{ $index }}][student_id]"
-                                            class="form-control {{ $errors->has("members.$index.student_id") ? 'is-invalid' : '' }}"
-                                            value="{{ old("members.$index.student_id", $member->student_id) }}">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Peranan</label>
-                                        <select name="members[{{ $index }}][peranan]"
-                                            class="form-select {{ $errors->has("members.$index.peranan") ? 'is-invalid' : '' }}">
-                                            <option value="">Sila Pilih Peranan</option>
-                                            @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
-                                                <option value="{{ $role }}"
-                                                    {{ old("members.$index.peranan", $member->peranan) == $role ? 'selected' : '' }}>
-                                                    {{ $role }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Jantina</label>
-                                        <select name="members[{{ $index }}][jantina]"
-                                            class="form-select {{ $errors->has("members.$index.jantina") ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih Jantina</option>
-                                            <option value="Lelaki"
-                                                {{ old("members.$index.jantina", $member->jantina) == 'Lelaki' ? 'selected' : '' }}>
-                                                Lelaki
-                                            </option>
-                                            <option value="Perempuan"
-                                                {{ old("members.$index.jantina", $member->jantina) == 'Perempuan' ? 'selected' : '' }}>
-                                                Perempuan
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Saiz Baju</label>
-                                        <select name="members[{{ $index }}][saiz_baju]"
-                                            class="form-select {{ $errors->has("members.$index.saiz_baju") ? 'is-invalid' : '' }}">
-                                            <option value="">Pilih Saiz Baju</option>
-                                            @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $size)
-                                                <option value="{{ $size }}"
-                                                    {{ old("members.$index.saiz_baju", $member->saiz_baju) == $size ? 'selected' : '' }}>
-                                                    {{ $size }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle" id="members-table">
+                                <thead class="table-light text-center">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama Penuh</th>
+                                        <th>No. KP / Passport</th>
+                                        <th>No. Matrik</th>
+                                        <th>Peranan</th>
+                                        <th>Jantina</th>
+                                        <th>Saiz Baju</th>
+                                        <th>Padam</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $members =
+                                            old('members') ??
+                                            $registration->members
+                                                ->map(function ($m) {
+                                                    return [
+                                                        'name' => $m->name,
+                                                        'ic_no' => $m->ic_no,
+                                                        'student_id' => $m->student_id,
+                                                        'peranan' => $m->peranan,
+                                                        'jantina' => $m->jantina,
+                                                        'saiz_baju' => $m->saiz_baju,
+                                                    ];
+                                                })
+                                                ->toArray();
+                                    @endphp
 
-                    <div class="d-flex justify-content-end mt-2">
-                        <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
-                            <i class="bx bx-plus"></i> Tambah Ahli
-                        </button>
-                    </div>
-
-                    <template id="member-template">
-                        <div class="card mb-3 member-item">
-                            <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
-                                <span class="fw-semibold">Ahli <span class="member-number">__NO__</span></span>
-                                <button type="button" class="btn btn-danger btn-sm remove-member">
-                                    <i class="bx bx-trash"></i> Padam
-                                </button>
-                            </div>
-                            <div class="card-body row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">Nama Penuh</label>
-                                    <input type="text" name="members[__INDEX__][name]" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">No. Kad Pengenalan / Passport / No. KTP</label>
-                                    <input type="text" name="members[__INDEX__][ic_no]" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">No. Matrik / Kad Pelajar</label>
-                                    <input type="text" name="members[__INDEX__][student_id]" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Peranan</label>
-                                    <select name="members[__INDEX__][peranan]" class="form-select">
-                                        <option value="">Sila Pilih Peranan</option>
-                                        <option value="Penari">Penari</option>
-                                        <option value="Kru">Kru</option>
-                                        <option value="Pegawai Pengiring">Pegawai Pengiring</option>
-                                        <option value="Koreografer">Koreografer</option>
-                                        <option value="Pembantu Koreografer">Pembantu Koreografer</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Jantina</label>
-                                    <select name="members[__INDEX__][jantina]" class="form-select">
-                                        <option value="">Pilih Jantina</option>
-                                        <option value="Lelaki">Lelaki</option>
-                                        <option value="Perempuan">Perempuan</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Saiz Baju</label>
-                                    <select name="members[__INDEX__][saiz_baju]" class="form-select">
-                                        <option value="">Pilih Saiz</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                        <option value="XXL">XXL</option>
-                                    </select>
-                                </div>
-                            </div>
+                                    @foreach ($members as $index => $member)
+                                        <tr class="member-row">
+                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][name]"
+                                                    class="form-control {{ $errors->has("members.$index.name") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.name", $member['name']) }}">
+                                                @if ($errors->has("members.$index.name"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.name") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][ic_no]"
+                                                    class="form-control {{ $errors->has("members.$index.ic_no") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.ic_no", $member['ic_no']) }}">
+                                                @if ($errors->has("members.$index.ic_no"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.ic_no") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" name="members[{{ $index }}][student_id]"
+                                                    class="form-control {{ $errors->has("members.$index.student_id") ? 'is-invalid' : '' }}"
+                                                    value="{{ old("members.$index.student_id", $member['student_id']) }}">
+                                                @if ($errors->has("members.$index.student_id"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.student_id") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][peranan]"
+                                                    class="form-select {{ $errors->has("members.$index.peranan") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
+                                                        <option value="{{ $role }}"
+                                                            {{ old("members.$index.peranan", $member['peranan']) == $role ? 'selected' : '' }}>
+                                                            {{ $role }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has("members.$index.peranan"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.peranan") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][jantina]"
+                                                    class="form-select {{ $errors->has("members.$index.jantina") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    <option value="Lelaki"
+                                                        {{ old("members.$index.jantina", $member['jantina']) == 'Lelaki' ? 'selected' : '' }}>
+                                                        Lelaki</option>
+                                                    <option value="Perempuan"
+                                                        {{ old("members.$index.jantina", $member['jantina']) == 'Perempuan' ? 'selected' : '' }}>
+                                                        Perempuan</option>
+                                                </select>
+                                                @if ($errors->has("members.$index.jantina"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.jantina") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select name="members[{{ $index }}][saiz_baju]"
+                                                    class="form-select {{ $errors->has("members.$index.saiz_baju") ? 'is-invalid' : '' }}">
+                                                    <option value="">Pilih</option>
+                                                    @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $size)
+                                                        <option value="{{ $size }}"
+                                                            {{ old("members.$index.saiz_baju", $member['saiz_baju']) == $size ? 'selected' : '' }}>
+                                                            {{ $size }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has("members.$index.saiz_baju"))
+                                                    <div class="invalid-feedback d-block">
+                                                        {{ $errors->first("members.$index.saiz_baju") }}
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($index > 0)
+                                                    <button type="button" class="btn btn-danger btn-sm remove-member">
+                                                        <i class="bx bx-trash"></i>
+                                                    </button>
+                                                @else
+                                                    –
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </template>
+                        <div class="text-end mt-2">
+                            <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
+                                <i class="bx bx-plus"></i> Tambah Ahli
+                            </button>
+                        </div>
+                    </div>
 
+                    <!-- Template for new members -->
+                    <template id="member-row-template">
+                        <tr class="member-row">
+                            <td class="text-center">__NO__</td>
+                            @foreach (['name', 'ic_no', 'student_id'] as $field)
+                                <td>
+                                    <input type="text" name="members[__INDEX__][{{ $field }}]"
+                                        class="form-control">
+                                </td>
+                            @endforeach
+                            <td>
+                                <select name="members[__INDEX__][peranan]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
+                                        <option value="{{ $role }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="members[__INDEX__][jantina]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    <option value="Lelaki">Lelaki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="members[__INDEX__][saiz_baju]" class="form-select">
+                                    <option value="">Pilih</option>
+                                    @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $s)
+                                        <option value="{{ $s }}">{{ $s }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger btn-sm remove-member">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
 
                     {{-- Payment --}}
                     <hr class="my-2">
@@ -412,118 +453,53 @@
         </div>
     </div>
     <!-- End Page Wrapper -->
-    @if (old('members'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const oldMembers = @json(old('members'));
-                const container = document.getElementById('members-container');
-                const templateHtml = document.getElementById('member-template').innerHTML;
 
-                // Kosongkan semua yang dimount dari DB supaya guna old sahaja
-                container.innerHTML = '';
-
-                oldMembers.forEach((member, index) => {
-                    let html = templateHtml
-                        .replace(/__INDEX__/g, index)
-                        .replace(/__NO__/g, index + 1);
-
-                    const div = document.createElement('div');
-                    div.innerHTML = html;
-                    container.appendChild(div);
-
-                    // Isi semula value lama ke dalam field
-                    Object.keys(member).forEach((key) => {
-                        const input = div.querySelector(`[name="members[${index}][${key}]"]`);
-                        if (input) {
-                            if (input.tagName === 'SELECT') {
-                                [...input.options].forEach(opt => {
-                                    if (opt.value == member[key]) opt.selected = true;
-                                });
-                            } else {
-                                input.value = member[key];
-                            }
-                        }
-                    });
-                });
-
-                // Update nombor ahli
-                const updateNumbers = () => {
-                    const numbers = container.querySelectorAll('.member-number');
-                    numbers.forEach((el, idx) => {
-                        el.textContent = idx + 1;
-                    });
-                };
-                updateNumbers();
-            });
-        </script>
-    @endif
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const addBtn = document.getElementById('add-member-btn');
-            const container = document.getElementById('members-container');
-            const templateHtml = document.getElementById('member-template').innerHTML;
+            const tableBody = document.querySelector('#members-table tbody');
+            const rowTemplate = document.getElementById('member-row-template').innerHTML;
 
-            function updateMemberNumbers() {
-                const numbers = container.querySelectorAll('.member-number');
-                numbers.forEach((el, idx) => {
-                    el.textContent = idx + 1;
+            function updateNumbers() {
+                [...tableBody.querySelectorAll('tr')].forEach((tr, idx) => {
+                    tr.querySelector('td:first-child').textContent = idx + 1;
                 });
             }
 
-            function attachRemoveButtons() {
-                container.querySelectorAll('.remove-member').forEach(button => {
-                    button.removeEventListener('click', removeHandler);
-                    button.addEventListener('click', removeHandler);
-                });
-            }
+            function addRow(data = {}) {
+                const index = tableBody.querySelectorAll('tr').length;
+                let html = rowTemplate.replace(/__INDEX__/g, index).replace(/__NO__/g, index + 1);
 
-            function removeHandler(e) {
-                e.target.closest('.member-item').remove();
-                updateMemberNumbers();
-            }
+                const temp = document.createElement('tbody');
+                temp.innerHTML = html.trim();
+                const row = temp.firstElementChild;
 
-            function addMember(memberData = {}) {
-                const index = container.querySelectorAll('.member-item').length;
-                let html = templateHtml
-                    .replace(/__INDEX__/g, index)
-                    .replace(/__NO__/g, index + 1);
-
-                const div = document.createElement('div');
-                div.innerHTML = html;
-                container.appendChild(div);
-
-                // Set value if provided
-                Object.keys(memberData).forEach((key) => {
-                    const input = div.querySelector(`[name="members[${index}][${key}]"]`);
-                    if (input) {
-                        if (input.tagName === 'SELECT') {
-                            [...input.options].forEach(opt => {
-                                if (opt.value == memberData[key]) opt.selected = true;
-                            });
-                        } else {
-                            input.value = memberData[key];
-                        }
-                    }
+                // Fill data
+                Object.keys(data).forEach(key => {
+                    const input = row.querySelector(`[name="members[${index}][${key}]"]`);
+                    if (input) input.value = data[key];
                 });
 
-                updateMemberNumbers();
-                attachRemoveButtons();
+                tableBody.appendChild(row);
+                updateNumbers();
             }
 
-            // Initialize remove buttons if not using old
-            attachRemoveButtons();
+            // Delegated event for delete button
+            tableBody.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-member')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+                    updateNumbers();
+                }
+            });
 
-            // Tambah ahli baru apabila klik
-            if (addBtn) {
-                addBtn.addEventListener('click', () => addMember());
-            }
-
-            // Kalau guna old(members), tambah semula ahli
-            @if (old('members'))
-                const oldMembers = @json(old('members'));
-                container.innerHTML = '';
-                oldMembers.forEach(m => addMember(m));
-            @endif
+            addBtn.addEventListener('click', function() {
+                if (tableBody.querySelectorAll('tr').length >= 25) {
+                    alert('Jumlah maksimum 25 ahli telah dicapai.');
+                    return;
+                }
+                addRow();
+            });
         });
     </script>
 
