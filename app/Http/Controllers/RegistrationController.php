@@ -6,6 +6,7 @@ use App\Models\Registration;
 use App\Models\User;
 use App\Notifications\NewRegistrationSubmitted;
 use App\Notifications\RegistrationStatusUpdated;
+use App\Notifications\UpdatedRegistrationInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -196,13 +197,16 @@ class RegistrationController extends Controller
 
     public function edit($id)
     {
-        $registration = Registration::findOrFail($id);
+        $registration = Registration::with(['user', 'members', 'payments'])->findOrFail($id);
 
         return view('pages.registration.edit', [
             'save_route' => route('registration.update', $id),
             'str_mode' => 'Kemas Kini',
             'registration' => $registration,
             'user_id' => $registration->user_id,
+            'institution_name' => $registration->user->institution_name,
+            'email' => $registration->user->email,
+            'phone_no' => $registration->user->phone_no,
         ]);
     }
 
@@ -218,6 +222,13 @@ class RegistrationController extends Controller
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
             'doc_link' => 'nullable|string|max:255',
+            'members' => 'required|array|min:1',
+            'members.*.name' => 'required|string|max:255',
+            'members.*.ic_no' => 'required|string|max:255',
+            'members.*.peranan' => 'required|string|max:255',
+            'members.*.jantina' => 'required|string',
+            'members.*.saiz_baju' => 'required|string',
+            'members.*.student_id' => 'nullable|string|max:100',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
@@ -232,7 +243,33 @@ class RegistrationController extends Controller
         $registration->fill($request->except('user_id'));
         $registration->save();
 
-        return redirect()->route('registration')->with('success', 'Maklumat berjaya dikemaskini');
+        // KEMASKINI AHLI KUMPULAN
+        if ($request->has('members')) {
+            $registration->members()->delete();
+            foreach ($request->members as $memberData) {
+                $registration->members()->create($memberData);
+            }
+        }
+
+        // Hantar notification ke semua Admin/Superadmin
+        $admins = User::role(['Admin', 'Superadmin'])->get();
+
+        if ($admins->isNotEmpty()) {
+            foreach ($admins as $admin) {
+                $admin->notify(new UpdatedRegistrationInfo($registration));
+            }
+        } else {
+            Log::error('Tiada Admin atau Superadmin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
+        }
+
+        $user = User::find(auth()->id());
+        if ($user->hasRole('Peserta')) {
+            return redirect()->route('registration.view', $registration->id)
+                ->with('success', 'Maklumat berjaya disimpan');
+        } else {
+            return redirect()->route('registration')
+                ->with('success', 'Maklumat berjaya disimpan');
+        }
     }
 
     public function search(Request $request)

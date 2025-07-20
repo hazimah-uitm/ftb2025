@@ -570,7 +570,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Muat naik Bukti Pembayaran (PDF / Imej) <span
+                                <label class="form-label fw-semibold">Muat naik Bukti Pembayaran (PDF) <span
                                         class="text-danger">*</span></label>
                                 <input type="file" name="payment[payment_file]" class="form-control">
                                 @if (!empty($registration->payments[0]->payment_file))
