@@ -36,7 +36,7 @@
                 <div class="card-header bg-light py-2">
                     <h6 class="mb-0 fw-bold text-uppercase text-center">SURAT AKUAN PERTANDINGAN</h6>
                 </div>
-                <div class="card-body py-2 small">
+                <div class="card-body py-2">
                     <p class="text-center mb-2">
                         Sukacita dimaklumkan bahawa pasukan kami dari {{ $registration->user->jenis_ipta ?? '-' }}
                     </p>

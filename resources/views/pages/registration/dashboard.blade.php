@@ -4,15 +4,13 @@
     <div class="container-fluid">
 
         {{-- Header --}}
-        <div class="text-center mb-3">
+        <div class="text-center mb-4">
             <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="FTB Logo" class="img-fluid mb-2"
-                style="max-height: 80px;">
-            <h4 class="fw-bold mb-1">FESTIVAL TARI BORNEO IX (9th EDITION) 2025</h4>
-            <hr class="mx-auto" style="width: 120px; border-top: 2px solid #6c757d; opacity: 0.6;">
-            <h6 class="mb-0">DEWAN JUBLI, SAMARAHAN CAMPUS</h6>
-            <h6 class="mb-0">UiTM SARAWAK BRANCH</h6>
-            <p class="text-muted small mt-1 mb-0"><strong>18 – 21 NOVEMBER 2025</strong></p>
-            <p class="text-muted small mb-0">ANJURAN UiTM SARAWAK BRANCH</p>
+                style="max-height: 100px;">
+            <h5 class="fw-bold mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h5>
+            <h6 class="fw-semibold mb-0">ANJURAN UiTM CAWANGAN SARAWAK</h6>
+            <h6 class="small mt-1 mb-0">18 – 21 NOVEMBER 2025</h6>
+            <h6 class="small mt-0 mb-0">DEWAN JUBLI, UITM CAWANGAN SARAWAK, KAMPUS SAMARAHAN </h6>
         </div>
 
         {{-- ADMIN VIEW --}}
