@@ -316,6 +316,8 @@ class RegistrationController extends Controller
     public function exportPdf($id)
     {
         $registration = Registration::with(['user', 'members', 'payments'])->findOrFail($id);
+        $user = auth()->user(); // pengguna semasa
+        $timestamp = now()->format('d/m/Y H:i'); // waktu semasa
 
         $pdfView = View::make('pages.registration.pdf', compact('registration'))->render();
 
@@ -328,13 +330,41 @@ class RegistrationController extends Controller
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
-        $filename = preg_replace('/[^A-Za-z0-9 _.-]/', '', $registration->user->institution_name) . ' - Dokumen Penyertaan FTB2025.pdf';
+        // Dapatkan kanvas
+        $canvas = $dompdf->getCanvas();
+        $canvasHeight = $canvas->get_height();
+        $canvasWidth = $canvas->get_width();
+
+        // Footer kiri: dijana oleh
+        $canvas->page_text(
+            30,
+            $canvasHeight - 40,
+            "Dijana oleh: {$user->name} pada {$timestamp}",
+            null,
+            9,
+            [0, 0, 0]
+        );
+
+        // Footer kanan: muka surat (laras ke dalam)
+        $canvas->page_text(
+            $canvasWidth - 50,
+            $canvasHeight - 40,
+            "{PAGE_NUM}", // hanya nombor
+            null,
+            9,
+            [0, 0, 0]
+        );
+
+        // Nama fail
+        $filename = preg_replace('/[^A-Za-z0-9 _.-]/', '', $registration->user->institution_name)
+            . ' - Dokumen Penyertaan FTB2025.pdf';
 
         return Response::make($dompdf->output(), 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="' . $filename . '"'
         ]);
     }
+
 
     public function destroy(Request $request, $id)
     {
