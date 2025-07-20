@@ -5,9 +5,9 @@
 <div style="text-align: center; margin-bottom: 20px;">
     <h3>BORANG PENYERTAAN</h3>
     <h3>FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h3>
+    <h4>DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN </h4>
+    <h4>(18 – 21 NOVEMBER 2025)</h4>
     <h4>ANJURAN UiTM CAWANGAN SARAWAK</h4>
-    <p><strong>18 - 21 NOVEMBER 2025</strong><br>
-        <strong>DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN</strong></p>
 </div>
 
 <div class="section-title">A. BUTIRAN KUMPULAN</div>

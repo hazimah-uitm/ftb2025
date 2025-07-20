@@ -25,9 +25,9 @@
         }
 
         h3,
-        h4 {
+        h4, h5, h6 {
             text-align: center;
-            margin: 2px 0;
+            margin: 1px 0;
         }
 
         .section-title {
