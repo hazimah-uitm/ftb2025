@@ -27,13 +27,13 @@
                     <h6 class="mb-0 fw-bold text-uppercase text-center">SURAT AKUAN PERTANDINGAN</h6>
                 </div>
                 <div class="card-body py-2 small">
-                    <p class="text-center mb-1">
-                        Sukacita dimaklumkan bahawa pasukan kami {{ $registration->user->jenis_ipta ?? '-' }}
+                    <p class="text-center mb-2">
+                        Sukacita dimaklumkan bahawa pasukan kami dari {{ $registration->user->jenis_ipta ?? '-' }}
                     </p>
 
-                    <h6 class="fw-semibold text-center mb-0">{{ $registration->user->institution_name ?? '-' }}</h6>
+                    <h6 class="fw-semibold text-center mb-2">{{ $registration->user->institution_name ?? '-' }}</h6>
 
-                    <p class="text-center mb-2">
+                    <p class="text-center mb-0">
                         berminat untuk menyertai <strong>Festival Tari Borneo IX (Edisi ke-9) 2025</strong> pada:
                     </p>
 
@@ -149,7 +149,7 @@
                                 <td>
                                     @if (!empty($registration->doc_link))
                                         <a href="{{ $registration->doc_link }}" target="_blank"><i
-                                                class='bx bxs-folder-open fs-4'></i></a>
+                                                class='bx bxs-folder-open fs-5'></i></a>
                                     @else
                                         -
                                     @endif
@@ -187,8 +187,8 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Nama</th>
-                                                    <th>No. Kad Pengenalan / Passport / No. KTP</th>
-                                                    <th>No. Matrik / Kad Pelajar</th>
+                                                    <th class="text-wrap">No. Kad Pengenalan / Passport / No. KTP</th>
+                                                    <th class="text-wrap">No. Matrik / Kad Pelajar</th>
                                                     <th>Peranan</th>
                                                     <th>Jantina</th>
                                                     <th>Saiz Baju</th>
@@ -280,14 +280,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Dihantar pada</th>
-                                <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}<br>oleh:
+                                <th>Dihantar</th>
+                                <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }} oleh
                                     {{ $registration->submitter->name ?? '-' }}</td>
                             </tr>
                             @if ($registration->checked_by)
                                 <tr>
-                                    <th>Disemak pada</th>
-                                    <td>{{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}<br>oleh:
+                                    <th>Disemak</th>
+                                    <td>{{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }} oleh
                                         {{ $registration->checker->name ?? '-' }}</td>
                                 </tr>
                                 <tr>

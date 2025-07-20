@@ -171,11 +171,11 @@
                                     @if ($registration)
                                         <p class="mb-2 small"><strong>Status:</strong>
                                             @if ($registration->status == 'Diluluskan')
-                                                <span class="badge bg-success">Diluluskan</span>
+                                                <span class="badge bg-success" style="font-size: 0.7rem;">Diluluskan</span>
                                             @elseif ($registration->status == 'Dibatalkan')
-                                                <span class="badge bg-danger">Dibatalkan</span>
+                                                <span class="badge bg-danger" style="font-size: 0.7rem;">Dibatalkan</span>
                                             @else
-                                                <span class="badge bg-warningxt-primary">Menunggu Kelulusan</span>
+                                                <span class="badge bg-warning" style="font-size: 0.7rem;">Menunggu Kelulusan</span>
                                             @endif
                                         </p>
                                     @else
