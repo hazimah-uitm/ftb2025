@@ -294,7 +294,7 @@
                                             <td>
                                                 <select name="members[{{ $index }}][peranan]"
                                                     class="form-select {{ $errors->has("members.$index.peranan") ? 'is-invalid' : '' }}">
-                                                    <option value="">Pilih</option>
+                                                    <option value="">Peranan</option>
                                                     @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
                                                         <option value="{{ $role }}"
                                                             {{ old("members.$index.peranan", $member['peranan']) == $role ? 'selected' : '' }}>
@@ -310,7 +310,7 @@
                                             <td>
                                                 <select name="members[{{ $index }}][jantina]"
                                                     class="form-select {{ $errors->has("members.$index.jantina") ? 'is-invalid' : '' }}">
-                                                    <option value="">Pilih</option>
+                                                    <option value="">Jantina</option>
                                                     <option value="Lelaki"
                                                         {{ old("members.$index.jantina", $member['jantina']) == 'Lelaki' ? 'selected' : '' }}>
                                                         Lelaki</option>
@@ -327,7 +327,7 @@
                                             <td>
                                                 <select name="members[{{ $index }}][saiz_baju]"
                                                     class="form-select {{ $errors->has("members.$index.saiz_baju") ? 'is-invalid' : '' }}">
-                                                    <option value="">Pilih</option>
+                                                    <option value="">Saiz Baju</option>
                                                     @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $size)
                                                         <option value="{{ $size }}"
                                                             {{ old("members.$index.saiz_baju", $member['saiz_baju']) == $size ? 'selected' : '' }}>
@@ -354,10 +354,16 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="text-end mt-2">
+                        <div class="text-end mt-1 mb-3">
                             <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
                                 <i class="bx bx-plus"></i> Tambah Ahli
                             </button>
+                            <div class="d-flex justify-content-end mt-2">
+                                <div id="max-member-alert" class="col-4 alert alert-warning d-none small mb-0">
+                                    <i class="bx bx-error-circle me-1"></i>
+                                    Jumlah maksimum <strong>25 orang ahli kumpulan</strong> telah dicapai.
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -373,7 +379,7 @@
                             @endforeach
                             <td>
                                 <select name="members[__INDEX__][peranan]" class="form-select">
-                                    <option value="">Pilih</option>
+                                    <option value="">Peranan</option>
                                     @foreach (['Penari', 'Kru', 'Pegawai Pengiring', 'Koreografer', 'Pembantu Koreografer'] as $role)
                                         <option value="{{ $role }}">{{ $role }}</option>
                                     @endforeach
@@ -381,14 +387,14 @@
                             </td>
                             <td>
                                 <select name="members[__INDEX__][jantina]" class="form-select">
-                                    <option value="">Pilih</option>
+                                    <option value="">Jantina</option>
                                     <option value="Lelaki">Lelaki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
                             </td>
                             <td>
                                 <select name="members[__INDEX__][saiz_baju]" class="form-select">
-                                    <option value="">Pilih</option>
+                                    <option value="">Saiz Baju</option>
                                     @foreach (['S', 'M', 'L', 'XL', 'XXL'] as $s)
                                         <option value="{{ $s }}">{{ $s }}</option>
                                     @endforeach
@@ -601,11 +607,31 @@
                 }
             });
 
+            const alertBox = document.getElementById('max-member-alert');
+            let alertTimeout = null;
+
             addBtn.addEventListener('click', function() {
-                if (tableBody.querySelectorAll('tr').length >= 25) {
-                    alert('Jumlah maksimum 25 ahli telah dicapai.');
+                const currentCount = tableBody.querySelectorAll('tr').length;
+
+                if (currentCount >= 25) {
+                    alertBox.classList.remove('d-none');
+
+                    // Reset timeout kalau alert ditekan berulang
+                    if (alertTimeout) clearTimeout(alertTimeout);
+
+                    alertTimeout = setTimeout(() => {
+                        alertBox.classList.add('d-none');
+                    }, 10000); // 5000ms = 5 saat
+
+                    alertBox.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
                     return;
+                } else {
+                    alertBox.classList.add('d-none');
                 }
+
                 addRow();
             });
         });

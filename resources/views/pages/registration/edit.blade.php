@@ -362,10 +362,16 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="text-end mt-2">
+                        <div class="text-end mt-1 mb-3">
                             <button type="button" class="btn btn-info btn-sm" id="add-member-btn">
                                 <i class="bx bx-plus"></i> Tambah Ahli
                             </button>
+                            <div class="d-flex justify-content-end mt-2">
+                                <div id="max-member-alert" class="col-4 alert alert-warning d-none small mb-0">
+                                    <i class="bx bx-error-circle me-1"></i>
+                                    Jumlah maksimum <strong>25 orang ahli kumpulan</strong> telah dicapai.
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -493,11 +499,31 @@
                 }
             });
 
+            const alertBox = document.getElementById('max-member-alert');
+            let alertTimeout = null;
+
             addBtn.addEventListener('click', function() {
-                if (tableBody.querySelectorAll('tr').length >= 25) {
-                    alert('Jumlah maksimum 25 ahli telah dicapai.');
+                const currentCount = tableBody.querySelectorAll('tr').length;
+
+                if (currentCount >= 25) {
+                    alertBox.classList.remove('d-none');
+
+                    // Reset timeout kalau alert ditekan berulang
+                    if (alertTimeout) clearTimeout(alertTimeout);
+
+                    alertTimeout = setTimeout(() => {
+                        alertBox.classList.add('d-none');
+                    }, 10000); // 5000ms = 5 saat
+
+                    alertBox.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
                     return;
+                } else {
+                    alertBox.classList.add('d-none');
                 }
+
                 addRow();
             });
         });
