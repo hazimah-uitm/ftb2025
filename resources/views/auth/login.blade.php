@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                     <div class="col mx-auto">
-                        <div class="card shadow">
+                        <div class="card shadow mb-2">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div
@@ -26,7 +26,7 @@
 
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h4 class="text-primary">LOG MASUK</h4>
+                                        <h5 class="text-primary fw-semibold">LOG MASUK</h5>
                                     </div>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
@@ -88,6 +88,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('manual-pengguna') }}"
+                                target="_blank" class="btn btn-info btn-sm"><i class="bx bxs-file-pdf me-2"></i>Manual Pengguna
+                            </a>
                         </div>
                     </div>
                 </div>

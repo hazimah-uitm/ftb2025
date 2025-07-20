@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="border p-2 rounded">
                                     <div class="text-center mb-4 text-uppercase">
-                                        <h4 class="text-primary text-uppercase">{{ __('Pendaftaran Berjaya!') }}</h4>
+                                        <h5 class="text-primary fw-semibold">{{ __('Pendaftaran Berjaya') }}</h5>
                                     </div>
 
                                     <div class="text-center mb-3">

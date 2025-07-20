@@ -26,9 +26,9 @@
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4 text-uppercase">
                                         @if (request()->query('type') == 'reset')
-                                            <h4 class="text-primary">Reset Kata Laluan</h4>
+                                            <h5 class="text-primary fw-semibold">Reset Kata Laluan</h5>
                                         @else
-                                            <h4 class="text-primary">Set Kata Laluan</h4>
+                                            <h5 class="text-primary fw-semibold">Set Kata Laluan</h5>
                                         @endif
                                     </div>
 

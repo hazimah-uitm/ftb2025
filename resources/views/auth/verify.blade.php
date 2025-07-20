@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="border p-2 rounded">
                                     <div class="text-center mb-4 text-uppercase">
-                                        <h3>{{ __('Sila Sahkan Alamat Emel Anda') }}</h3>
+                                        <h5 class="text-primary fw-semibold">{{ __('Sila Sahkan Alamat Emel Anda') }}</h5>
                                     </div>
                                     @if (session('resent'))
                                         <div class="alert alert-success text-center" role="alert">

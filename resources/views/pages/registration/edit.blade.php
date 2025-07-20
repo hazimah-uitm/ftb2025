@@ -240,8 +240,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nama Penuh</th>
-                                        <th>No. KP / Passport</th>
-                                        <th>No. Matrik</th>
+                                        <th>No. Kad Pengenalan / Passport / No. KTP</th>
+                                        <th>No. Matrik / Kad Pelajar</th>
                                         <th>Peranan</th>
                                         <th>Jantina</th>
                                         <th>Saiz Baju</th>
