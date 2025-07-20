@@ -98,14 +98,14 @@
                                                     Semak
                                                 </button>
                                             @endif
-                                            {{-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal{{ $registration->id }}" title="Padam">
-                                                <i class="bx bx-trash"></i>
-                                            </button> --}}
                                             <a href="{{ route('registration.pdf', $registration->id) }}"
                                                 class="btn btn-warning btn-sm" target="_blank">
                                                 <i class="bx bxs-file-pdf"></i> PDF
                                             </a>
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal{{ $registration->id }}" title="Padam">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
                                         @endhasanyrole
                                     </td>
                                 </tr>
