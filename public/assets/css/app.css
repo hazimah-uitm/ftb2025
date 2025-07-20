@@ -89,17 +89,17 @@ a {
 
 .logo-icon-login {
 	width: 35em;
-	margin-top: 5px;
+	margin-top: 0px;
 }
 
 .logo-text-login {
-	font-size: 20px;
-	margin-left: 8px;
+	font-size: 17px;
+	margin-left: 0px;
 	margin-top: 0;
 	margin-bottom: 0;
 	letter-spacing: 2px;
 	font-weight: 600;
-	color: #ffffffcc;
+	color: #000;
 }
 
 .logo-subtitle-login {
@@ -109,7 +109,7 @@ a {
 	margin-left: 0;
 	margin-top: 5px;
 	letter-spacing: 1px;
-	color: rgb(179, 179, 179);
+	color: #36454F;
 }
 
 .toggle-icon {

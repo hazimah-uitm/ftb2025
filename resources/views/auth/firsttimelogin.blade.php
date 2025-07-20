@@ -4,26 +4,29 @@
     <div class="wrapper">
         <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
             <div class="container-fluid">
-                <div class="text-center">
-                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
-                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="img-fluid logo-icon-login"
-                            alt="logo icon" style="max-width: 100%; height: auto;">
-                    </div>
-                    <div class="mb-3">
-                        <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
-                        <h6 class="logo-subtitle-login mb-0">
-                            ANJURAN UiTM CAWANGAN SARAWAK
-                        </h6>
-                    </div>
-                </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-5">
                         <div class="card shadow">
                             <div class="card-body">
+                                <div class="text-center">
+                                    <div
+                                        class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
+                                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}"
+                                            class="img-fluid logo-icon-login" alt="logo icon"
+                                            style="max-width: 100%; height: auto;">
+                                    </div>
+                                    <div class="mb-3">
+                                        <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
+                                        <h6 class="logo-subtitle-login mb-0">
+                                            ANJURAN UiTM CAWANGAN SARAWAK
+                                        </h6>
+                                    </div>
+                                </div>
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
                                         <h3 class="text-uppercase">Pengesahan Akaun</h3>
-                                        <p class="text-muted">Masukkan alamat emel anda untuk menerima pautan pengesahan emel baru
+                                        <p class="text-muted">Masukkan alamat emel anda untuk menerima pautan pengesahan
+                                            emel baru
                                         </p>
                                     </div>
 

@@ -5,34 +5,37 @@
     <div class="wrapper">
         <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
             <div class="container-fluid">
-                <div class="text-center">
-                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
-                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" class="img-fluid logo-icon-login"
-                            alt="logo icon" style="max-width: 100%; height: auto;">
-                    </div>
-                    <div class="mb-3">
-                        <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
-                        <h6 class="logo-subtitle-login mb-0">
-                            ANJURAN UiTM CAWANGAN SARAWAK
-                        </h6>
-                    </div>
-                </div>
                 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                     <div class="col mx-auto">
                         <div class="card shadow">
                             <div class="card-body">
+                                <div class="text-center">
+                                    <div
+                                        class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-0">
+                                        <img src="{{ asset('public/assets/images/logo-ftb1.png') }}"
+                                            class="img-fluid logo-icon-login" alt="logo icon"
+                                            style="max-width: 100%; height: auto;">
+                                    </div>
+                                    <div class="mb-3">
+                                        <h4 class="logo-text-login mb-0">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
+                                        <h6 class="logo-subtitle-login mb-0">
+                                            ANJURAN UiTM CAWANGAN SARAWAK
+                                        </h6>
+                                    </div>
+                                </div>
+
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3 class="">LOG MASUK</h3>
+                                        <h5 class="text-primary">LOG MASUK</h5>
                                     </div>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
                                             @if ($errors->count() == 1)
-                                               <p class="mb-0">{!! $errors->first() !!}</p>
+                                                <p class="mb-0">{!! $errors->first() !!}</p>
                                             @else
                                                 <ul class="mb-0">
                                                     @foreach ($errors->all() as $error)
-                                                         <li>{!! $error !!}</li>
+                                                        <li>{!! $error !!}</li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -59,11 +62,13 @@
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="remember"
                                                         id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Ingat saya</label>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Ingat
+                                                        saya</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 text-end">
-                                                <a class="text-muted" href="{{ route('password.request') }}">Reset Kata Laluan</a> <br> <a href="{{ route('firsttimelogin.form') }}">Pengesahan
+                                                <a class="text-muted" href="{{ route('password.request') }}">Reset Kata
+                                                    Laluan</a> <br> <a href="{{ route('firsttimelogin.form') }}">Pengesahan
                                                     Akaun</a>
                                             </div>
                                             <div class="col-12">
