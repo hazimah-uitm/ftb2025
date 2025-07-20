@@ -161,20 +161,20 @@
                     </div>
                     <div class="modal-body">
                         @isset($registration)
-                            Are you sure you want to delete this record? <span style="font-weight: 600;">
+                            Adakah anda pasti untuk padam rekod <span style="font-weight: 600;">
                                 {{ ucfirst($registration->name) }}</span>?
                         @else
-                            No record
+                            Tiada Rekod
                         @endisset
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         @isset($registration)
                             <form class="d-inline" method="POST"
                                 action="{{ route('registration.destroy', $registration->id) }}">
                                 {{ method_field('delete') }}
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Padam</button>
                             </form>
                         @endisset
                     </div>
