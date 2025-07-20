@@ -1,5 +1,5 @@
 <div class="logo-header">
-    <img src="{{ $logoBase64 }}" alt="FTB Logo" height="90">
+    <img src="{{ $logoBase64 }}" alt="FTB Logo" height="120">
 </div>
 
 <div style="text-align: center; margin-bottom: 20px;">
@@ -7,7 +7,7 @@
     <h3>FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h3>
     <h4>ANJURAN UiTM CAWANGAN SARAWAK</h4>
     <p><strong>18 - 21 NOVEMBER 2025</strong><br>
-        DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN</p>
+        <strong>DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN</strong></p>
 </div>
 
 <p>Sukacita dimaklumkan bahawa pasukan kami dari {{ $registration->user->jenis_ipta ?? '-' }}
