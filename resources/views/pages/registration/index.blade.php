@@ -103,7 +103,7 @@
                                                 <i class="bx bx-trash"></i>
                                             </button>
                                             <a href="{{ route('registration.pdf', $registration->id) }}"
-                                                class="btn btn-secondary btn-sm" target="_blank">
+                                                class="btn btn-warning btn-sm" target="_blank">
                                                 <i class="bx bxs-file-pdf"></i> PDF
                                             </a>
                                         @endhasanyrole

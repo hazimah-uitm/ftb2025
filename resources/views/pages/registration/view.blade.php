@@ -14,9 +14,14 @@
                 </ol>
             </nav>
         </div>
-        <div class="ms-auto">
+        <div class="ms-auto d-flex gap-2">
+            <a href="{{ route('registration.pdf', $registration->id) }}" target="_blank">
+                <button type="button" class="btn btn-warning btn-sm mt-2 mt-lg-0">
+                    <i class="bx bxs-file-pdf"></i> Muat Turun PDF
+                </button>
+            </a>
             <a href="{{ route('registration.edit', $registration->id) }}">
-                <button type="button" class="btn btn-primary mt-2 mt-lg-0">Kemaskini Maklumat</button>
+                <button type="button" class="btn btn-primary btn-sm mt-2 mt-lg-0"><i class='bx bxs-edit'></i> Kemaskini Maklumat</button>
             </a>
         </div>
     </div>
@@ -286,13 +291,15 @@
                             </tr>
                             <tr>
                                 <th>Dihantar</th>
-                                <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }} oleh
+                                <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
+                                    oleh
                                     {{ $registration->submitter->name ?? '-' }}</td>
                             </tr>
                             @if ($registration->checked_by)
                                 <tr>
                                     <th>Disemak</th>
-                                    <td>{{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }} oleh
+                                    <td>{{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}
+                                        oleh
                                         {{ $registration->checker->name ?? '-' }}</td>
                                 </tr>
                                 <tr>
