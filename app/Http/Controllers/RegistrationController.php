@@ -343,7 +343,14 @@ class RegistrationController extends Controller
         $user = auth()->user(); // pengguna semasa
         $timestamp = now()->format('d/m/Y H:i'); // waktu semasa
 
-        $pdfView = View::make('pages.registration.pdf', compact('registration'))->render();
+        $path = public_path('assets/images/logo-ftb1.png');
+        $logoData = base64_encode(file_get_contents($path));
+        $logoMimeType = mime_content_type($path);
+        
+        $pdfView = view('pages.registration.pdf', [
+            'registration' => $registration,
+            'logoBase64' => "data:{$logoMimeType};base64,{$logoData}",
+        ])->render();
 
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);

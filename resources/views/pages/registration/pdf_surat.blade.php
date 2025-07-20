@@ -1,5 +1,5 @@
 <div class="logo-header">
-    <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="Logo FTB" height="60">
+    <img src="{{ $logoBase64 }}" alt="FTB Logo" height="90">
 </div>
 
 <div style="text-align: center; margin-bottom: 20px;">

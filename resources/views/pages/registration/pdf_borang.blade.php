@@ -1,6 +1,7 @@
 <div class="logo-header">
-    <img src="{{ asset('public/assets/images/logo-ftb1.png') }}" alt="Logo FTB" height="90">
+    <img src="{{ $logoBase64 }}" alt="FTB Logo" height="90">
 </div>
+
 <div style="text-align: center; margin-bottom: 20px;">
     <h3>BORANG PENYERTAAN</h3>
     <h3>FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h3>
@@ -26,18 +27,6 @@
     <tr>
         <th>Nama Tarian Kreatif Etnik Borneo</th>
         <td>{{ $registration->creative_dance_name }}</td>
-    </tr>
-    <tr>
-        <th>Nama Pegawai Pengiring</th>
-        <td>{{ $registration->members->where('peranan', 'Pengiring')->pluck('name')->implode(', ') ?: '-' }}</td>
-    </tr>
-    <tr>
-        <th>Nama Koreografer</th>
-        <td>{{ $registration->koreografer_name ?? '-' }}</td>
-    </tr>
-    <tr>
-        <th>Nama Pembantu Koreografer</th>
-        <td>{{ $registration->assistant_koreografer_name ?? '-' }}</td>
     </tr>
     <tr>
         <th>Alamat</th>
