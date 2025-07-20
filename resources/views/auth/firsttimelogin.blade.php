@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h3 class="text-uppercase">Pengesahan Akaun</h3>
+                                        <h4 class="text-primary text-uppercase">Pengesahan Akaun</h4>
                                         <p class="text-muted">Masukkan alamat emel anda untuk menerima pautan pengesahan
                                             emel baru
                                         </p>

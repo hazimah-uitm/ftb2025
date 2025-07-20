@@ -41,7 +41,7 @@
                 <label for="jenis_ipta" class="form-label">Jenis Insitusi Pengajian Tinggi</label>
                 <select class="form-select {{ $errors->has('jenis_ipta') ? 'is-invalid' : '' }}" name="jenis_ipta" id="jenis_ipta">
                     <option disabled {{ old('jenis_ipta') == '' ? 'selected' : '' }}>Pilih Jenis</option>
-                    @foreach (['University', 'University College', 'College', 'Teacher Training Institute', 'Polytechnic', 'Community College'] as $type)
+                    @foreach (['Universiti', 'Kolej Universiti', 'Kolej', 'Institusi Perguruan', 'Politeknik', 'Kolej Komuniti'] as $type)
                         <option value="{{ $type }}" {{ old('jenis_ipta') == $type ? 'selected' : '' }}>{{ $type }}</option>
                     @endforeach
                 </select>

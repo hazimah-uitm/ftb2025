@@ -26,7 +26,7 @@
 
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4">
-                                        <h5 class="text-primary">LOG MASUK</h5>
+                                        <h4 class="text-primary">LOG MASUK</h4>
                                     </div>
                                     @if ($errors->any())
                                         <div class="alert alert-danger">

@@ -26,9 +26,9 @@
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4 text-uppercase">
                                         @if (request()->query('type') == 'reset')
-                                            <h3 class="">Reset Password</h3>
+                                            <h4 class="text-primary">Reset Kata Laluan</h4>
                                         @else
-                                            <h3 class="">Set Password</h3>
+                                            <h4 class="text-primary">Set Kata Laluan</h4>
                                         @endif
                                     </div>
 

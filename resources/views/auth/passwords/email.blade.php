@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="border p-4 rounded">
                                     <div class="text-center mb-4 text-uppercase">
-                                        <h3>{{ __('Lupa Kata Laluan') }}</h3>
+                                        <h4 class="text-primary">{{ __('Lupa Kata Laluan') }}</h4>
                                     </div>
                                     @if (session('status'))
                                         <div class="alert alert-success" role="alert">

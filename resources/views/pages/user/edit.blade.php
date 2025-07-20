@@ -43,7 +43,7 @@
                         id="jenis_ipta">
                         <option disabled {{ old('jenis_ipta', $user->jenis_ipta ?? '') == '' ? 'selected' : '' }}>Select
                             Type</option>
-                        @foreach (['University', 'University College', 'College', 'Teacher Training Institute', 'Polytechnic', 'Community College'] as $type)
+                        @foreach (['Universiti', 'Kolej Universiti', 'Kolej', 'Institusi Perguruan', 'Politeknik', 'Kolej Komuniti'] as $type)
                             <option value="{{ $type }}"
                                 {{ old('jenis_ipta', $user->jenis_ipta ?? '') == $type ? 'selected' : '' }}>
                                 {{ $type }}</option>

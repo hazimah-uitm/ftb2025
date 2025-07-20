@@ -69,7 +69,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'institution_name' => 'required',
+            'institution_name' => 'required|unique:users,institution_name',
             'jenis_ipta' => 'required',
             'name'     => 'required',
             'ic_no' => 'required|unique:users,ic_no',
@@ -89,6 +89,7 @@ class UserController extends Controller
             'phone_no.required' => 'Sila isi no. telefon pengguna',
             'publish_status.required' => 'Sila isi status pengguna',
             'institution_name.required' => 'Sila isi nama institusi',
+            'institution_name.unique' => 'Nama institusi telah wujud',
             'jenis_ipta.required' => 'Sila pilih jenis ipta',
         ]);
 
@@ -202,15 +203,15 @@ class UserController extends Controller
             'phone_no' => 'required|string',
             'password' => 'required|min:8|confirmed',
         ], [
-            'name.required'     => 'Please enter your name',
-            'ic_no.required'    => 'Please enter your id',
-            'ic_no.unique'      => 'The id already exists',
-            'email.required'    => 'Please enter your email',
-            'email.unique'      => 'The email already exists',
-            'position.required' => 'Please enter your position',
-            'institution_name.required' => 'Please enter the institution name',
-            'institution_name.unique' => 'The institution name already exists',
-            'jenis_ipta.required' => 'Please select the type of higher education institution',
+            'name.required'     => 'Sila masukkan nama anda',
+            'ic_no.required'    => 'Sila masukkan nombor pengenalan anda',
+            'ic_no.unique'      => 'Nombor pengenalan ini telah wujud',
+            'email.required'    => 'Sila masukkan alamat emel anda',
+            'email.unique'      => 'Alamat emel ini telah wujud',
+            'position.required' => 'Sila masukkan jawatan anda',
+            'institution_name.required' => 'Sila masukkan nama institusi',
+            'institution_name.unique'   => 'Nama institusi ini telah wujud',
+            'jenis_ipta.required'       => 'Sila pilih jenis institusi pengajian tinggi',
         ]);
 
         $user = new User();
