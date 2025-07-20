@@ -570,13 +570,15 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Muat naik Bukti Pembayaran (PDF) <span
-                                        class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">
+                                    Muat naik Bukti Pembayaran (PDF)
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <input type="file" name="payment[payment_file]" class="form-control">
-                                @if (!empty($registration->payments[0]->payment_file))
-                                    <small class="d-block mt-1">
-                                        Current File:
-                                        <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}"
+                                @if (session('uploaded_payment_file'))
+                                    <small class="d-block mt-1 text-success">
+                                        Fail telah dimuat naik:
+                                        <a href="{{ asset('public/storage/' . session('uploaded_payment_file')) }}"
                                             target="_blank">Papar</a>
                                     </small>
                                 @endif

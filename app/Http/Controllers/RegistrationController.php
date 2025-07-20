@@ -14,6 +14,8 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
@@ -80,7 +82,7 @@ class RegistrationController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'group_name' => 'required|string|max:255',
             'traditional_dance_name' => 'required|string|max:255',
             'creative_dance_name' => 'required|string|max:255',
@@ -103,7 +105,7 @@ class RegistrationController extends Controller
 
             'payment.payment_type' => 'required|string|max:255',
             'payment.date' => 'required|date',
-            'payment.payment_file' => 'required|file|max:2048',
+            'payment.payment_file' => 'nullable|file|max:2048',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
@@ -117,10 +119,25 @@ class RegistrationController extends Controller
             'members.*.peranan.required' => 'Sila pilih peranan untuk setiap ahli kumpulan.',
             'members.*.jantina.required' => 'Sila pilih jantina untuk setiap ahli kumpulan.',
             'members.*.saiz_baju.required' => 'Sila pilih saiz baju untuk setiap ahli kumpulan.',
-            'payment.payment_file.required' => 'Sila muat naik bukti pembayaran (PDF).',
             'payment.payment_file.file' => 'Sila pilih fail yang sah.',
             'payment.payment_file.max' => 'Saiz fail terlalu besar. Maksimum 2MB.',
         ]);
+
+        // Simpan fail jika ada, sebelum validation
+        if ($request->hasFile('payment.payment_file')) {
+            $tempPath = $request->file('payment.payment_file')->store('temp_payment_files', 'public');
+            session()->put('uploaded_payment_file', $tempPath);
+        }
+
+        // Jika validation fail
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // WAJIB fail jika tiada fail lama dalam session
+        if (!session()->has('uploaded_payment_file') && !$request->hasFile('payment.payment_file')) {
+            return back()->withErrors(['payment.payment_file' => 'Sila muat naik bukti pembayaran (PDF).'])->withInput();
+        }
 
         $registration = new Registration();
         $registration->user_id = Auth::id();
@@ -143,14 +160,21 @@ class RegistrationController extends Controller
         //     }
         // }
 
-        // Save Payment
-        if ($request->has('payment')) {
-            $paymentData = $request->payment;
-            if ($request->hasFile('payment.payment_file')) {
-                $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
-            }
-            $registration->payments()->create($paymentData);
+        $paymentData = $request->input('payment', []);
+
+        if (session('uploaded_payment_file')) {
+            $finalPath = str_replace('temp_payment_files/', 'payment_files/', session('uploaded_payment_file'));
+            Storage::disk('public')->move(session('uploaded_payment_file'), $finalPath);
+            $paymentData['payment_file'] = $finalPath;
+        } elseif ($request->hasFile('payment.payment_file')) {
+            $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+        } else {
+            return back()->withErrors(['payment.payment_file' => 'Sila muat naik bukti pembayaran (PDF).'])->withInput();
         }
+
+        $registration->payments()->create($paymentData);
+
+        session()->forget('uploaded_payment_file');
 
         // Hantar notification ke semua Admin/Superadmin
         $admins = User::role(['Admin', 'Superadmin'])->get();
@@ -364,7 +388,6 @@ class RegistrationController extends Controller
             'Content-Disposition' => 'inline; filename="' . $filename . '"'
         ]);
     }
-
 
     public function destroy(Request $request, $id)
     {
