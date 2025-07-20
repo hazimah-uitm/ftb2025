@@ -21,7 +21,8 @@
                 </button>
             </a>
             <a href="{{ route('registration.edit', $registration->id) }}">
-                <button type="button" class="btn btn-primary btn-sm mt-2 mt-lg-0"><i class='bx bxs-edit'></i> Kemaskini Maklumat</button>
+                <button type="button" class="btn btn-primary btn-sm mt-2 mt-lg-0"><i class='bx bxs-edit'></i> Kemaskini
+                    Maklumat</button>
             </a>
         </div>
     </div>
@@ -102,7 +103,7 @@
 
         <div class="row">
             <!-- Left Column: Registration Info -->
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <!-- Info Card -->
                 <div class="card mb-2">
                     <div class="card-header bg-light">
@@ -195,13 +196,13 @@
                                         <table class="table table-striped table-sm">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Nama</th>
-                                                    <th class="text-wrap">No. Kad Pengenalan / Passport / No. KTP</th>
-                                                    <th class="text-wrap">No. Matrik / Kad Pelajar</th>
-                                                    <th>Peranan</th>
-                                                    <th>Jantina</th>
-                                                    <th>Saiz Baju</th>
+                                                    <th style="width: 3%">#</th>
+                                                    <th class="text-wrap" style="width: 30%">Nama</th>
+                                                    <th class="text-wrap" style="width: 25%">No. Kad Pengenalan / Passport / No. KTP</th>
+                                                    <th class="text-wrap" style="width: 20%">No. Matrik / Kad Pelajar</th>
+                                                    <th class="text-wrap" style="width: 8%">Peranan</th>
+                                                    <th style="width: 7%">Jantina</th>
+                                                    <th style="width: 7%">Saiz Baju</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -268,17 +269,16 @@
                 @endif
             </div>
 
-            <!-- Right Column: Approval Card -->
-            <div class="col-md-4">
-                <!-- Application Status -->
+            <div class="col-md-3">
+                <!-- STATUS PENYERTAAN -->
                 <div class="card mb-2">
-                    <div class="card-header bg-light">
-                        <h6 class="mb-0 fw-bold text-uppercase">Status Penyertaan</h6>
+                    <div class="card-header bg-light py-2">
+                        <h6 class="mb-0 fw-bold text-uppercase small">Status Penyertaan</h6>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-borderless table-sm mb-0">
+                    <div class="card-body py-2 px-3">
+                        <table class="table table-sm table-borderless mb-0 small">
                             <tr>
-                                <th>Status</th>
+                                <th class="text-nowrap">Status</th>
                                 <td>
                                     @if ($registration->status == 'Diluluskan')
                                         <span class="badge bg-success">Diluluskan</span>
@@ -290,20 +290,26 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Dihantar</th>
-                                <td>{{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
-                                    oleh
-                                    {{ $registration->submitter->name ?? '-' }}</td>
+                                <th class="text-nowrap align-top">Dihantar</th>
+                                <td>
+                                    <div>
+                                        {{ $registration->submitted_at ? \Carbon\Carbon::parse($registration->submitted_at)->format('d/m/Y H:i') : '-' }}
+                                    </div>
+                                    <div>oleh {{ $registration->submitter->name ?? '-' }}</div>
+                                </td>
                             </tr>
                             @if ($registration->checked_by)
                                 <tr>
-                                    <th>Disemak</th>
-                                    <td>{{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}
-                                        oleh
-                                        {{ $registration->checker->name ?? '-' }}</td>
+                                    <th class="text-nowrap align-top">Disemak</th>
+                                    <td>
+                                        <div>
+                                            {{ $registration->checked_at ? \Carbon\Carbon::parse($registration->checked_at)->format('d/m/Y H:i') : '-' }}
+                                        </div>
+                                        <div>oleh {{ $registration->checker->name ?? '-' }}</div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th>Catatan Admin</th>
+                                    <th class="text-nowrap align-top">Catatan</th>
                                     <td>{!! nl2br(e($registration->remarks_checker ?? '-')) !!}</td>
                                 </tr>
                             @endif
@@ -311,30 +317,29 @@
                     </div>
                 </div>
 
-                <!-- Approval Form -->
+                <!-- BORANG KELULUSAN (ADMIN) -->
                 @hasanyrole('Superadmin|Admin')
                     @if ($registration->status === 'Menunggu Kelulusan')
                         <div class="card mb-2">
-                            <div class="card-header bg-light">
-                                <h6 class="mb-0 fw-bold text-uppercase">Status Penyertaan</h6>
+                            <div class="card-header bg-light py-2">
+                                <h6 class="mb-0 fw-bold text-uppercase small">Status Kelulusan</h6>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body py-2 px-3">
                                 <form action="{{ route('registration.approval', $registration->id) }}" method="POST">
                                     {{ csrf_field() }}
-                                    <div class="mb-3">
-                                        <label for="status" class="form-label">Status Kelulusan</label>
-                                        <select class="form-select" name="status" required>
-                                            <option value="">Pilih Status Kelulusan</option>
+                                    <div class="mb-2">
+                                        <select class="form-select form-select-sm" name="status" required>
+                                            <option value="">Pilih Status</option>
                                             <option value="Diluluskan">Diluluskan</option>
                                             <option value="Dibatalkan">Dibatalkan</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="remarks_checker" class="form-label">Catatan</label>
-                                        <textarea class="form-control" name="remarks_checker" rows="4"></textarea>
+                                    <div class="mb-2">
+                                        <textarea class="form-control form-control-sm" name="remarks_checker" rows="3" placeholder="Catatan..."></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-success w-100"><i class="bx bx-check-circle"></i>
-                                        Submit</button>
+                                    <button type="submit" class="btn btn-success btn-sm w-100">
+                                        <i class="bx bx-check-circle"></i> Hantar
+                                    </button>
                                 </form>
                             </div>
                         </div>
