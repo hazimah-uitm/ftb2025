@@ -25,7 +25,7 @@ class NewRegistrationSubmitted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Pendaftaran Baharu Telah Dihantar')
+            ->subject('Penyertaan Baharu Telah Dihantar')
             ->greeting('Salam sejahtera,')
             ->line('Satu penyertaan baharu telah dihantar oleh ' . $this->registration->user->institution_name)
             ->line('Nama Kumpulan: ' . $this->registration->group_name)
