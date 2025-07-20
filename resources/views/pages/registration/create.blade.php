@@ -773,7 +773,14 @@
 
             // Tambah ahli baru apabila klik
             if (addBtn) {
-                addBtn.addEventListener('click', () => addMember());
+                addBtn.addEventListener('click', () => {
+                    const currentCount = container.querySelectorAll('.member-item').length;
+                    if (currentCount >= 25) {
+                        alert('Jumlah maksimum 25 ahli telah dicapai.');
+                        return;
+                    }
+                    addMember();
+                });
             }
 
             // Kalau guna old(members), tambah semula ahli
