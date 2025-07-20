@@ -99,7 +99,7 @@ class RegistrationController extends Controller
 
             'payment.payment_type' => 'required|string|max:255',
             'payment.date' => 'required|date',
-            'payment.payment_file' => 'nullable|file|max:2048',
+            'payment.payment_file' => 'required|file|max:2048',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
@@ -108,6 +108,14 @@ class RegistrationController extends Controller
             'address.required' => 'Sila isi alamat',
             'sinopsis_traditional.required' => 'Sila isi sinopsis tradisional',
             'sinopsis_creative.required' => 'Sila isi sinopsis kreatif',
+            'members.*.name.required' => 'Sila isi nama penuh untuk setiap ahli kumpulan.',
+            'members.*.ic_no.required' => 'Sila isi nombor IC/Passport setiap ahli kumpulan.',
+            'members.*.peranan.required' => 'Sila pilih peranan untuk setiap ahli kumpulan.',
+            'members.*.jantina.required' => 'Sila pilih jantina untuk setiap ahli kumpulan.',
+            'members.*.saiz_baju.required' => 'Sila pilih saiz baju untuk setiap ahli kumpulan.',
+            'payment.payment_file.required' => 'Sila muat naik bukti pembayaran (PDF).',
+            'payment.payment_file.file' => 'Sila pilih fail yang sah.',
+            'payment.payment_file.max' => 'Saiz fail terlalu besar. Maksimum 2MB.',
         ]);
 
         $registration = new Registration();
@@ -237,6 +245,11 @@ class RegistrationController extends Controller
             'address.required' => 'Sila isi alamat',
             'sinopsis_traditional.required' => 'Sila isi sinopsis tradisional',
             'sinopsis_creative.required' => 'Sila isi sinopsis kreatif',
+            'members.*.name.required' => 'Sila isi nama penuh untuk setiap ahli kumpulan.',
+            'members.*.ic_no.required' => 'Sila isi nombor IC/Passport setiap ahli kumpulan.',
+            'members.*.peranan.required' => 'Sila pilih peranan untuk setiap ahli kumpulan.',
+            'members.*.jantina.required' => 'Sila pilih jantina untuk setiap ahli kumpulan.',
+            'members.*.saiz_baju.required' => 'Sila pilih saiz baju untuk setiap ahli kumpulan.',
         ]);
 
         $registration = Registration::findOrFail($id);
@@ -254,12 +267,19 @@ class RegistrationController extends Controller
         // Hantar notification ke semua Admin/Superadmin
         $admins = User::role(['Admin', 'Superadmin'])->get();
 
-        if ($admins->isNotEmpty()) {
-            foreach ($admins as $admin) {
-                $admin->notify(new UpdatedRegistrationInfo($registration));
+        $user = User::find(auth()->id());
+
+        // Hanya hantar notifikasi jika bukan Admin/Superadmin
+        if (!$user->hasRole(['Admin', 'Superadmin'])) {
+            $admins = User::role(['Admin', 'Superadmin'])->get();
+
+            if ($admins->isNotEmpty()) {
+                foreach ($admins as $admin) {
+                    $admin->notify(new UpdatedRegistrationInfo($registration));
+                }
+            } else {
+                Log::error('Tiada Admin atau Superadmin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
             }
-        } else {
-            Log::error('Tiada Admin atau Superadmin ditemui dalam sistem untuk menerima notifikasi permohonan ruang.');
         }
 
         $user = User::find(auth()->id());

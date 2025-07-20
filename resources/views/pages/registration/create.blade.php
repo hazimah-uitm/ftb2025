@@ -576,9 +576,14 @@
                                 @if (!empty($registration->payments[0]->payment_file))
                                     <small class="d-block mt-1">
                                         Current File:
-                                        <a href="{{ asset('storage/' . $registration->payments[0]->payment_file) }}"
+                                        <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}"
                                             target="_blank">Papar</a>
                                     </small>
+                                @endif
+                                @if ($errors->has('payment.payment_file'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('payment.payment_file') }}
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -664,52 +669,119 @@
         </div>
     </div>
     <!-- End Page Wrapper -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('members-container');
-            const templateHtml = document.getElementById('member-template').innerHTML;
-            const addBtn = document.getElementById('add-member-btn');
+    <!-- End Page Wrapper -->
+    @if (old('members'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const oldMembers = @json(old('members'));
+                const container = document.getElementById('members-container');
+                const templateHtml = document.getElementById('member-template').innerHTML;
 
-            let count = 1; // already have 1 member
+                // Kosongkan semua yang dimount dari DB supaya guna old sahaja
+                container.innerHTML = '';
 
-            addBtn.addEventListener('click', function() {
-                if (count >= 25) {
-                    alert('Maximum 25 members allowed.');
-                    return;
-                }
+                oldMembers.forEach((member, index) => {
+                    let html = templateHtml
+                        .replace(/__INDEX__/g, index)
+                        .replace(/__NO__/g, index + 1);
 
-                const index = count;
-                const newHtml = templateHtml
-                    .replace(/__INDEX__/g, index)
-                    .replace(/__NO__/g, index + 1);
+                    const div = document.createElement('div');
+                    div.innerHTML = html;
+                    container.appendChild(div);
 
-                const div = document.createElement('div');
-                div.innerHTML = newHtml;
-                container.appendChild(div);
+                    // Isi semula value lama ke dalam field
+                    Object.keys(member).forEach((key) => {
+                        const input = div.querySelector(`[name="members[${index}][${key}]"]`);
+                        if (input) {
+                            if (input.tagName === 'SELECT') {
+                                [...input.options].forEach(opt => {
+                                    if (opt.value == member[key]) opt.selected = true;
+                                });
+                            } else {
+                                input.value = member[key];
+                            }
+                        }
+                    });
+                });
 
-                count++;
+                // Update nombor ahli
+                const updateNumbers = () => {
+                    const numbers = container.querySelectorAll('.member-number');
+                    numbers.forEach((el, idx) => {
+                        el.textContent = idx + 1;
+                    });
+                };
                 updateNumbers();
             });
+        </script>
+    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addBtn = document.getElementById('add-member-btn');
+            const container = document.getElementById('members-container');
+            const templateHtml = document.getElementById('member-template').innerHTML;
 
-            container.addEventListener('click', function(e) {
-                if (e.target.closest('.remove-member')) {
-                    const allItems = container.querySelectorAll('.member-item');
-                    if (allItems.length === 1) {
-                        alert('At least one member is required.');
-                        return;
-                    }
-                    e.target.closest('.member-item').remove();
-                    count--;
-                    updateNumbers();
-                }
-            });
-
-            function updateNumbers() {
+            function updateMemberNumbers() {
                 const numbers = container.querySelectorAll('.member-number');
                 numbers.forEach((el, idx) => {
                     el.textContent = idx + 1;
                 });
             }
+
+            function attachRemoveButtons() {
+                container.querySelectorAll('.remove-member').forEach(button => {
+                    button.removeEventListener('click', removeHandler);
+                    button.addEventListener('click', removeHandler);
+                });
+            }
+
+            function removeHandler(e) {
+                e.target.closest('.member-item').remove();
+                updateMemberNumbers();
+            }
+
+            function addMember(memberData = {}) {
+                const index = container.querySelectorAll('.member-item').length;
+                let html = templateHtml
+                    .replace(/__INDEX__/g, index)
+                    .replace(/__NO__/g, index + 1);
+
+                const div = document.createElement('div');
+                div.innerHTML = html;
+                container.appendChild(div);
+
+                // Set value if provided
+                Object.keys(memberData).forEach((key) => {
+                    const input = div.querySelector(`[name="members[${index}][${key}]"]`);
+                    if (input) {
+                        if (input.tagName === 'SELECT') {
+                            [...input.options].forEach(opt => {
+                                if (opt.value == memberData[key]) opt.selected = true;
+                            });
+                        } else {
+                            input.value = memberData[key];
+                        }
+                    }
+                });
+
+                updateMemberNumbers();
+                attachRemoveButtons();
+            }
+
+            // Initialize remove buttons if not using old
+            attachRemoveButtons();
+
+            // Tambah ahli baru apabila klik
+            if (addBtn) {
+                addBtn.addEventListener('click', () => addMember());
+            }
+
+            // Kalau guna old(members), tambah semula ahli
+            @if (old('members'))
+                const oldMembers = @json(old('members'));
+                container.innerHTML = '';
+                oldMembers.forEach(m => addMember(m));
+            @endif
         });
     </script>
 
