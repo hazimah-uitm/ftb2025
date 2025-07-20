@@ -14,6 +14,11 @@
                 </ol>
             </nav>
         </div>
+        <div class="ms-auto">
+            <a href="{{ route('registration.edit', $registration->id) }}">
+                <button type="button" class="btn btn-primary mt-2 mt-lg-0">Kemaskini Maklumat</button>
+            </a>
+        </div>
     </div>
 
     <h6 class="mb-0 text-uppercase">{{ $registration->user->institution_name }}</h6>

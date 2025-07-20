@@ -3,20 +3,28 @@
 @section('content')
     <!-- Breadcrumb -->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Pengurusan Pendaftaran</div>
+        <div class="breadcrumb-title pe-3">Pengurusan Penyertaan</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('registration') }}">Senarai Pendaftaran</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $str_mode }} Pendaftaran</li>
+                    @role('Peserta')
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('registration.view', $registration->id ?? 0) }}">Maklumat Penyertaan</a>
+                        </li>
+                    @else
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('registration') }}">Senarai Penyertaan</a>
+                        </li>
+                    @endrole
+                    <li class="breadcrumb-item active" aria-current="page">{{ $str_mode }} Penyertaan</li>
                 </ol>
             </nav>
         </div>
     </div>
     <!-- End Breadcrumb -->
 
-    <h6 class="mb-0 text-uppercase">{{ $str_mode }} Pendaftaran</h6>
+    <h6 class="mb-0 text-uppercase">{{ $str_mode }} Penyertaan</h6>
     <hr />
 
     <div class="card">
@@ -159,10 +167,13 @@
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-select">
                         <option value="Menunggu Kelulusan"
-                            {{ $registration->status == 'Menunggu Kelulusan' ? 'selected' : '' }}>Menunggu Kelulusan</option>
-                        <option value="Diluluskan" {{ $registration->status == 'Diluluskan' ? 'selected' : '' }}>Diluluskan
+                            {{ $registration->status == 'Menunggu Kelulusan' ? 'selected' : '' }}>Menunggu Kelulusan
                         </option>
-                        <option value="Dibatalkan" {{ $registration->status == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan
+                        <option value="Diluluskan" {{ $registration->status == 'Diluluskan' ? 'selected' : '' }}>
+                            Diluluskan
+                        </option>
+                        <option value="Dibatalkan" {{ $registration->status == 'Dibatalkan' ? 'selected' : '' }}>
+                            Dibatalkan
                         </option>
                     </select>
                 </div>
