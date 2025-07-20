@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/registration/{id}/force-delete', 'RegistrationController@forceDelete')->name('registration.forceDelete');
     Route::post('registration/{id}/approval', 'RegistrationController@approval')->name('registration.approval');
     Route::get('dashboard', 'RegistrationController@userDashboard')->name('dashboard');
+    Route::get('registration/{id}/pdf', 'RegistrationController@exportPdf')->name('registration.pdf');
 
     // User Role Management
     Route::get('user-role', 'UserRoleController@index')->name('user-role');

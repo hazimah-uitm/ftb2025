@@ -51,7 +51,7 @@ class ResetPasswordNotification extends Notification
                 'email' => $notifiable->getEmailForPasswordReset(), 
                 'type' => $actionType 
             ], false)))
-            ->line('Sila abaikan emel ini jika anda tidak membuat permohonan reset kata laluan.')
+            ->line('Sila abaikan emel ini jika anda tidak membuat sebarang permohonan set kata laluan.')
             ->salutation("Terima kasih.");
     
         return $mailMessage;

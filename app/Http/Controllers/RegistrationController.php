@@ -10,6 +10,10 @@ use App\Notifications\UpdatedRegistrationInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Response;
 
 class RegistrationController extends Controller
 {
@@ -306,6 +310,27 @@ class RegistrationController extends Controller
 
         return view('pages.registration.index', [
             'registrationList' => $registrationList,
+        ]);
+    }
+
+    public function exportPdf($id)
+    {
+        $registration = Registration::with(['user', 'members', 'payments'])->findOrFail($id);
+
+        $pdfView = View::make('pages.registration.pdf', compact('registration'))->render();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($pdfView);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        return Response::make($dompdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Penyertaan_' . $registration->group_name . '.pdf"'
         ]);
     }
 
