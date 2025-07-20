@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Dokumen Penyertaan FTB2025</title>
+    <title>{{ $registration->user->institution_name }} - Dokumen Penyertaan FTB2025</title>
     <style>
         body {
             font-family: sans-serif;
@@ -53,11 +53,12 @@
 </head>
 
 <body>
-    
+
     @include('pages.registration.pdf_surat')
 
-<div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
 
-@include('pages.registration.pdf_borang')
+    @include('pages.registration.pdf_borang')
 </body>
+
 </html>

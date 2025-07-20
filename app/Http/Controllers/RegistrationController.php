@@ -328,9 +328,11 @@ class RegistrationController extends Controller
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
+        $filename = preg_replace('/[^A-Za-z0-9 _.-]/', '', $registration->user->institution_name) . ' - Dokumen Penyertaan FTB2025.pdf';
+
         return Response::make($dompdf->output(), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Penyertaan_' . $registration->group_name . '.pdf"'
+            'Content-Disposition' => 'inline; filename="' . $filename . '"'
         ]);
     }
 
