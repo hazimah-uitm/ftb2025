@@ -124,6 +124,14 @@
     </tr>
     <tr>
         <th>Bukti Bayaran</th>
-        <td>{{ $registration->payments[0]->payment_file ?? '-' }}</td>
+        <td>
+            @if (!empty($registration->payments[0]->payment_file))
+                <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}" target="_blank">
+                    [Buka Fail]
+                </a>
+            @else
+                Tiada
+            @endif
+        </td>
     </tr>
 </table>
