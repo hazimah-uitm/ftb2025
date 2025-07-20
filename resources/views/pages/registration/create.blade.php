@@ -516,42 +516,40 @@
                     <div class="mb-1 mt-0">
 
                         <p class="mb-2 mt-2">
-                            <i class="bx bx-info-circle"></i>
-                            <span class="ms-1">
-                                Pihak kami telah membuat pembayaran Yuran Komitmen atas nama
-                                <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
-                                (No. Akaun Bank : <strong>11040010001473</strong>) - BANK ISLAM MALAYSIA BERHAD melalui
-                                kaedah berikut:
-                            </span>
+                            Pihak kami telah membuat pembayaran Yuran Komitmen atas nama
+                            <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
+                            (No. Akaun Bank : <strong>11040010001473</strong>) - BANK ISLAM MALAYSIA BERHAD melalui
+                            kaedah berikut:
                         </p>
-
-                        <div class="border rounded p-3 mb-2 bg-light">
-                            <div class="mb-2 fw-semibold">Pilih kaedah bayaran <span class="text-danger">*</span>
-                            </div>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="radio" name="payment[payment_type]"
-                                    id="method1"
-                                    value="Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD"
-                                    {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="method1">
-                                    Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD.
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment[payment_type]"
-                                    id="method2"
-                                    value="Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)"
-                                    {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="method2">
-                                    Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer (Bayaran
-                                    dari luar negara).
-                                </label>
-                            </div>
-                            @if ($errors->has('payment.payment_type'))
-                                <div class="text-danger mt-1 small">
-                                    {{ $errors->first('payment.payment_type') }}
+                        <div class="row g-3 mb-3">
+                            <div class="col-12">
+                                <div class="mb-2 fw-semibold">Pilih kaedah bayaran <span class="text-danger">*</span>
                                 </div>
-                            @endif
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" name="payment[payment_type]"
+                                        id="method1"
+                                        value="Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD"
+                                        {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="method1">
+                                        Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment[payment_type]"
+                                        id="method2"
+                                        value="Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)"
+                                        {{ old('payment.payment_type', $registration->payments[0]->payment_type ?? '') == 'Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="method2">
+                                        Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer
+                                        (Bayaran dari luar negara).
+                                    </label>
+                                </div>
+                                @if ($errors->has('payment.payment_type'))
+                                    <div class="text-danger mt-1 small">
+                                        {{ $errors->first('payment.payment_type') }}
+                                    </div>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="row g-3 mb-3">
