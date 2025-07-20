@@ -25,9 +25,11 @@ class UpdatedRegistrationInfo extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Penyertaan Telah Dikemaskini Oleh Peserta')
+            ->subject('Penyertaan telah Dikemaskini oleh Peserta')
+            ->greeting('Salam Sejahtera,')
             ->line('Penyertaan oleh ' . $this->registration->user->name . ' telah dikemaskini.')
-            ->action('Lihat Maklumat', route('registration.view', $this->registration->id));
+            ->action('Lihat Maklumat', route('registration.view', $this->registration->id))
+            ->salutation("Terima kasih.");
     }
 
     /**
