@@ -58,14 +58,13 @@
 <table>
     <thead>
         <tr>
-            <th>BIL</th>
-            <th>NAMA AHLI</th>
-            <th>NO. K/P / KTP</th>
-            <th>NO. MATRIK</th>
-            <th>PERANAN</th>
-            <th>L</th>
-            <th>P</th>
-            <th>SAIZ BAJU</th>
+            <th>Bil.</th>
+            <th>Nama</th>
+            <th>No. Kad Pengenalan / Passport / No. KTP</th>
+            <th>No. Matrik / Kad Pelajar</th>
+            <th>Peranan</th>
+            <th>Jantina</th>
+            <th>Saiz Baju</th>
         </tr>
     </thead>
     <tbody>
