@@ -63,7 +63,8 @@
             <th>No. Kad Pengenalan / Passport / No. KTP</th>
             <th>No. Matrik / Kad Pelajar</th>
             <th>Peranan</th>
-            <th>Jantina</th>
+            <th>L</th>
+            <th>P</th>
             <th>Saiz Baju</th>
         </tr>
     </thead>
