@@ -29,7 +29,7 @@
     <li>Kami juga mengakui bahawa pihak Jawatankuasa Penganjur berhak membatalkan penyertaan kami
         sekiranya kami melanggar peraturan penyertaan yang telah ditetapkan.</li>
     <li>Pihak penganjur akan memastikan festival berjalan dengan lancar dan selamat. Namun begitu,
-        sebarang kecederaan atau kemalangan sepanjang FTB 2025 berlangsung adalah atas tanggung jawab
+        sebarang kecederaan atau kemalangan sepanjang FTB 2025 berlangsung adalah atas tanggungjawab
         peserta.</li>
 </ol>
 
