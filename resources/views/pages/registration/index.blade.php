@@ -120,7 +120,7 @@
             </div>
             <div class="mt-3 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <span class="mr-2 mx-1">Records per page</span>
+                    <span class="mr-2 mx-1">Rekod per halaman</span>
                     <form action="{{ route('registration.search') }}" method="GET" id="perPageForm"
                         class="d-flex align-items-center">
                         <input type="hidden" name="search" value="{{ request('search') }}">
@@ -135,8 +135,8 @@
 
                 <div class="d-flex justify-content-end align-items-center">
                     <span class="mx-2 mt-2 small text-muted">
-                        Showing {{ $registrationList->firstItem() }} hingga {{ $registrationList->lastItem() }}
-                        from
+                        Menunjukkan {{ $registrationList->firstItem() }} hingga {{ $registrationList->lastItem() }}
+                        form-control
                         {{ $registrationList->total() }} record(s)
                     </span>
                     <div class="pagination-wrapper">

@@ -114,10 +114,10 @@
                         <div class="flex-fill">
                             <div class="fw-semibold mb-2">Maklumat Tambahan</div>
                             <ul class="mb-0 small ps-3 ps-md-0">
-                                <li>
+                                {{-- <li>
                                     Untuk maklumat lanjut, sila layari <strong>Laman Web Rasmi FTB2025</strong>
                                     (<a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">kenyalang.uitm.edu.my/ftb2025</a>).
-                                </li>
+                                </li> --}}
                                 <li>
                                 Semua pendaftaran mestilah diselesaikan melalui 
                                 <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025" target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
@@ -164,7 +164,7 @@
                             <div class="d-flex align-items-start">
                                 <i class="bx bx-user-check fs-4 text-primary me-3"></i>
                                 <div>
-                                    <div class="fw-semibold">Status Penyertaan Anda</div>
+                                    <div class="fw-semibold">Status Penyertaan Saya Anda</div>
                                     @if ($registration)
                                         <p class="mb-2 small"><strong>Status:</strong>
                                             @if ($registration->status == 'Diluluskan')
@@ -232,10 +232,12 @@
                         <div class="flex-fill">
                             <div class="fw-semibold mb-2">Maklumat Tambahan</div>
                             <ul class="mb-0 small ps-3 ps-md-0">
-                            <li>
-                                    Untuk maklumat lanjut, sila layari <strong>Laman Web Rasmi FTB2025</strong>
-                                    (<a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">kenyalang.uitm.edu.my/ftb2025</a>).
-                                </li>
+                                {{-- <li>
+                                    Untuk maklumat lanjut, sila layari
+                                    <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">
+                                        kenyalang.uitm.edu.my/ftb2025
+                                    </a>.
+                                </li> --}}
                                 <li>
                                 Semua pendaftaran mestilah diselesaikan melalui 
                                         <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025" target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,

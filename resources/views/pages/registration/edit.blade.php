@@ -58,7 +58,7 @@
                         <label for="group_name" class="form-label">Nama Kumpulan</label>
                         <input type="text" class="form-control {{ $errors->has('group_name') ? 'is-invalid' : '' }}"
                             id="group_name" name="group_name"
-                            value="{{ old('group_name', $registration->group_name ?? '') }}" readonly>
+                            value="{{ old('group_name', $registration->group_name ?? '') }}">
                         @if ($errors->has('group_name'))
                             <div class="invalid-feedback">
                                 @foreach ($errors->get('group_name') as $error)
@@ -163,8 +163,16 @@
 
                     <div class="col-6">
                         <label class="form-label">No. Telefon</label>
-                        <input type="text" class="form-control"
-                            value="{{ $phone_no ?? ($registration->user->phone_no ?? '-') }}" readonly>
+                        <input type="text" name="phone_no"
+                            class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
+                            value="{{ old('phone_no', $phone_no ?? ($registration->user->phone_no ?? '')) }}">
+                        @if ($errors->has('phone_no'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('phone_no') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-6">
