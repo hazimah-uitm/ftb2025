@@ -193,7 +193,7 @@
                         <span data-bs-toggle="tooltip" data-bs-placement="right"
                             title="Sila letak pautan url Google Drive"><input type="url"
                                 class="form-control {{ $errors->has('doc_link') ? 'is-invalid' : '' }}" name="doc_link"
-                                value="{{ old('doc_link', $registration->doc_link ?? '') }}" readonly></span>
+                                value="{{ old('doc_link', $registration->doc_link ?? '') }}"></span>
                         @if ($errors->has('doc_link'))
                             <div class="invalid-feedback">
                                 @foreach ($errors->get('doc_link') as $error)
