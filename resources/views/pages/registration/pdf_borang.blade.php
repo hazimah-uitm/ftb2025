@@ -13,7 +13,7 @@
 <div class="section-title">A. BUTIRAN KUMPULAN</div>
 <table>
     <tr>
-        <th style="width: 40%">Nama Institusi</th>
+        <th style="width: 40%;">Nama Institusi</th>
         <td>{{ $registration->user->institution_name }}</td>
     </tr>
     <tr>
@@ -58,14 +58,14 @@
 <table>
     <thead>
         <tr>
-            <th>Bil.</th>
-            <th>Nama</th>
-            <th>No. Kad Pengenalan / Passport / No. KTP</th>
-            <th>No. Matrik / Kad Pelajar</th>
-            <th>Peranan</th>
-            <th>L</th>
-            <th>P</th>
-            <th>Saiz Baju</th>
+            <th style="text-align: center">Bil.</th>
+            <th style="text-align: center">Nama</th>
+            <th style="text-align: center">No. Kad Pengenalan / Passport / No. KTP</th>
+            <th style="text-align: center">No. Matrik / Kad Pelajar</th>
+            <th style="text-align: center">Peranan</th>
+            <th style="text-align: center">L</th>
+            <th style="text-align: center">P</th>
+            <th style="text-align: center">Saiz Baju</th>
         </tr>
     </thead>
     <tbody>
@@ -111,7 +111,7 @@
         <th>Tarikh Bayaran</th>
         <td>{{ $registration->payments[0]->date ?? '-' }}</td>
     </tr>
-    <tr>
+    <!-- <tr>
         <th>Bukti Bayaran</th>
         <td>
             @if (!empty($registration->payments[0]->payment_file))
@@ -122,5 +122,5 @@
                 Tiada
             @endif
         </td>
-    </tr>
+    </tr> -->
 </table>

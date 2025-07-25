@@ -272,7 +272,7 @@
             <div class="col-md-3">
                 <!-- STATUS PENYERTAAN -->
                 <div class="card mb-2">
-                    <div class="card-header bg-light py-2">
+                    <div class="card-header py-2" style="background-color: yellow">
                         <h6 class="mb-0 fw-bold text-uppercase small">Status Penyertaan</h6>
                     </div>
                     <div class="card-body py-2 px-3">
@@ -321,7 +321,7 @@
                 @hasanyrole('Superadmin|Admin')
                     @if ($registration->status === 'Menunggu Kelulusan')
                         <div class="card mb-2">
-                            <div class="card-header bg-light py-2">
+                            <div class="card-header py-2" style="background-color: yellow">
                                 <h6 class="mb-0 fw-bold text-uppercase small">Status Kelulusan</h6>
                             </div>
                             <div class="card-body py-2 px-3">

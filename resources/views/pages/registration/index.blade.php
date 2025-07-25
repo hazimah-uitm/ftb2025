@@ -51,7 +51,7 @@
             </div>
             <div class="table-responsive">
                 <table class="table">
-                    <thead>
+                    <theaD class="text-center">
                         <tr>
                             <th>#</th>
                             <th>Nama Institusi</th>
@@ -156,7 +156,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Record Deletion Confirmation</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Pengesahan Padam Rekod</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
