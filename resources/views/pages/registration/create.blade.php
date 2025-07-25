@@ -159,8 +159,16 @@
 
                     <div class="col-6">
                         <label class="form-label">No. Telefon</label>
-                        <input type="text" class="form-control"
-                            value="{{ $phone_no ?? ($registration->user->phone_no ?? '-') }}" readonly>
+                        <input type="text" name="phone_no"
+                            class="form-control {{ $errors->has('phone_no') ? 'is-invalid' : '' }}"
+                            value="{{ old('phone_no', $phone_no ?? ($registration->user->phone_no ?? '')) }}">
+                        @if ($errors->has('phone_no'))
+                            <div class="invalid-feedback">
+                                @foreach ($errors->get('phone_no') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-6">

@@ -89,6 +89,7 @@ class RegistrationController extends Controller
             // 'koreografer_name' => 'required|string|max:255',
             // 'assistant_koreografer_name' => 'nullable|string|max:255',
             'address' => 'required|string',
+            'phone_no' => 'required|string|max:20',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
             'doc_link' => 'nullable|string|max:255',
@@ -151,6 +152,12 @@ class RegistrationController extends Controller
         // Save Members
         foreach ($request->members as $memberData) {
             $registration->members()->create($memberData);
+        }
+
+        // Kemaskini nombor telefon dalam model User
+        if ($request->has('phone_no')) {
+            $registration->user->phone_no = $request->input('phone_no');
+            $registration->user->save();
         }
 
         // Save Escort Officers
@@ -255,6 +262,7 @@ class RegistrationController extends Controller
             // 'koreografer_name' => 'required|string|max:255',
             // 'assistant_koreografer_name' => 'nullable|string|max:255',
             'address' => 'required|string',
+            'phone_no' => 'required|string|max:20',
             'sinopsis_traditional' => 'required|string',
             'sinopsis_creative' => 'required|string',
             'doc_link' => 'nullable|string|max:255',
@@ -290,6 +298,12 @@ class RegistrationController extends Controller
             foreach ($request->members as $memberData) {
                 $registration->members()->create($memberData);
             }
+        }
+
+        // Kemaskini nombor telefon dalam model User
+        if ($request->has('phone_no')) {
+            $registration->user->phone_no = $request->input('phone_no');
+            $registration->user->save();
         }
 
         // Hantar notification ke semua Admin/Superadmin
@@ -346,7 +360,7 @@ class RegistrationController extends Controller
         $path = public_path('assets/images/logo-ftb1.png');
         $logoData = base64_encode(file_get_contents($path));
         $logoMimeType = mime_content_type($path);
-        
+
         $pdfView = view('pages.registration.pdf', [
             'registration' => $registration,
             'logoBase64' => "data:{$logoMimeType};base64,{$logoData}",
