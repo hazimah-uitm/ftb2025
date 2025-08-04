@@ -80,12 +80,12 @@
             </div>
 
             <!-- Competition Rules -->
-            <div class="card border-start border-4 border-secondary shadow-sm mb-4"
+            <div class="card border-start border-4 border-warning shadow-sm mb-4"
                 style="background: linear-gradient(to right, #f4f4f4, #ffffff);">
                 <div
                     class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 px-4">
                     <div class="d-flex align-items-start">
-                        <i class="bx bx-book fs-4 text-secondary me-3"></i>
+                        <i class="bx bx-book fs-4 text-warning me-3"></i>
                         <div>
                             <div class="fw-semibold">Syarat dan Kriteria Permarkahan Pertandingan</div>
                             <small class="text-muted">Sila baca Syarat dan Kriteria Permarkahan Pertandingan sebelum
@@ -94,7 +94,7 @@
                     </div>
                     <div class="mt-3 mt-md-0">
                         <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}"
-                            class="btn btn-sm btn-secondary" target="_blank">
+                            class="btn btn-sm btn-warning" target="_blank">
                             <i class="bx bx-book-open me-1"></i> Papar Syarat dan Kriteria Permarkahan Pertandingan
                         </a>
                     </div>
