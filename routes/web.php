@@ -18,8 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/manual-pengguna', function () {
-    return view('manual');
+    return redirect(url('public/storage/Manual Pengguna FTB2025.pdf'));
 })->name('manual-pengguna');
+
 
 // Login & logout function
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
