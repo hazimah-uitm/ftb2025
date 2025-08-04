@@ -16,6 +16,6 @@
     </style>
 </head>
 <body>
-    <iframe src="{{ asset('public/storage/Manual Pengguna FTB2025.pdf') }}"></iframe>
+    <iframe src="{{ asset('public/storage/Manual_Pengguna_FTB2025.pdf') }}"></iframe>
 </body>
 </html>
