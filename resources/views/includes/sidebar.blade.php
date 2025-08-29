@@ -50,6 +50,13 @@
     @endhasanyrole
 
     <li>
+        <a href="{{ route('tentatif-program') }}" target="_blank">
+            <div class="parent-icon"><i class='bx bx-calendar'></i></div>
+            <div class="menu-title">Tentatif Program</div>
+        </a>
+    </li>
+
+    <li>
         <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank" rel="noopener">
             <div class="parent-icon"><i class='bx bx-link'></i></div>
             <div class="menu-title">FTB 2025</div>

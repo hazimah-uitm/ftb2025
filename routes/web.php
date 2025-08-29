@@ -21,6 +21,10 @@ Route::get('/manual-pengguna', function () {
     return redirect(url('public/storage/Manual Pengguna FTB2025.pdf'));
 })->name('manual-pengguna');
 
+Route::get('/tentatif-program', function () {
+    return redirect(url('public/storage/TENTATIF  FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025.pdf'));
+})->name('tentatif-program');
+
 
 // Login & logout function
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

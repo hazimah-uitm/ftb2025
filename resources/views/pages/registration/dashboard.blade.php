@@ -9,7 +9,7 @@
                 style="max-height: 100px;">
             <h4 class="fw-bold mb-1">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
             <h6 class="mt-0 mb-0">DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN </h6>
-            <h6 class="mt-0 mb-1">(18 – 21 NOVEMBER 2025)</h6>
+            <h6 class="mt-0 mb-1">(2 DISEMBER 2025 - 5 DISEMBER 2025)</h6>
             <h6 class="mb-0">ANJURAN UiTM CAWANGAN SARAWAK</h6>
         </div>
 
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}"
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PEMARKAHAN FTBIX2025.pdf') }}"
                             class="btn btn-sm btn-warning" target="_blank">
                             <i class="bx bx-book-open me-1"></i> Papar Syarat dan Kriteria Permarkahan Pertandingan
                         </a>
@@ -114,14 +114,17 @@
                         <div class="flex-fill">
                             <div class="fw-semibold mb-2">Maklumat Tambahan</div>
                             <ul class="mb-0 small ps-3 ps-md-0">
-                                {{-- <li>
-                                    Untuk maklumat lanjut, sila layari <strong>Laman Web Rasmi FTB2025</strong>
-                                    (<a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">kenyalang.uitm.edu.my/ftb2025</a>).
-                                </li> --}}
                                 <li>
-                                Semua pendaftaran mestilah diselesaikan melalui 
-                                <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025" target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
-                                    selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
+                                    Untuk maklumat lanjut, sila layari <strong>Laman Web Rasmi FTB2025</strong>
+                                    (<a href="https://kenyalang.uitm.edu.my/ftb2025"
+                                        target="_blank">kenyalang.uitm.edu.my/ftb2025</a>).
+                                </li>
+                                <li>
+                                    Semua pendaftaran mestilah diselesaikan melalui
+                                    <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025"
+                                        target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
+                                    selewat-lewatnya pada <strong>30 September 2025 (Selasa)
+                                    </strong>.
                                 </li>
                                 <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
                                     <ul class="mb-0">
@@ -172,7 +175,8 @@
                                             @elseif ($registration->status == 'Dibatalkan')
                                                 <span class="badge bg-danger" style="font-size: 0.7rem;">Dibatalkan</span>
                                             @else
-                                                <span class="badge bg-warning" style="font-size: 0.7rem;">Menunggu Kelulusan</span>
+                                                <span class="badge bg-warning" style="font-size: 0.7rem;">Menunggu
+                                                    Kelulusan</span>
                                             @endif
                                         </p>
                                     @else
@@ -211,7 +215,7 @@
                         </div>
                     </div>
                     <div class="mt-3 mt-md-0">
-                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PERMARKAHAN FTB2025.pdf') }}"
+                        <a href="{{ asset('public/storage/SYARAT & KRITERIA PEMARKAHAN FTBIX2025.pdf') }}"
                             class="btn btn-sm btn-warning" target="_blank">
                             <i class="bx bx-book-open me-1"></i> Papar Syarat dan Kriteria Permarkahan Pertandingan
                         </a>
@@ -232,16 +236,19 @@
                         <div class="flex-fill">
                             <div class="fw-semibold mb-2">Maklumat Tambahan</div>
                             <ul class="mb-0 small ps-3 ps-md-0">
-                                {{-- <li>
+                                <li>
                                     Untuk maklumat lanjut, sila layari
                                     <a href="https://kenyalang.uitm.edu.my/ftb2025" target="_blank">
                                         kenyalang.uitm.edu.my/ftb2025
                                     </a>.
-                                </li> --}}
+                                </li>
                                 <li>
-                                Semua pendaftaran mestilah diselesaikan melalui 
-                                        <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025" target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
-                                    selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
+                                    Semua pendaftaran mestilah diselesaikan melalui
+                                    <strong>Sistem Pendaftaran FTB 2025</strong> (<a
+                                        href="https://mulu.uitm.edu.my/ftb2025"
+                                        target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
+                                    selewat-lewatnya pada <strong>30 September 2025 (Selasa)
+                                    </strong>.
                                 </li>
                                 <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
                                     <ul class="mb-0">

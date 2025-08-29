@@ -49,7 +49,7 @@
                     </p>
 
                     <ul class="list-unstyled text-center mb-2">
-                        <li><strong>Tarikh: 18 November - 21 November 2025</strong></li>
+                        <li><strong>Tarikh: 2 DISEMBER 2025 - 5 DISEMBER 2025</strong></li>
                         <li><strong>Tempat: Dewan Jubli, UiTM Cawangan Sarawak Kampus Samarahan</strong></li>
                     </ul>
 

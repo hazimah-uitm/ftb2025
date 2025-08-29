@@ -6,7 +6,7 @@
     <h3>SURAT AKUAN PERTANDINGAN</h3>
     <h3>FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h3>
     <h4>DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN </h4>
-    <h4>(18 – 21 NOVEMBER 2025)</h4>
+    <h4>(2 DISEMBER 2025 - 5 DISEMBER 2025)</h4>
     <h4>ANJURAN UiTM CAWANGAN SARAWAK</h4>
 </div>
 
@@ -16,7 +16,7 @@
 </p>
 
 <ul style="margin-left: 30px;">
-    <li><strong>Tarikh: 18 November - 21 November 2025</strong></li>
+    <li><strong>Tarikh: 2 DISEMBER 2025 - 5 DISEMBER 2025</strong></li>
     <li><strong>Tempat: Dewan Jubli, UiTM Cawangan Sarawak, Kampus Samarahan</strong></li>
 </ul>
 
