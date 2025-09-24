@@ -9,7 +9,7 @@
                 style="max-height: 100px;">
             <h4 class="fw-bold mb-1">FESTIVAL TARI BORNEO IX (EDISI KE-9) 2025</h4>
             <h6 class="mt-0 mb-0">DEWAN JUBLI, UiTM CAWANGAN SARAWAK, KAMPUS SAMARAHAN </h6>
-            <h6 class="mt-0 mb-1">(2 DISEMBER 2025 - 5 DISEMBER 2025)</h6>
+            <h6 class="mt-0 mb-1">(3 Disember 2025 - 4 Disember 2025)</h6>
             <h6 class="mb-0">ANJURAN UiTM CAWANGAN SARAWAK</h6>
         </div>
 
