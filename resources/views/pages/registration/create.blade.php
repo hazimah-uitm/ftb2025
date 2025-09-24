@@ -554,7 +554,7 @@
                                 <li class="mb-2">
                                     Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat akuan
                                     pertandingan,
-                                    selewat-lewatnya pada <strong>31 Ogos 2025 (Ahad)</strong>.
+                                    selewat-lewatnya pada <strong>30 September 2025 (Selasa)</strong>.
                                 </li>
                                 <li>
                                     Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
