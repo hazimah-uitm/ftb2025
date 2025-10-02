@@ -425,116 +425,220 @@
                     </template>
 
                     {{-- Payment --}}
-                    <hr class="my-2">
-                    <h6 class="text-primary">PENGESAHAN PEMBAYARAN YURAN KOMITMEN</h6>
+                    {{-- Payment --}}
+<hr class="my-2">
+<h6 class="text-primary">PENGESAHAN PEMBAYARAN YURAN KOMITMEN</h6>
 
-                    <div class="mb-1 mt-0">
+@php
+    $p = isset($registration->payments[0]) ? $registration->payments[0] : null;
+@endphp
 
-                        <p class="mb-3 small">
-                            Pihak kami telah membuat pembayaran Yuran Komitmen atas nama
-                            <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
-                            (No. Akaun Bank : <strong>11040010001473</strong>) - BANK ISLAM MALAYSIA BERHAD melalui
-                            kaedah berikut:
-                        </p>
-                        @foreach ($registration->payments as $payment)
-                            <table class="table table-borderless table-sm">
-                                <tr>
-                                    <th style="width:30%">Kaedah Bayaran</th>
-                                    <td>{{ $payment->payment_type }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Tarikh Bayaran</th>
-                                    <td>{{ $payment->date }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Bukti Bayaran</th>
-                                    <td>
-                                        @if ($payment->payment_file)
-                                            <a href="{{ asset('public/storage/' . $payment->payment_file) }}"
-                                                target="_blank"><i class='bx bxs-file-pdf fs-4'></i></a>
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                </tr>
-                            </table>
-                        @endforeach
-                    </div>
+<div class="mb-1 mt-0">
+    <p class="mb-2 mt-2">
+        Pihak kami telah membuat pembayaran Yuran Komitmen atas nama
+        <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
+        (No. Akaun Bank : <strong>11040010001473</strong>) - BANK ISLAM MALAYSIA BERHAD melalui
+        kaedah berikut:
+    </p>
+
+    {{-- Kaedah bayaran (radio) --}}
+    <div class="row g-3 mb-3">
+        <div class="col-12">
+            <div class="mb-2 fw-semibold">Pilih kaedah bayaran</div>
+
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="payment[payment_type]" id="method1"
+                    value="Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD"
+                    {{ old('payment.payment_type', $p ? $p->payment_type : '') == 'Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD' ? 'checked' : '' }}>
+                <label class="form-check-label" for="method1">
+                    Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment[payment_type]" id="method2"
+                    value="Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)"
+                    {{ old('payment.payment_type', $p ? $p->payment_type : '') == 'Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)' ? 'checked' : '' }}>
+                <label class="form-check-label" for="method2">
+                    Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer (Bayaran dari luar negara).
+                </label>
+            </div>
+
+            @if ($errors->has('payment.payment_type'))
+                <div class="text-danger mt-1 small">
+                    {{ $errors->first('payment.payment_type') }}
                 </div>
-
-                <button type="submit" class="btn btn-primary">{{ $str_mode }}</button>
-            </form>
+            @endif
         </div>
     </div>
-    <!-- End Page Wrapper -->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const addBtn = document.getElementById('add-member-btn');
-            const tableBody = document.querySelector('#members-table tbody');
-            const rowTemplate = document.getElementById('member-row-template').innerHTML;
+    {{-- Tarikh & Bukti --}}
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <label class="form-label fw-semibold">Tarikh Bayaran </label>
+            <input type="date"
+                class="form-control {{ $errors->has('payment.date') ? 'is-invalid' : '' }}"
+                name="payment[date]"
+                value="{{ old('payment.date', $p && $p->date ? \Illuminate\Support\Carbon::parse($p->date)->format('Y-m-d') : '') }}">
+            @if ($errors->has('payment.date'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('payment.date') }}
+                </div>
+            @endif
+        </div>
 
-            function updateNumbers() {
-                [...tableBody.querySelectorAll('tr')].forEach((tr, idx) => {
-                    tr.querySelector('td:first-child').textContent = idx + 1;
-                });
-            }
+        <div class="col-md-6">
+            <label class="form-label fw-semibold">Muat naik Bukti Pembayaran (PDF / Imej)</label>
+            <input type="file" name="payment[payment_file]" class="form-control">
 
-            function addRow(data = {}) {
-                const index = tableBody.querySelectorAll('tr').length;
-                let html = rowTemplate.replace(/__INDEX__/g, index).replace(/__NO__/g, index + 1);
+            {{-- Papar fail sedia ada jika ada --}}
+            @if ($p && !empty($p->payment_file))
+                <small class="d-block mt-1">
+                    Fail sedia ada:
+                    <a href="{{ asset('public/storage/' . $p->payment_file) }}" target="_blank">Papar</a>
+                    <span class="text-muted">— Biarkan kosong jika tidak mahu tukar.</span>
+                </small>
+            @endif
 
-                const temp = document.createElement('tbody');
-                temp.innerHTML = html.trim();
-                const row = temp.firstElementChild;
+            {{-- Papar fail sementara jika ada (ikut pattern create form awak) --}}
+            @if (session('uploaded_payment_file'))
+                <small class="d-block mt-1 text-success">
+                    Fail telah dimuat naik:
+                    <a href="{{ asset('public/storage/' . session('uploaded_payment_file')) }}" target="_blank">Papar</a>
+                </small>
+            @endif
 
-                // Fill data
-                Object.keys(data).forEach(key => {
-                    const input = row.querySelector(`[name="members[${index}][${key}]"]`);
-                    if (input) input.value = data[key];
-                });
+            @if ($errors->has('payment.payment_file'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('payment.payment_file') }}
+                </div>
+            @endif
+        </div>
+    </div>
 
-                tableBody.appendChild(row);
+    {{-- Nota sama seperti create --}}
+    <div class="alert alert-info mt-2 small p-3">
+        <p class="mb-2"><strong>Nota:</strong></p>
+        <ol class="mb-2 ps-3">
+            <li class="mb-2">
+                Peserta boleh memilih salah satu kaedah untuk membuat pembayaran yuran penyertaan seperti berikut:
+                <ul class="mb-2">
+                    <li>Deposit terus ke akaun UiTMKS di BANK ISLAM MALAYSIA BERHAD bernombor:
+                        <b>11040010001473</b>, di mana-mana cawangan <b>BANK ISLAM MALAYSIA BERHAD.</b>
+                    </li>
+                    <li>Bayaran dibuat melalui pindaan wang (IBG Transfers) atau Telegraphic Transfer
+                        (bayaran daripada luar negara).
+                    </li>
+                </ul>
+            </li>
+            <li class="mb-2">
+                Setiap kumpulan dikehendaki mengepilkan bersama salinan bukti transaksi bayaran bersama borang ini.
+            </li>
+            <li class="mb-2">
+                Maklumat bank UiTMKS untuk bayaran adalah seperti berikut:
+                <div class="card border-0 shadow-sm mt-2 mb-1">
+                    <div class="card-body p-2">
+                        <table class="table table-borderless table-striped table-sm mb-0">
+                            <tr><td>Penama Akaun:</td><td><strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong></td></tr>
+                            <tr><td>No. Akaun Bank:</td><td><strong>11040010001473</strong></td></tr>
+                            <tr><td>Nama Syarikat Bank:</td><td><strong>BANK ISLAM MALAYSIA BERHAD</strong></td></tr>
+                            <tr><td>Alamat Bank:</td><td><strong>UITM KAMPUS SAMARAHAN, JALAN MERANEK, 94300 KOTA SAMARAHAN</strong></td></tr>
+                            <tr><td>Swift Code:</td><td><strong>BIMBMYKL</strong></td></tr>
+                            <tr><td>Jumlah Yuran:</td><td><strong>RM1,500 / Kumpulan</strong></td></tr>
+                            <tr><td>Rujukan Bayaran:</td><td><strong>FTB2025</strong></td></tr>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            <li class="mb-2">
+                Semua pendaftaran mestilah diselesaikan melalui sistem, berserta surat akuan pertandingan,
+                selewat-lewatnya pada <strong>30 September 2025 (Selasa)</strong>.
+            </li>
+            <li class="mb-0">
+                Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
+                <ul class="mb-0">
+                    <li>Cik Melinda Anak Jindu (+6082 678 059) / <a href="mailto:mel@uitm.edu.my">mel@uitm.edu.my</a></li>
+                    <li>Cik Lydia Jimbie Anak Anthony (+6082 677 058) / <a href="mailto:lydia@uitm.edu.my">lydia@uitm.edu.my</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">{{ $str_mode }}</button>
+        </form>
+    </div>
+</div>
+<!-- End Page Wrapper -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addBtn = document.getElementById('add-member-btn');
+        const tableBody = document.querySelector('#members-table tbody');
+        const rowTemplate = document.getElementById('member-row-template').innerHTML;
+
+        function updateNumbers() {
+            [...tableBody.querySelectorAll('tr')].forEach((tr, idx) => {
+                tr.querySelector('td:first-child').textContent = idx + 1;
+            });
+        }
+
+        function addRow(data = {}) {
+            const index = tableBody.querySelectorAll('tr').length;
+            let html = rowTemplate.replace(/__INDEX__/g, index).replace(/__NO__/g, index + 1);
+
+            const temp = document.createElement('tbody');
+            temp.innerHTML = html.trim();
+            const row = temp.firstElementChild;
+
+            // Fill data
+            Object.keys(data).forEach(key => {
+                const input = row.querySelector(`[name="members[${index}][${key}]"]`);
+                if (input) input.value = data[key];
+            });
+
+            tableBody.appendChild(row);
+            updateNumbers();
+        }
+
+        // Delegated event for delete button
+        tableBody.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-member')) {
+                const row = e.target.closest('tr');
+                row.remove();
                 updateNumbers();
             }
-
-            // Delegated event for delete button
-            tableBody.addEventListener('click', function(e) {
-                if (e.target.closest('.remove-member')) {
-                    const row = e.target.closest('tr');
-                    row.remove();
-                    updateNumbers();
-                }
-            });
-
-            const alertBox = document.getElementById('max-member-alert');
-            let alertTimeout = null;
-
-            addBtn.addEventListener('click', function() {
-                const currentCount = tableBody.querySelectorAll('tr').length;
-
-                if (currentCount >= 25) {
-                    alertBox.classList.remove('d-none');
-
-                    // Reset timeout kalau alert ditekan berulang
-                    if (alertTimeout) clearTimeout(alertTimeout);
-
-                    alertTimeout = setTimeout(() => {
-                        alertBox.classList.add('d-none');
-                    }, 10000); // 5000ms = 5 saat
-
-                    alertBox.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                    return;
-                } else {
-                    alertBox.classList.add('d-none');
-                }
-
-                addRow();
-            });
         });
-    </script>
 
+        const alertBox = document.getElementById('max-member-alert');
+        let alertTimeout = null;
+
+        addBtn.addEventListener('click', function() {
+            const currentCount = tableBody.querySelectorAll('tr').length;
+
+            if (currentCount >= 25) {
+                alertBox.classList.remove('d-none');
+
+                // Reset timeout kalau alert ditekan berulang
+                if (alertTimeout) clearTimeout(alertTimeout);
+
+                alertTimeout = setTimeout(() => {
+                    alertBox.classList.add('d-none');
+                }, 10000); // 5000ms = 5 saat
+
+                alertBox.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                return;
+            } else {
+                alertBox.classList.add('d-none');
+            }
+
+            addRow();
+        });
+    });
+</script>
 @endsection

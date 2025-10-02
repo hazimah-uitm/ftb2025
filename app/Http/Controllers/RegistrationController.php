@@ -291,6 +291,9 @@ class RegistrationController extends Controller
             'members.*.jantina' => 'required|string',
             'members.*.saiz_baju' => 'required|string',
             'members.*.student_id' => 'nullable|string|max:100',
+            'payment.payment_type' => 'nullable|string|max:255',
+            'payment.date' => 'nullable|date',
+            'payment.payment_file' => 'nullable|file|max:2048',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
             'traditional_dance_name.required' => 'Sila isi nama tarian tradisional',
@@ -322,6 +325,58 @@ class RegistrationController extends Controller
         if ($request->has('phone_no')) {
             $registration->user->phone_no = $request->input('phone_no');
             $registration->user->save();
+        }
+
+        // Payment
+        $paymentPayload = $request->input('payment', []);
+
+        // Ada sebarang input payment?
+        $hasAnyPaymentInput = $request->filled('payment.payment_type')
+            || $request->filled('payment.date')
+            || $request->hasFile('payment.payment_file');
+
+        // Ambil rekod payment pertama (jika anda guna 1 rekod shj per registration)
+        $currentPayment = $registration->payments()->first();
+
+        if ($hasAnyPaymentInput) {
+            // Sediakan data asas (nullable)
+            $data = [
+                'payment_type' => $paymentPayload['payment_type'] ?? null,
+                'date'         => $paymentPayload['date'] ?? null,
+                // payment_file isi kemudian
+            ];
+
+            // Fail baharu dimuat naik?
+            if ($request->hasFile('payment.payment_file')) {
+                // Padam fail lama jika wujud
+                if ($currentPayment && !empty($currentPayment->payment_file) && Storage::disk('public')->exists($currentPayment->payment_file)) {
+                    Storage::disk('public')->delete($currentPayment->payment_file);
+                }
+                // Simpan fail baru
+                $data['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+            } else {
+                // Tiada upload baru → kekalkan fail lama jika wujud
+                if ($currentPayment) {
+                    $data['payment_file'] = $currentPayment->payment_file; // maintain
+                } else {
+                    $data['payment_file'] = $paymentPayload['payment_file'] ?? null;
+                }
+            }
+
+            if ($currentPayment) {
+                $currentPayment->update($data);
+            } else {
+                $registration->payments()->create($data);
+            }
+        } else {
+            // Tiada input payment langsung → biarkan apa yang sedia ada (no-op)
+            // Jika anda mahu beri opsyen buang payment, guna checkbox 'payment_remove' (rujuk di bawah)
+            if ($request->boolean('payment_remove') && $currentPayment) {
+                if (!empty($currentPayment->payment_file) && Storage::disk('public')->exists($currentPayment->payment_file)) {
+                    Storage::disk('public')->delete($currentPayment->payment_file);
+                }
+                $currentPayment->delete(); // atau ->forceDelete() ikut keperluan
+            }
         }
 
         // Hantar notification ke semua Admin/Superadmin
