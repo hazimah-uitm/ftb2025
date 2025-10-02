@@ -198,7 +198,8 @@
                                                 <tr>
                                                     <th style="width: 3%">#</th>
                                                     <th class="text-wrap" style="width: 30%">Nama</th>
-                                                    <th class="text-wrap" style="width: 25%">No. Kad Pengenalan / Passport / No. KTP</th>
+                                                    <th class="text-wrap" style="width: 25%">No. Kad Pengenalan / Passport /
+                                                        No. KTP</th>
                                                     <th class="text-wrap" style="width: 20%">No. Matrik / Kad Pelajar</th>
                                                     <th class="text-wrap" style="width: 8%">Peranan</th>
                                                     <th style="width: 7%">Jantina</th>
@@ -228,13 +229,14 @@
 
 
                 <!-- Payment -->
-                @if ($registration->payments && $registration->payments->count())
-                    <div class="card mb-2">
-                        <div class="card-header bg-light">
-                            <h6 class="mb-0 fw-bold text-uppercase">PENGESAHAN PEMBAYARAN YURAN KOMITMEN</h6>
-                        </div>
-                        <div class="card-body">
+                <div class="card mb-2">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0 fw-bold text-uppercase">PENGESAHAN PEMBAYARAN YURAN KOMITMEN</h6>
+                    </div>
+                    <div class="card-body">
 
+
+                        @if ($registration->payments && $registration->payments->count())
                             <p class="mb-3 small">
                                 Pihak kami telah membuat pembayaran Yuran Komitmen atas nama
                                 <strong>UNIVERSITI TEKNOLOGI MARA (UITM) (UITM-AAW1)</strong>
@@ -245,18 +247,20 @@
                                 <table class="table table-borderless table-sm">
                                     <tr>
                                         <th style="width:30%">Kaedah Bayaran</th>
-                                        <td>{{ $payment->payment_type }}</td>
+                                        <td>{{ $payment->payment_type ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tarikh Bayaran</th>
-                                        <td>{{ $payment->date }}</td>
+                                        <td>{{ $payment->date ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Bukti Bayaran</th>
                                         <td>
                                             @if ($payment->payment_file)
                                                 <a href="{{ asset('public/storage/' . $payment->payment_file) }}"
-                                                    target="_blank"><i class='bx bxs-file-pdf fs-4'></i></a>
+                                                    target="_blank">
+                                                    <i class='bx bxs-file-pdf fs-4'></i>
+                                                </a>
                                             @else
                                                 -
                                             @endif
@@ -264,9 +268,13 @@
                                     </tr>
                                 </table>
                             @endforeach
-                        </div>
+                        @else
+                            <p class="text-muted mb-0">Tiada maklumat pembayaran direkodkan.</p>
+                        @endif
+
                     </div>
-                @endif
+                </div>
+
             </div>
 
             <div class="col-md-3">

@@ -91,36 +91,43 @@
 </table>
 
 <div class="section-title">C. PENGESAHAN PEMBAYARAN YURAN KOMITMEN</div>
-<table>
-    <tr>
-        <th>Kaedah Bayaran</th>
-        <td>
-            <span class="checkbox">{!! ($registration->payments[0]->payment_type ?? '') ==
-            'Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD'
-                ? '&#9745;'
-                : '&#9744;' !!}</span> Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM
-            MALAYSIA BERHAD<br>
-            <span class="checkbox">{!! ($registration->payments[0]->payment_type ?? '') ==
-            'Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)'
-                ? '&#9745;'
-                : '&#9744;' !!}</span> Bayaran dibuat melalui pindahan wang (IBG Transfer)
-            atau Telegraphic Transfer (Bayaran dari luar negara)
-        </td>
-    </tr>
-    <tr>
-        <th>Tarikh Bayaran</th>
-        <td>{{ $registration->payments[0]->date ?? '-' }}</td>
-    </tr>
-    <!-- <tr>
-        <th>Bukti Bayaran</th>
-        <td>
-            @if (!empty($registration->payments[0]->payment_file))
-                <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}" target="_blank">
-                    [Buka Fail]
-                </a>
-            @else
-                Tiada
-            @endif
-        </td>
-    </tr> -->
-</table>
+@if ($registration->payments && $registration->payments->count())
+    <table>
+        <tr>
+            <th>Kaedah Bayaran</th>
+            <td>
+                <span class="checkbox">{!! ($registration->payments[0]->payment_type ?? '') ==
+                'Deposit terus ke akaun UiTMKS di cawangan BANK ISLAM MALAYSIA BERHAD'
+                    ? '&#9745;'
+                    : '&#9744;' !!}</span> Deposit terus ke akaun UiTMKS di cawangan BANK
+                ISLAM
+                MALAYSIA BERHAD<br>
+                <span class="checkbox">{!! ($registration->payments[0]->payment_type ?? '') ==
+                'Bayaran dibuat melalui pindahan wang (IBG Transfer) atau Telegraphic Transfer  (Bayaran dari luar negara)'
+                    ? '&#9745;'
+                    : '&#9744;' !!}</span> Bayaran dibuat melalui pindahan wang (IBG
+                Transfer)
+                atau Telegraphic Transfer (Bayaran dari luar negara)
+            </td>
+        </tr>
+        <tr>
+            <th>Tarikh Bayaran</th>
+            <td>{{ $registration->payments[0]->date ?? '-' }}</td>
+        </tr>
+        <tr>
+            <th>Bukti Bayaran</th>
+            <td>
+                @if (!empty($registration->payments[0]->payment_file))
+                    <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}"
+                        target="_blank">
+                        [Buka Fail]
+                    </a>
+                @else
+                    Tiada
+                @endif
+            </td>
+        </tr>
+    </table>
+@else
+    <p class="text-muted">Tiada maklumat pembayaran direkodkan.</p>
+@endif

@@ -430,8 +430,7 @@
                         </p>
                         <div class="row g-3 mb-3">
                             <div class="col-12">
-                                <div class="mb-2 fw-semibold">Pilih kaedah bayaran <span class="text-danger">*</span>
-                                </div>
+                                <div class="mb-2 fw-semibold">Pilih kaedah bayaran</div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="radio" name="payment[payment_type]"
                                         id="method1"
@@ -461,8 +460,7 @@
 
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Tarikh Bayaran <span
-                                        class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Tarikh Bayaran </label>
                                 <input type="date"
                                     class="form-control {{ $errors->has('payment.date') ? 'is-invalid' : '' }}"
                                     name="payment[date]"
@@ -477,7 +475,6 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">
                                     Muat naik Bukti Pembayaran (PDF / Imej)
-                                    <span class="text-danger">*</span>
                                 </label>
                                 <input type="file" name="payment[payment_file]" class="form-control">
                                 @if (session('uploaded_payment_file'))

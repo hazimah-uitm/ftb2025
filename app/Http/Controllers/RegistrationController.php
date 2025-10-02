@@ -104,8 +104,8 @@ class RegistrationController extends Controller
             // 'escort_officers' => 'nullable|array',
             // 'escort_officers.*.name' => 'required|string|max:255',
 
-            'payment.payment_type' => 'required|string|max:255',
-            'payment.date' => 'required|date',
+            'payment.payment_type' => 'nullable|string|max:255',
+            'payment.date' => 'nullable|date',
             'payment.payment_file' => 'nullable|file|max:2048',
         ], [
             'group_name.required' => 'Sila isi nama kumpulan',
@@ -136,9 +136,9 @@ class RegistrationController extends Controller
         }
 
         // WAJIB fail jika tiada fail lama dalam session
-        if (!session()->has('uploaded_payment_file') && !$request->hasFile('payment.payment_file')) {
-            return back()->withErrors(['payment.payment_file' => 'Sila muat naik bukti pembayaran (PDF).'])->withInput();
-        }
+        // if (!session()->has('uploaded_payment_file') && !$request->hasFile('payment.payment_file')) {
+        //     return back()->withErrors(['payment.payment_file' => 'Sila muat naik bukti pembayaran (PDF).'])->withInput();
+        // }
 
         $registration = new Registration();
         $registration->user_id = Auth::id();
@@ -169,19 +169,37 @@ class RegistrationController extends Controller
 
         $paymentData = $request->input('payment', []);
 
-        if (session('uploaded_payment_file')) {
-            $finalPath = str_replace('temp_payment_files/', 'payment_files/', session('uploaded_payment_file'));
-            Storage::disk('public')->move(session('uploaded_payment_file'), $finalPath);
-            $paymentData['payment_file'] = $finalPath;
-        } elseif ($request->hasFile('payment.payment_file')) {
-            $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+        // Tentukan sama ada user isi apa-apa berkaitan payment
+        $hasAnyPayment = $request->filled('payment.payment_type')
+            || $request->filled('payment.date')
+            || $request->hasFile('payment.payment_file')
+            || session()->has('uploaded_payment_file');
+
+        // Kalau ada apa-apa input/payment file, barulah proses & create rekod payment
+        if ($hasAnyPayment) {
+
+            if (session('uploaded_payment_file')) {
+                $finalPath = str_replace('temp_payment_files/', 'payment_files/', session('uploaded_payment_file'));
+                Storage::disk('public')->move(session('uploaded_payment_file'), $finalPath);
+                $paymentData['payment_file'] = $finalPath;
+            } elseif ($request->hasFile('payment.payment_file')) {
+                $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+            } else {
+                // tiada fail? tak mengapa—biarkan payment_file kekal null
+                $paymentData['payment_file'] = $paymentData['payment_file'] ?? null;
+            }
+
+            $registration->payments()->create([
+                'payment_type' => $paymentData['payment_type'] ?? null,
+                'date'         => $paymentData['date'] ?? null,
+                'payment_file' => $paymentData['payment_file'] ?? null,
+            ]);
+
+            session()->forget('uploaded_payment_file');
         } else {
-            return back()->withErrors(['payment.payment_file' => 'Sila muat naik bukti pembayaran (PDF).'])->withInput();
+            // tiada apa-apa input berkaitan payment → jangan create rekod payment langsung
+            session()->forget('uploaded_payment_file');
         }
-
-        $registration->payments()->create($paymentData);
-
-        session()->forget('uploaded_payment_file');
 
         // Hantar notification ke semua Admin/Superadmin
         $admins = User::role(['Admin', 'Superadmin'])->get();

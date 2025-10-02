@@ -51,7 +51,7 @@
             </div>
             <div class="table-responsive">
                 <table class="table">
-                    <theaD class="text-center">
+                    <thead class="text-center">
                         <tr>
                             <th>#</th>
                             <th>Nama Institusi</th>
@@ -62,7 +62,7 @@
                             <th>Tindakan</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @if (count($registrationList) > 0)
                             @foreach ($registrationList as $registration)
                                 <tr>
