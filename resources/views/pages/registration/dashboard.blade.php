@@ -123,7 +123,7 @@
                                     Semua pendaftaran mestilah diselesaikan melalui
                                     <strong>Sistem Pendaftaran FTB 2025</strong> (<a href="https://mulu.uitm.edu.my/ftb2025"
                                         target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
-                                    selewat-lewatnya pada <strong>30 September 2025 (Selasa)
+                                    selewat-lewatnya pada <strong>12 Oktober 2025 (Ahad)
                                     </strong>.
                                 </li>
                                 <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
@@ -247,7 +247,7 @@
                                     <strong>Sistem Pendaftaran FTB 2025</strong> (<a
                                         href="https://mulu.uitm.edu.my/ftb2025"
                                         target="_blank">mulu.uitm.edu.my/ftb2025</a>), berserta surat akuan pertandingan,
-                                    selewat-lewatnya pada <strong>30 September 2025 (Selasa)
+                                    selewat-lewatnya pada <strong>12 Oktober 2025 (Ahad)
                                     </strong>.
                                 </li>
                                 <li>Untuk maklumat lanjut atau sebarang pertanyaan, sila hubungi:
