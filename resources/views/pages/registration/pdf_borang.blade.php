@@ -120,7 +120,7 @@
                 @if (!empty($registration->payments[0]->payment_file))
                     <a href="{{ asset('public/storage/' . $registration->payments[0]->payment_file) }}"
                         target="_blank">
-                        [Buka Fail]
+                        [Pautan Fail]
                     </a>
                 @else
                     Tiada
