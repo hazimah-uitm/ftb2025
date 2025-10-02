@@ -69,8 +69,8 @@
                     @foreach ($userList as $user)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->institution_name }}</td>
-                        <td>{{ ucfirst($user->name) }}</td>
+                        <td class="text-wrap">{{ $user->institution_name }}</td>
+                        <td class="text-wrap">{{ ucfirst($user->name) }}</td>
                         <td>{{ $user->ic_no }}</td>
                         <td>{{ $user->position }}</td>
                         <td>{{ $user->phone_no }}</td>
