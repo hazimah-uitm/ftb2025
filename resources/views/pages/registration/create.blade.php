@@ -336,7 +336,7 @@
                                                 <select name="members[{{ $index }}][saiz_baju]"
                                                     class="form-select {{ $errors->has("members.$index.saiz_baju") ? 'is-invalid' : '' }}">
                                                     <option value="">Saiz Baju</option>
-                                                    @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $size)
+                                                    @foreach (['S', 'M', 'L', 'XL', '2XL', '3XL'] as $size)
                                                         <option value="{{ $size }}"
                                                             {{ old("members.$index.saiz_baju", $member['saiz_baju']) == $size ? 'selected' : '' }}>
                                                             {{ $size }}</option>
@@ -403,7 +403,7 @@
                             <td>
                                 <select name="members[__INDEX__][saiz_baju]" class="form-select">
                                     <option value="">Saiz Baju</option>
-                                    @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $s)
+                                    @foreach (['S', 'M', 'L', 'XL', '2XL', '3XL'] as $s)
                                         <option value="{{ $s }}">{{ $s }}</option>
                                     @endforeach
                                 </select>
