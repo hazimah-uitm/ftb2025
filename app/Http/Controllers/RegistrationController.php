@@ -169,36 +169,39 @@ class RegistrationController extends Controller
 
         $paymentData = $request->input('payment', []);
 
-        // Tentukan sama ada user isi apa-apa berkaitan payment
-        $hasAnyPayment = $request->filled('payment.payment_type')
-            || $request->filled('payment.date')
+        // normalize empty strings → null
+        $paymentType = isset($paymentData['payment_type']) && $paymentData['payment_type'] !== '' ? $paymentData['payment_type'] : null;
+        $paymentDate = isset($paymentData['date']) && $paymentData['date'] !== '' ? $paymentData['date'] : null;
+
+        // Ada sebarang input/payment file?
+        $hasAnyPayment = ($paymentType !== null)
+            || ($paymentDate !== null)
             || $request->hasFile('payment.payment_file')
             || session()->has('uploaded_payment_file');
 
-        // Kalau ada apa-apa input/payment file, barulah proses & create rekod payment
         if ($hasAnyPayment) {
-
             if (session('uploaded_payment_file')) {
                 $finalPath = str_replace('temp_payment_files/', 'payment_files/', session('uploaded_payment_file'));
                 Storage::disk('public')->move(session('uploaded_payment_file'), $finalPath);
-                $paymentData['payment_file'] = $finalPath;
+                $paymentFile = $finalPath;
             } elseif ($request->hasFile('payment.payment_file')) {
-                $paymentData['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
+                $paymentFile = $request->file('payment.payment_file')->store('payment_files', 'public');
             } else {
-                // tiada fail? tak mengapa—biarkan payment_file kekal null
-                $paymentData['payment_file'] = $paymentData['payment_file'] ?? null;
+                $paymentFile = null; // kekalkan null jika tiada fail
             }
 
-            $registration->payments()->create([
-                'payment_type' => $paymentData['payment_type'] ?? null,
-                'date'         => $paymentData['date'] ?? null,
-                'payment_file' => $paymentData['payment_file'] ?? null,
-            ]);
+            // Jika selepas normalize semuanya null dan tiada fail → jangan cipta rekod
+            if ($paymentType !== null || $paymentDate !== null || $paymentFile !== null) {
+                $registration->payments()->create([
+                    'payment_type' => $paymentType,
+                    'date'         => $paymentDate,
+                    'payment_file' => $paymentFile,
+                ]);
+            }
 
             session()->forget('uploaded_payment_file');
         } else {
-            // tiada apa-apa input berkaitan payment → jangan create rekod payment langsung
-            session()->forget('uploaded_payment_file');
+            session()->forget('uploaded_payment_file'); // clear jika ada lebihan
         }
 
         // Hantar notification ke semua Admin/Superadmin
@@ -330,52 +333,61 @@ class RegistrationController extends Controller
         // Payment
         $paymentPayload = $request->input('payment', []);
 
-        // Ada sebarang input payment?
-        $hasAnyPaymentInput = $request->filled('payment.payment_type')
-            || $request->filled('payment.date')
+        // normalize empty strings → null
+        $paymentType = isset($paymentPayload['payment_type']) && $paymentPayload['payment_type'] !== '' ? $paymentPayload['payment_type'] : null;
+        $paymentDate = isset($paymentPayload['date']) && $paymentPayload['date'] !== '' ? $paymentPayload['date'] : null;
+
+        // Ada sebarang input payment (selepas normalize) atau fail baru?
+        $hasAnyPaymentInput = ($paymentType !== null)
+            || ($paymentDate !== null)
             || $request->hasFile('payment.payment_file');
 
-        // Ambil rekod payment pertama (jika anda guna 1 rekod shj per registration)
         $currentPayment = $registration->payments()->first();
 
         if ($hasAnyPaymentInput) {
-            // Sediakan data asas (nullable)
             $data = [
-                'payment_type' => $paymentPayload['payment_type'] ?? null,
-                'date'         => $paymentPayload['date'] ?? null,
+                'payment_type' => $paymentType,
+                'date'         => $paymentDate,
                 // payment_file isi kemudian
             ];
 
-            // Fail baharu dimuat naik?
             if ($request->hasFile('payment.payment_file')) {
-                // Padam fail lama jika wujud
+                // Padam fail lama kalau ada
                 if ($currentPayment && !empty($currentPayment->payment_file) && Storage::disk('public')->exists($currentPayment->payment_file)) {
                     Storage::disk('public')->delete($currentPayment->payment_file);
                 }
-                // Simpan fail baru
                 $data['payment_file'] = $request->file('payment.payment_file')->store('payment_files', 'public');
             } else {
                 // Tiada upload baru → kekalkan fail lama jika wujud
                 if ($currentPayment) {
-                    $data['payment_file'] = $currentPayment->payment_file; // maintain
+                    $data['payment_file'] = $currentPayment->payment_file;
                 } else {
-                    $data['payment_file'] = $paymentPayload['payment_file'] ?? null;
+                    $data['payment_file'] = null;
                 }
             }
 
+            // Jika selepas normalize semuanya null dan tiada fail → jangan cipta/update
+            $allNull = ($data['payment_type'] === null) && ($data['date'] === null) && ($data['payment_file'] === null);
+
             if ($currentPayment) {
-                $currentPayment->update($data);
+                if ($allNull) {
+                    // tiada makna untuk kekal rekod kosong—optional: biarkan sahaja no-op
+                    // $currentPayment->update($data); // dielakkan supaya tak tulis '' ke DB
+                } else {
+                    $currentPayment->update($data);
+                }
             } else {
-                $registration->payments()->create($data);
+                if (!$allNull) {
+                    $registration->payments()->create($data);
+                }
             }
         } else {
-            // Tiada input payment langsung → biarkan apa yang sedia ada (no-op)
-            // Jika anda mahu beri opsyen buang payment, guna checkbox 'payment_remove' (rujuk di bawah)
-            if ($request->boolean('payment_remove') && $currentPayment) {
+            // Tiada input payment langsung → no-op
+            if ($request->has('payment_remove') && $currentPayment) {
                 if (!empty($currentPayment->payment_file) && Storage::disk('public')->exists($currentPayment->payment_file)) {
                     Storage::disk('public')->delete($currentPayment->payment_file);
                 }
-                $currentPayment->delete(); // atau ->forceDelete() ikut keperluan
+                $currentPayment->delete();
             }
         }
 

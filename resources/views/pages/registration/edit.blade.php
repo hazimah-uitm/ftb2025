@@ -425,12 +425,11 @@
                     </template>
 
                     {{-- Payment --}}
-                    {{-- Payment --}}
                     <hr class="my-2">
                     <h6 class="text-primary">PENGESAHAN PEMBAYARAN YURAN KOMITMEN</h6>
 
                     @php
-                        $p = isset($registration->payments[0]) ? $registration->payments[0] : null;
+                        $p = optional($registration->payments)->first();
                     @endphp
 
                     <div class="mb-1 mt-0">
